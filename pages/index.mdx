@@ -1,0 +1,245 @@
+---
+title: Get Started
+---
+
+import Feutares from "components/Feutares";
+import HeroSection from "components/HeroSection";
+
+
+<HeroSection />
+<Feutares />
+
+# Introduction
+
+The jsonVerse package is a powerful utility designed to simplify the management of JSON data files within a designated folder. It offers methods for adding, editing, deleting, and retrieving data from JSON files. This wiki provides detailed examples and usage scenarios to help you effectively implement the jsonVerse package in your projects.
+
+# Installation
+
+
+To begin using the jsonVerse package, you'll need to install it via npm. Open your terminal and run the following command:
+
+```bash copy npm2yarn
+npm install jsonverse
+```
+
+## Usage
+
+### Import and Initialization
+
+To get started, import the required modules, set up an Express router, and initialize the jsonVerse instance:
+
+
+
+
+
+
+
+
+
+```js copy
+const express = require("express");
+const app = express();
+const jsonverse = require("jsonverse");
+
+// Initialize the JSONDatabase instance
+const db = new jsonverse({
+  dataFolderPath: "./MyData", // data directory
+  logFolderPath: "./MyLogs", // logs directory
+  activateLogs: true, // to enable the logs set this value to true
+});
+```
+
+### Display All Data
+
+You can display all the data from your website using the following code:
+
+```javascript copy
+app.get("/", async (req, res) => {
+  try {
+    const allData = await db.allData();
+    // ... (rendering logic)
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Display Data from a specific data json file
+
+you can display data from a specific data file by file name
+
+
+
+
+```javascript copy
+app.get("/", async (req, res) => {
+  try {
+    db.readData(dataName) // dataName: the name of the json file like test.json the data name will be "test"
+      .then((result) => {
+        res.send(result); // result is the content of the json file
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Add Data
+
+To add data, use the following code:
+
+```javascript copy
+app.post("/add", async (req, res) => {
+  try {
+    const { dataName, name, social, rank, competition, date, edu, password } =
+      req.body;
+    const newData = {
+      social,
+      name,
+      rank,
+      competition,
+      date,
+      edu,
+      password: db.encrypt(password, "Your-Secret-Key"),
+    };
+    await db.saveData(dataName, newData);
+    // ... (redirect or response)
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Get Data by ID
+
+Retrieve data by its ID with this code:
+
+```javascript copy
+app.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const result = await db.findById(id);
+    if (result) {
+      // ... (rendering logic)
+      // remember if the retrieved data contained encrypted data to use
+      // db.decrypt(encryptedData, secretKey)
+    } else {
+      // ... (not found logic)
+    }
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Delete Data by ID
+
+Delete data by its ID using this code:
+
+```javascript copy
+app.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await db.delById(id);
+    // ... (response or redirect)
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Edit Data by ID
+
+Edit existing data using this code:
+
+```javascript copy
+app.post("/edit/:id", async (req, res) => {
+  const id = req.params.id;
+  const { name, social, rank, competition, date, edu } = req.body;
+  try {
+    const updatedData = {
+      social,
+      name,
+      rank,
+      competition,
+      date,
+      edu,
+    };
+    await db.editById(id, updatedData);
+    // ... (response or redirect)
+  } catch (err) {
+    // ... (error handling)
+  }
+});
+```
+
+### Encrypt/Decrypt
+
+you can encrypt/decrypt the data that you are saving by this commend
+
+- Encrypt
+
+```javascript copy
+db.encrypt(data, secretKey);
+```
+
+- Decrypt
+
+```javascript copy
+db.decrypt(encryptedData, secretKey);
+```
+
+### Backup
+
+backup the data files you want by the dataName in Backup folder in Data Folder (the package create it automatically)
+
+```javascript copy
+db.backupCreate(dataName); //  dataName: the name of the data file you want to backup
+```
+
+### Restore Backup
+
+Restore the backup data files you want by the dataName in Backup `./Data/Backup` ./Data is the path you add to the data folder
+
+```javascript copy
+db.backupRestore(dataName, backupFileName); // the dataName is the data you want to restore to it & the backupFileName is the backup file name you got after backing up
+```
+
+### Delete Backup
+
+Delete the backup data json files you want by the dataName in Backup folder in Data Folder (the package create it automatically)
+
+```javascript copy
+const retentionDays = 5; // write here with days the time you want to delete the backups since then like i want to delete the backup the had been saved the last 5 days
+db.backupDelete(dataName, retentionDays);
+```
+
+### Import/Export Data
+
+- Import
+
+you can import data from json files from outside the project files
+
+```javascript copy
+db.importData(dataName, (format = "json"), filePath);
+// dataName: the data file you want to import to if exist if doesn't write the new data name instead
+// format: to set the format to json you don't need to write it it's json by default
+// filePath: where is the file you want to import
+```
+
+- Export
+
+you can Export data from json files
+
+```javascript copy
+db.exportData(dataName, (format = "json"));
+// dataName: the data file you want to Export
+// format: to set the format of the new exported file like json and csv
+```
+
+## Conclusion
+
+The jsonVerse package simplifies the management of JSON data files within a specified folder. With the provided examples and usage instructions, you'll be able to efficiently integrate the jsonVerse package into your projects to streamline data operations.
