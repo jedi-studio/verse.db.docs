@@ -10,17 +10,17 @@ const config: DocsThemeConfig = {
         <Logo height={24} />
         <span
           className="mx-2 font-extrabold hidden md:inline select-none"
-          title={`JsonVerse Logo`}
+          title={`verse.db Logo`}
         >
-          JsonVerse
+          verse.db
         </span>
       </>
     );
   },
   project: {
-    link: "https://github.com/Marco5dev/jsonverse",
+    link: "https://github.com/Marco5dev/verse.db",
   },
-  docsRepositoryBase: "https://github.com/Marco5dev/jsonverseDocs",
+  docsRepositoryBase: "https://github.com/Marco5dev/verse.db.docs",
   chat: {
     link: "https://discord.gg/EurnFWMweW",
   },
@@ -28,13 +28,13 @@ const config: DocsThemeConfig = {
     const { route, locale } = useRouter();
     const { frontMatter, title } = useConfig();
 
-    const imageUrl = new URL("https://jedi-studio-api.vercel.app/api/og/jsonverse");
+    const imageUrl = new URL("https://og.jedi-studio.com/api/og/jsonverse?title=verse%2Edb");
 
     if (!/\/index\.+/.test(route)) {
       imageUrl.searchParams.set("title", title);
     }
 
-    const ogTitle = title ? `${title} – JsonVerse` : `JsonVerse`;
+    const ogTitle = title ? `${title} - verse.db` : `verse.db`;
     const ogDescription = frontMatter.description;
     const ogImage = frontMatter.image || imageUrl.toString();
 
@@ -76,11 +76,14 @@ const config: DocsThemeConfig = {
         <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:locale" content={locale} />
+        <title>
+          {title ? `${title} | VERSE.DB` : `VERSE.DB`}
+        </title>
       </>
     );
   },
   footer: {
-    text: "JsonVerse Powered by JEDI Studio.",
+    text: "verse.db Powered by JEDI Studio.",
   },
 };
 

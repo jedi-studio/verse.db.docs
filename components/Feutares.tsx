@@ -4,7 +4,7 @@ import {
   RotateCcw,
   Search,
   Shield,
-  Zap,
+  Server,
 } from "lucide-react";
 import React from "react";
 
@@ -20,13 +20,13 @@ const Feutares = () => {
       title: "Data Encryption",
       icon: <Shield />,
       description:
-        "Protect sensitive data using strong encryption with crypto-js.",
+        "Protect sensitive data using strong encryption with `crypto`.",
     },
     {
       title: "Efficient Searching",
       icon: <Search />,
       description:
-        "Implement efficient searching using the Fuse.js library for fast and accurate results.",
+        "Implement efficient searching with fast and accurate results.",
     },
     {
       title: "Model Handling",
@@ -38,13 +38,13 @@ const Feutares = () => {
       title: "Data Operations",
       icon: <RotateCcw />,
       description:
-        "Perform common data operations like find(), save(), delete(), and update() with simple and intuitive methods.",
+        "Perform common data operations like `.find()`, `.add()`, `.remove()`, and `.update()` with simple and intuitive methods.",
     },
     {
-      title: "Cache Management",
-      icon: <Zap />,
+      title: "Multiple Adapters",
+      icon: <Server />,
       description:
-        "Optimize performance with cache management to reduce unnecessary data reads.",
+        "Make your project more powerfull using multiple databases with multiple adapters at the same time",
     },
   ];
 

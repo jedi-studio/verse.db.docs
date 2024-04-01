@@ -1,19 +1,25 @@
 {
   "index": {
-    "title": "Introduction",
+    "title": "Home",
     "type": "page",
     "display": "hidden"
   },
   "docs": {
     "title": "Docs",
-    "type": "page"
-  },
-  "examples": {
-    "title": "Examples",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "sidebar": true
+    }
   },
   "blog": {
     "title": "Blog",
+    "type": "page",
+    "theme": {
+      "sidebar": false
+    }
+  },
+  "about": {
+    "title": "About",
     "type": "page",
     "theme": {
       "sidebar": false
