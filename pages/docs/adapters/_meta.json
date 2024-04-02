@@ -1,0 +1,5 @@
+{
+    "json": "JSON Adapter",
+    "yaml": "YAML Adapter",
+    "sql": "SQL Adapter",
+}
