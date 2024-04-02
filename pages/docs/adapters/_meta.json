@@ -1,5 +1,11 @@
 {
-    "json": "JSON Adapter",
-    "yaml": "YAML Adapter",
-    "sql": "SQL Adapter",
+    "json": {
+        "title": "JSON Adapter"
+    },
+    "yaml": {
+        "title": "YAML Adapter"
+    },
+    "sql":{
+        "title": "SQL Adapter"
+    }
 }

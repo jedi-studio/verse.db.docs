@@ -1,4 +1,14 @@
 {
-    "load": "Load Methode",
-    "add": "Add Methode",
+    "load": {
+        "title": "Load Methode"
+    },
+    "add": {
+        "title": "Add Methode"
+    },
+    "remove": {
+        "title": "Remove Methode"
+    },
+    "update": {
+        "title": "Update Methode"
+    }
 }

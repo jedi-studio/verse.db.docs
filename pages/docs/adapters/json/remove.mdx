@@ -1,10 +1,10 @@
 ---
-title: Add method
+title: Remove method
 ---
 
 import { Steps, Callout, FileTree } from "nextra/components";
 
-# Using the `add` Method with the `json` Adapter
+# Using the `remove` Method with the `json` Adapter
 
 After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 
@@ -26,19 +26,23 @@ const db = versedb.connect({
 });
 ```
 
-### Calling the `add` Method
+### Calling the `remove` Method
 
 adding an object to a data file
 
 ```js copy showLineNumbers {8}
-const newData = {
-  // Object data properties here
-};
-const dataname = "dataname"; // Replace with the desired dataname
-// or
-const dataname = "subfolder/dataname"; // Replace with the desired dataname with a subfolder
+// this is the data in the json file for example
+const data = [
+  { _id: "1234", name: "John" },
+  { _id: "5678", name: "Jane" },
+];
+// and this is the query to search for an object(s) with this query
+const query = { _id: "1234" };
+// and this is the dataname of the json file "dataname.json"
+const dataname = "dataname";
 
-await db.add(dataname, newData);
+// Act
+await db.remove(dataname, query);
 ```
 
 - The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
@@ -47,9 +51,12 @@ await db.add(dataname, newData);
 
 ### the results:
 
+after running the commands you will get an a result and this is the result :
+
 ```json showLineNumbers
 {
   "acknowledged": true,
-  "message": "Data added successfully."
+  "message": "1 document(s) removed successfully.",
+  "results": null
 }
 ```
