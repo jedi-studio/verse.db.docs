@@ -5,7 +5,7 @@
     "display": "hidden"
   },
   "docs": {
-    "title": "Docs",
+    "title": "Documentation",
     "type": "page",
     "theme": {
       "sidebar": true
@@ -18,8 +18,8 @@
       "sidebar": false
     }
   },
-  "about": {
-    "title": "About",
+   "about": {
+    "title": "About Us",
     "type": "page",
     "theme": {
       "sidebar": false
