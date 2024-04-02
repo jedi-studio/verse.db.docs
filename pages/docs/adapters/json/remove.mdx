@@ -3,9 +3,11 @@ title: Remove method
 ---
 import { Steps, Callout, FileTree } from 'nextra/components';
 
+
 # Using the `remove` Method with the `json` Adapter
 
 After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
+
 <Steps>
   ### Setting Up the Database
 
@@ -27,28 +29,33 @@ After successfully establishing a connection to your database (refer to the docu
 ### Calling the `remove` Method
 
 adding an object to a data file
-```js copy showLineNumbers {8}
- // Arrange
-    const data = [
-      { _id: "1234", name: "John" },
-      { _id: "5678", name: "Jane" },
-    ];
-    const query = { _id: "1234" };
-    const dataname = "remove";
 
-    // Act
-    await db.add(dataname, data);
-    const result = await db.remove(dataname, query);
+```js copy showLineNumbers {8}
+// this is the data in the json file for example
+const data = [
+  { _id: "1234", name: "John" },
+  { _id: "5678", name: "Jane" },
+];
+// and this is the query to search for an object(s) with this query
+const query = { _id: "1234" };
+// and this is the dataname of the json file "dataname.json"
+const dataname = "dataname";
+
+// Act
+await db.remove(dataname, query);
 ```
+
 - The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
 </Steps>
 
 ### the results:
+after running the commands you will get an a result and this is the result :
 
 ```json showLineNumbers
 {
-    acknowledged: true,
-    message: "Data added successfully.",
+  "acknowledged": true,
+  "message": "1 document(s) removed successfully.",
+  "results": null
 }
 ```

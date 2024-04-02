@@ -1,32 +1,35 @@
 ---
 title: Add method
 ---
-import { Steps, Callout, FileTree } from 'nextra/components';
+
+import { Steps, Callout, FileTree } from "nextra/components";
 
 # Using the `add` Method with the `json` Adapter
 
 After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
+
 <Steps>
   ### Setting Up the Database
 
-  ```javascript copy showLineNumbers
-  const versedb = require('verse.db');
-  // Alternatively, use import for modern JavaScript projects:
-  import versedb from "versedb";
+```javascript copy showLineNumbers
+const versedb = require("verse.db");
+// Alternatively, use import for modern JavaScript projects:
+import versedb from "versedb";
 
-  // Create a connection to the database using the `versedb.connect` function:
-  const db = versedb.connect({
-    adapter: 'json', // Specify the 'json' adapter
-    dataPath: './data', // Path to the directory containing your JSON files
-    devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-    encryption: { enable: false, secret: "" }, // Encryption (under development, not recommended)
-    backup: { enable: false, path: "", password: "" }, // Backups (under development, not recommended)
-  });
+// Create a connection to the database using the `versedb.connect` function:
+const db = versedb.connect({
+  adapter: "json", // Specify the 'json' adapter
+  dataPath: "./data", // Path to the directory containing your JSON files
+  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
+  encryption: { enable: false, secret: "" }, // Encryption (under development, not recommended)
+  backup: { enable: false, path: "", password: "" }, // Backups (under development, not recommended)
+});
 ```
 
 ### Calling the `add` Method
 
 adding an object to a data file
+
 ```js copy showLineNumbers {8}
 const newData = {
   // Object data properties here
@@ -35,8 +38,9 @@ const dataname = "dataname"; // Replace with the desired dataname
 // or
 const dataname = "subfolder/dataname"; // Replace with the desired dataname with a subfolder
 
-await db.add(dataname, newData)
+await db.add(dataname, newData);
 ```
+
 - The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
 </Steps>
@@ -45,7 +49,7 @@ await db.add(dataname, newData)
 
 ```json showLineNumbers
 {
-    acknowledged: true,
-    message: "Data added successfully.",
+  "acknowledged": true,
+  "message": "Data added successfully."
 }
 ```
