@@ -1,9 +1,9 @@
 ---
-title: Add method
+title: Remove method
 ---
 import { Steps, Callout, FileTree } from 'nextra/components';
 
-# Using the `add` Method with the `json` Adapter
+# Using the `remove` Method with the `json` Adapter
 
 After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 <Steps>
@@ -24,18 +24,21 @@ After successfully establishing a connection to your database (refer to the docu
   });
 ```
 
-### Calling the `add` Method
+### Calling the `remove` Method
 
 adding an object to a data file
 ```js copy showLineNumbers {8}
-const newData = {
-  // Object data properties here
-};
-const dataname = "dataname"; // Replace with the desired dataname
-// or
-const dataname = "subfolder/dataname"; // Replace with the desired dataname with a subfolder
+ // Arrange
+    const data = [
+      { _id: "1234", name: "John" },
+      { _id: "5678", name: "Jane" },
+    ];
+    const query = { _id: "1234" };
+    const dataname = "remove";
 
-await db.add(dataname, newData)
+    // Act
+    await db.add(dataname, data);
+    const result = await db.remove(dataname, query);
 ```
 - The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
