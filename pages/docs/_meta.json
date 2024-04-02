@@ -1,4 +1,6 @@
 {
-    "introduction": "Introduction",
+    "introduction": {
+        "title": "Introduction"
+    },
     "adapters": "Adapters"
 }
