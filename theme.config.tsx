@@ -20,7 +20,7 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/Marco5dev/verse.db",
   },
-  docsRepositoryBase: "https://github.com/Marco5dev/verse.db.docs",
+  docsRepositoryBase: "https://github.com/Marco5dev/verse.db.docs/tree/master/",
   chat: {
     link: "https://discord.gg/EurnFWMweW",
   },
