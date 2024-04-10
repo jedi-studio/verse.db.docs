@@ -37,12 +37,11 @@ import versedb from "versedb";
 
 // Connect to the database
 const db = versedb.connect({
-    adapter: 'json',
-    dataPath: './data',
-    devLogs: {enable: true, path: "./logs},
-    encryption: {enable: false, secret: ""}, // Under Development
-    backup: {enable: false, path: "", password: ""}, // Under Development
-})
+  adapter: "json", // Specify the 'json' adapter
+  dataPath: "./data", // Path to the directory containing your JSON files
+  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
+  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
+});
 ```
 </Steps>
 
