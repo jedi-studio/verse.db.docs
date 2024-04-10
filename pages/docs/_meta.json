@@ -2,5 +2,13 @@
     "introduction": {
         "title": "Introduction"
     },
-    "adapters": "Adapters"
+    "adapters": {
+      "title": "Adapters"
+    },
+    "cors": {
+      "title": "CORS"
+    },
+    "utils": {
+      "title": "Utiles"
+    }
 }

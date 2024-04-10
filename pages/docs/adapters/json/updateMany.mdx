@@ -1,15 +1,15 @@
 ---
-title: Update method
+title: UpdateMany method
 ---
 
 import { Steps, Callout, FileTree } from "nextra/components";
 
-# Using the `update` Method with the `json` Adapter
+# Using the `updateMany` Method with the `json` Adapter
 
 After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 
 <Steps>
-  ### Setting Up the Database
+### Setting Up the Database
 
 ```javascript copy showLineNumbers
 const versedb = require("verse.db");
@@ -25,25 +25,25 @@ const db = versedb.connect({
 });
 ```
 
-### Calling the `update` Method
+### Calling the `updateMany` Method
 
 adding an object to a data file
 
-```js copy showLineNumbers {14}
-// this is the data we have
+```js copy showLineNumbers {7,14}
+// For example this is our data
 const data = [
   { _id: "1234", name: "John" },
   { _id: "5678", name: "Jane" },
 ];
-// and this is out update query what we want to update and how to update it with our operation methods
-const updateQuery = { $set: { name: "Mike" } };
-// this is the search query of the item that we will update
-const query = { name: "John" };
-// this is the name of the json file "dataname.json"
-const dataname = "dataname";
+// this is the filter we are using for this example
+const filter = { name: ["John", "Jane"] };
+// this is our update query
+const updateQuery = { name: "Mike" };
+// and this is the dataname (dataname.verse)
+const dataname = "updateMany";
 
 // Act
-const result = await db.update(dataname, query, updateQuery);
+const result = await db.updateMany(dataname, filter, updateQuery);
 ```
 
 - The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
@@ -54,14 +54,20 @@ const result = await db.update(dataname, query, updateQuery);
 
 after running the commands you will get an a result and this is the result :
 
-```json showLineNumbers {4-7}
+```json showLineNumbers {4-13}
 {
   "acknowledged": true,
-  "message": "1 document(s) updated successfully.",
-  "results": {
-    "_id": "1234",
-    "name": "Mike"
-  }
+  "message": "2 document(s) updated successfully.",
+  "results": [
+    {
+      "_id": "1234",
+      "name": "Mike"
+    },
+    {
+      "_id": "5678",
+      "name": "Mike"
+    }
+  ]
 }
 ```
 

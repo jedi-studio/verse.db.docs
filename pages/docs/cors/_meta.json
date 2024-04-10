@@ -1,0 +1,14 @@
+{
+  "connect": {
+    "title": "Connections and Setup"
+  },
+  "logger": {
+    "title": "Logger system"
+  },
+  "schema": {
+    "title": "Schemas System"
+  },
+  "encode": {
+    "title": "Encoding and securing data"
+  }
+}

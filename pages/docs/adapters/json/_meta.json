@@ -1,15 +1,20 @@
 {
-    "load": {
-        "title": "Load Methode"
-    },
-    "add": {
-        "title": "Add Methode"
-    },
-    "remove": {
-        "title": "Remove Methode"
-    },
-    "update": {
-        "title": "Update Methode"
-
-    }
+  "load": {
+    "title": "Load Methode"
+  },
+  "add": {
+    "title": "Add Methode"
+  },
+  "remove": {
+    "title": "Remove Methode"
+  },
+  "update": {
+    "title": "Update Methode"
+  },
+  "updateMany": {
+    "title": "UpdateMany Methode"
+  },
+  "find": {
+    "title": "Find Methode"
+  }
 }

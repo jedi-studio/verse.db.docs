@@ -1,8 +1,8 @@
 ---
 title: Remove method
 ---
-import { Steps, Callout, FileTree } from 'nextra/components';
 
+import { Steps, Callout, FileTree } from "nextra/components";
 
 # Using the `remove` Method with the `json` Adapter
 
@@ -11,19 +11,18 @@ After successfully establishing a connection to your database (refer to the docu
 <Steps>
   ### Setting Up the Database
 
-  ```javascript copy showLineNumbers
-  const versedb = require('verse.db');
-  // Alternatively, use import for modern JavaScript projects:
-  import versedb from "versedb";
+```javascript copy showLineNumbers
+const versedb = require("verse.db");
+// Alternatively, use import for modern JavaScript projects:
+import versedb from "versedb";
 
-  // Create a connection to the database using the `versedb.connect` function:
-  const db = versedb.connect({
-    adapter: 'json', // Specify the 'json' adapter
-    dataPath: './data', // Path to the directory containing your JSON files
-    devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-    encryption: { enable: false, secret: "" }, // Encryption (under development, not recommended)
-    backup: { enable: false, path: "", password: "" }, // Backups (under development, not recommended)
-  });
+// Create a connection to the database using the `versedb.connect` function:
+const db = versedb.connect({
+  adapter: "json", // Specify the 'json' adapter
+  dataPath: "./data", // Path to the directory containing your JSON files
+  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
+  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
+});
 ```
 
 ### Calling the `remove` Method
@@ -50,6 +49,7 @@ await db.remove(dataname, query);
 </Steps>
 
 ### the results:
+
 after running the commands you will get an a result and this is the result :
 
 ```json showLineNumbers

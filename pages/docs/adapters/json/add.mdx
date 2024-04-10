@@ -21,8 +21,7 @@ const db = versedb.connect({
   adapter: "json", // Specify the 'json' adapter
   dataPath: "./data", // Path to the directory containing your JSON files
   devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-  encryption: { enable: false, secret: "" }, // Encryption (under development, not recommended)
-  backup: { enable: false, path: "", password: "" }, // Backups (under development, not recommended)
+  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
 });
 ```
 
