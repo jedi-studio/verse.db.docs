@@ -8,7 +8,4 @@
   "schema": {
     "title": "Schemas System"
   },
-  "encode": {
-    "title": "Encoding and securing data"
-  }
 }

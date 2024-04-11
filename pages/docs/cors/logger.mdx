@@ -1,0 +1,96 @@
+---
+title: Logger System
+---
+# Logger System
+
+we have a built-in logger system for our package with a nice and simple way to use.
+
+For Example:
+```js copy showLineNumbers
+const versedb = require("verse.db")
+
+const log = versedb.logger
+
+log.logSuccess({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+
+log.logError({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  },
+  throwErr: true
+})
+
+log.logInfo({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+
+log.logWarn({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+```
+
+### Import the logger
+```js 
+const versedb = require("verse.db")
+
+const log = versedb.logger
+
+```
+
+### logSuccess, logInfo, logWarning
+
+those 3 are the same in thir options and simple to use
+Example:
+```js copy showLineNumbers
+log.logSuccess({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+
+log.logInfo({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+
+log.logWarn({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  }
+})
+```
+
+### logError
+```js copy showLineNumbers
+log.logError({
+  content: "the log content",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir"
+  },
+  throwErr: true // if you want to use (throw new Error) insted of console.log just turn this on with true
+})
+```
