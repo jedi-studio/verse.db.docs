@@ -73,8 +73,14 @@ const config: DocsThemeConfig = {
         <meta name="twitter:site" content="@kmoshax" />
         <meta name="twitter:image" content={ogImage} />
         <meta property="og:title" content={ogTitle} />
+        <meta property="title" content={ogTitle} />
+        <meta name="title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
+        <meta property="description" content={ogDescription} />
+        <meta name="description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
+        <meta property="image" content={ogImage} />
+        <meta name="image" content={ogImage} />
         <meta property="og:locale" content={locale} />
         <title>
           {title ? `${title} | VERSE.DB` : `VERSE.DB`}
