@@ -8,23 +8,6 @@ import { Steps, Callout, FileTree } from "nextra/components";
 
 First After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 
-<Steps>
-  ### Setting Up the Database
-
-```javascript copy showLineNumbers
-const versedb = require("verse.db");
-// Alternatively, use import for modern JavaScript projects:
-import versedb from "versedb";
-
-// Create a connection to the database using the `versedb.connect` function:
-const db = versedb.connect({
-  adapter: "json", // Specify the 'json' adapter
-  dataPath: "./data", // Path to the directory containing your JSON files
-  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
-});
-```
-
 ### Calling the `Find` Method
 
 ```js copy showLineNumbers
@@ -43,11 +26,9 @@ const results = await db.load("users");
 console.log(results);
 ```
 
-</Steps>
-
 ### the results:
 
-```json showLineNumbers
+```json
 [
   {
     // Object data properties here

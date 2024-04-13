@@ -1,0 +1,84 @@
+---
+title: Connections and Setup
+---
+import { Callout } from 'nextra/components';
+
+# Database Connections and Setup
+
+In `verse.db` we are using our built-in `.connect` to let you connect to a database. And we have until now some nice options for out database that is being improved with time.
+
+### Adapter(s)
+our first and the most important option, The `adapter` option. <br />
+here in the adapter option you can use it to select the adapter you want 
+
+For Example:
+```js showLineNumbers copy {2}
+const db = new versedb.connect({
+  adapter: "json", // Specify the 'json' adapter
+});
+```
+of course you just should select only one adapter in the single connection.
+you can make a multiple connections in the same time with the next example:
+```js showLineNumbers copy {2,5,8}
+const jsonDb = new versedb.connect({
+  adapter: "json", // Specify the 'json' adapter
+});
+const yamlDb = new versedb.connect({
+  adapter: "yaml", // Specify the 'json' adapter
+});
+const sqlDb = new versedb.connect({
+  adapter: "sql", // Specify the 'json' adapter
+});
+```
+<Callout type="info" emoji="ℹ️">
+  Until now we only have 3 adapters which is `json`, `yaml` and `sql`. and they are going to be more in the next updates.
+</Callout>
+
+### Data Path
+This is the second most important option in our database connection options. <br />
+selectign the path of the connection to use with `dataPath` option
+
+For Example: 
+```js copy showLineNumbers {3}
+const db = new versedb.connect({
+  adapter: "adapter", // the adapter (json, ymal or sql)
+  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+});
+```
+
+### Dev Logs
+we have a logger system which can be easily enabled/disabled with each connection.<be />
+
+For Example:
+```js copy showLineNumbers {4-7}
+const db = new versedb.connect({
+  adapter: "adapter", // the adapter (json, ymal or sql)
+  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+  devLogs: {
+    enable: true | false, // here you can set the dev logs to true to let the database write logs in a files in the logs folder
+    path: "./path/tp/the/logs/folder", // and this is the path to the logs folder
+  }
+});
+```
+The logger system also supports using outside the database it-self. just follow the insteractions in the [Logger system page](logger)
+
+### Secure Data (encryption)
+we have our special build-in encoder & encryptor which give us more secure for the data and less-sized data files with faster database than ever. <be /> 
+we save all the data files for all the adapters in (`.verse`) files 
+
+you can set your own secret for the encryption because we use our defualt secret `versedb` to encrypt the data.
+<br />
+For Example: 
+```js copy showLineNumbers {8-10}
+const db = new versedb.connect({
+  adapter: "adapter", // the adapter (json, ymal or sql)
+  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+  devLogs: {
+    enable: true | false, // here you can set the dev logs to true to let the database write logs in a files in the logs folder
+    path: "./path/tp/the/logs/folder", // and this is the path to the logs folder
+  },
+  encryption: {
+    secret: "put-your-secret-here"
+  }
+});
+```

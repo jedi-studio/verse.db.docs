@@ -44,25 +44,25 @@ const config: DocsThemeConfig = {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
+          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/favicon/favicon-32x32.png"
+          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/favicon/favicon-16x16.png"
+          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
         />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/VLsPsKf/w-simple-logo.png" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link
           rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
+          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
           color="#000000"
         />
         <meta httpEquiv="Content-Language" content="en" />
@@ -72,9 +72,14 @@ const config: DocsThemeConfig = {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@kmoshax" />
         <meta name="twitter:image" content={ogImage} />
+        <meta name="title" content={ogTitle} />
+        <meta name="image" content={ogImage} />
         <meta property="og:title" content={ogTitle} />
+        <meta property="title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
+        <meta property="description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
+        <meta property="image" content={ogImage} />
         <meta property="og:locale" content={locale} />
         <title>
           {title ? `${title} | VERSE.DB` : `VERSE.DB`}
