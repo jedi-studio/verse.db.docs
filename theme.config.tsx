@@ -34,7 +34,7 @@ const config: DocsThemeConfig = {
       imageUrl.searchParams.set("title", title);
     }
 
-    const ogTitle = title ? `${title} - verse.db` : `verse.db`;
+    const ogTitle = title ? `VERSE.DB | ${title}` : `VERSE.DB`;
     const ogDescription = frontMatter.description;
     const ogImage = frontMatter.image || imageUrl.toString();
 
@@ -66,11 +66,10 @@ const config: DocsThemeConfig = {
           color="#000000"
         />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="apple-mobile-web-app-title" content="SWR" />
+        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
+        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
         <meta name="description" content={ogDescription} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@kmoshax" />
         <meta name="twitter:image" content={ogImage} />
         <meta name="title" content={ogTitle} />
         <meta name="image" content={ogImage} />
@@ -82,7 +81,7 @@ const config: DocsThemeConfig = {
         <meta property="image" content={ogImage} />
         <meta property="og:locale" content={locale} />
         <title>
-          {title ? `${title} | VERSE.DB` : `VERSE.DB`}
+          {ogTitle}
         </title>
       </>
     );
