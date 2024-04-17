@@ -1,11 +1,21 @@
 ---
 title: Schema json/yaml
+description: Here you will learn how to use schema with our database however our database can work with both ways with/without schema
 ---
+
+import { Steps } from "nextra/components";
+
+# Schema json/yaml
 
 in here you will learn how to use schema with our database however our database can work with both ways with/without schema
 and we will get started with how to setup a schema at first with our hello world example
 
-```js
+### setting up a new schema
+
+we recommand you add the schema in external file and exporting to to use it freely everywhere in you project's codes
+this is an example of how you can make a new schema for users database files
+
+```js filename="/models/userSchema.js" {23} /schema/ showLineNumbers copy
 const versedb = require("versedb");
 const schema = versedb.Schema;
 const db = new versedb.connect({
@@ -29,4 +39,20 @@ const UsersSchema = new schema({
 });
 
 module.exports = versedb.model("Users", UsersSchema);
+```
+
+### using the schema
+
+then all you need to do is importing your schema in the file you want to use it in and using the commands
+for Example:
+
+```js filename="/models/userSchema.js" {8} /USERS/ showLineNumbers copy
+const USERS =  require("./models/userSchema.js");
+
+USERS.load(); // loads the data from it
+USERS.add(newData); // Add a new data to the schema database
+USERS.update(query, newData); // Updats the data in the schema database
+USERS.remove(query); // Updats the data in the schema database
+USERS.find(query); // Updats the data in the schema database
+// and the rest of the noremal function of the adapter but wihtou typing the dataname
 ```
