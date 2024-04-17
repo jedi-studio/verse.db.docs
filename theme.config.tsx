@@ -73,6 +73,11 @@ const config: DocsThemeConfig = {
           color="#000000"
         />
         {/* META DATA */}
+        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
+        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta name="twitter:card" content="summary_large_image" />
+        
         {/*  MAIN META TAGS  */}
         <meta
           name="keywords"
@@ -88,10 +93,22 @@ const config: DocsThemeConfig = {
         <meta name="reply-to" content="support@jedi-studio.com" />
         <meta name="owner" content="JEDI Studio (jedi-studio)" />
         <meta name="url" content="http://jedi-studio.com" />
-        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
-        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
-        <meta httpEquiv="Content-Language" content="en" />
-        <meta name="twitter:card" content="summary_large_image" />
+
+        {/*  MAIN META TAGS  */}
+        <meta
+          property="keywords"
+          content="jedi, studio, verse.db, verse, db, json, sql, yaml, schema, schema-less, docs, data, database, data bridge,"
+        />
+        <meta property="title" content={ogTitle} />
+        <meta property="description" content={ogDescription} />
+        <meta property="copyright" content="JEDI Studio." />
+        <meta property="language" content="EN" />
+        <meta property="author" content="JEDI Studio, support@jedi-studio.com" />
+        <meta property="designer" content="JEDI" />
+        <meta property="copyright" content="JEDI" />
+        <meta property="reply-to" content="support@jedi-studio.com" />
+        <meta property="owner" content="JEDI Studio (jedi-studio)" />
+        <meta property="url" content="http://jedi-studio.com" />        
 
         {/*  OG META TAGS WITH NAME*/}
         <meta name="og:title" content={ogTitle} />
