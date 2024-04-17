@@ -25,6 +25,16 @@ const config: DocsThemeConfig = {
   chat: {
     link: "https://discord.gg/EurnFWMweW",
   },
+  banner: {
+    key: 'V1.1',
+    text: (
+      <a href="/blog" target="_blank">
+        🎉 VERSE.DB 1.1 is released. Read more →
+      </a>
+    )
+  },
+  primaryHue: { dark: 0, light: 230 },
+  primarySaturation: { dark: 0, light: 100 },
   head: () => {
     const { route, locale } = useRouter();
     const { frontMatter, title } = useConfig();

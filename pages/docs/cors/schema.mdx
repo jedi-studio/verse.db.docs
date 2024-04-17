@@ -46,7 +46,7 @@ module.exports = versedb.model("Users", UsersSchema);
 then all you need to do is importing your schema in the file you want to use it in and using the commands
 for Example:
 
-```js filename="/models/userSchema.js" {8} /USERS/ showLineNumbers copy
+```js filename="index.js" {8} /USERS/ showLineNumbers copy
 const USERS =  require("./models/userSchema.js");
 
 USERS.load(); // loads the data from it

@@ -19,17 +19,26 @@ html {
 }
 
 body {
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0) 0%,
       rgb(255, 255, 255) 300px
     ),
     fixed 0 0 / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0),
-    fixed 10px 10px / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0);
+    fixed 10px 10px / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0); */
+    /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(161,195,241,1) 100%); */
 }
 
 .dark body {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #111 300px),
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #111 300px),
     fixed 0 0 / 20px 20px radial-gradient(#29b3c591 1px, transparent 0),
-    fixed 10px 10px / 20px 20px radial-gradient(#f1f1f17c 1px, transparent 0);
+    fixed 10px 10px / 20px 20px radial-gradient(#f1f1f17c 1px, transparent 0); */
+  /* background: radial-gradient(circle, rgba(10,25,47,1) 0%, rgba(13,16,20,1) 100%); */
+}
+
+.main .main-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
 }
