@@ -73,10 +73,13 @@ const config: DocsThemeConfig = {
           color="#000000"
         />
         {/* META DATA */}
-        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
-        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
         <meta httpEquiv="Content-Language" content="en" />
+        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
+        <meta name="msapplication-TileColor" content="#0a192f" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta property="apple-mobile-web-app-title" content="VERSE.DB" />
+        <meta property="msapplication-TileColor" content="#0a192f" />
+        <meta property="twitter:card" content="summary_large_image" />
         
         {/*  MAIN META TAGS  */}
         <meta
