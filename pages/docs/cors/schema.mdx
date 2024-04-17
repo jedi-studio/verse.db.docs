@@ -1,3 +1,32 @@
 ---
 title: Schema json/yaml
 ---
+
+in here you will learn how to use schema with our database however our database can work with both ways with/without schema
+and we will get started with how to setup a schema at first with our hello world example
+
+```js
+const versedb = require("versedb");
+const schema = versedb.Schema;
+const db = new versedb.connect({
+  // your connection settings here
+  // NOTE*: that you can only use JSON/YAML adapters in Schemas
+  adapter: "json" | "ymal", // choose one of them per connection
+});
+
+const UsersSchema = new schema({
+  username: {
+    type: string, // set the type of the item
+    required: true, // set if it's required or not
+    unique: true, // set if you want it to be unique or not
+  },
+  age: {
+    type: number, // set the type of the item
+    min: 16, // set the minimum number you want
+    max: 60, // set the maximum number you want
+    default: 20, // set the default number
+  },
+});
+
+module.exports = versedb.model("Users", UsersSchema);
+```

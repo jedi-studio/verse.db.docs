@@ -12,15 +12,16 @@ const config: DocsThemeConfig = {
           className="mx-2 font-extrabold hidden md:inline select-none"
           title={`verse.db Logo`}
         >
-          verse.db
+          VERSE.DB
         </span>
       </>
     );
   },
   project: {
-    link: "https://github.com/Marco5dev/verse.db",
+    link: "https://github.com/jedi-studio/verse.db",
   },
-  docsRepositoryBase: "https://github.com/Marco5dev/verse.db.docs/tree/master/",
+  docsRepositoryBase:
+    "https://github.com/jedi-studio/verse.db.docs/tree/master/",
   chat: {
     link: "https://discord.gg/EurnFWMweW",
   },
@@ -28,10 +29,12 @@ const config: DocsThemeConfig = {
     const { route, locale } = useRouter();
     const { frontMatter, title } = useConfig();
 
-    const imageUrl = new URL("https://og.jedi-studio.com/api/og/jsonverse?title=verse%2Edb");
-
+    const imageUrl = new URL(
+      "https://og.jedi-studio.com/api/og/versedb?type=DOCUMENTATION&title=VERSE%2EDB&description=description%2Etest"
+    );
     if (!/\/index\.+/.test(route)) {
       imageUrl.searchParams.set("title", title);
+      imageUrl.searchParams.set("description", frontMatter.description);
     }
 
     const ogTitle = title ? `VERSE.DB | ${title}` : `VERSE.DB`;
@@ -58,36 +61,65 @@ const config: DocsThemeConfig = {
           sizes="16x16"
           href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
         />
-        <link rel="icon" type="image/svg+xml" href="https://i.ibb.co/VLsPsKf/w-simple-logo.png" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+        />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link
           rel="mask-icon"
           href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
           color="#000000"
         />
-        <meta httpEquiv="Content-Language" content="en" />
-        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
-        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
-        <meta name="description" content={ogDescription} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={ogImage} />
+        {/* META DATA */}
+        {/*  MAIN META TAGS  */}
+        <meta
+          name="keywords"
+          content="jedi, studio, verse.db, verse, db, json, sql, yaml, schema, schema-less, docs, data, database, data bridge,"
+        />
         <meta name="title" content={ogTitle} />
-        <meta name="image" content={ogImage} />
+        <meta name="description" content={ogDescription} />
+        <meta name="copyright" content="JEDI Studio." />
+        <meta name="language" content="EN" />
+        <meta name="author" content="JEDI Studio, support@jedi-studio.com" />
+        <meta name="designer" content="JEDI" />
+        <meta name="copyright" content="JEDI" />
+        <meta name="reply-to" content="support@jedi-studio.com" />
+        <meta name="owner" content="JEDI Studio (jedi-studio)" />
+        <meta name="url" content="http://jedi-studio.com" />
+        <meta name="apple-mobile-web-app-title" content="VERSE.DB" />
+        <meta name="msapplication-TileColor" content="rgb(17, 17, 17)" />
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta name="twitter:card" content="summary_large_image" />
+
+        {/*  OG META TAGS WITH NAME*/}
+        <meta name="og:title" content={ogTitle} />
+        <meta name="og:type" content="database" />
+        <meta name="og:url" content="http://jedi-studio.com" />
+        <meta name="og:image" content={ogImage} />
+        <meta name="og:site_name" content={ogTitle} />
+        <meta name="og:description" content={ogDescription} />
+        <meta name="fb:page_id" content={ogTitle} />
+        <meta name="og:email" content="support@jedi-studio.com" />
+
+        {/*  OG META TAGS WITH NAME*/}
         <meta property="og:title" content={ogTitle} />
-        <meta property="title" content={ogTitle} />
-        <meta property="og:description" content={ogDescription} />
-        <meta property="description" content={ogDescription} />
+        <meta property="og:type" content="database" />
+        <meta property="og:url" content="http://jedi-studio.com" />
         <meta property="og:image" content={ogImage} />
-        <meta property="image" content={ogImage} />
-        <meta property="og:locale" content={locale} />
-        <title>
-          {ogTitle}
-        </title>
+        <meta property="og:site_name" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
+        <meta property="fb:page_id" content={ogTitle} />
+        <meta property="og:email" content="support@jedi-studio.com" />
+
+        {/* TITLE */}
+        <title>{ogTitle}</title>
       </>
     );
   },
   footer: {
-    text: "verse.db Powered by JEDI Studio.",
+    text: "VERSE.DB. Powered by JEDI Studio.",
   },
 };
 
