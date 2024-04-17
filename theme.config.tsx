@@ -38,7 +38,7 @@ const config: DocsThemeConfig = {
     }
 
     const ogTitle = title ? `VERSE.DB | ${title}` : `VERSE.DB`;
-    const ogDescription = frontMatter.description;
+    const ogDescription = frontMatter.description ? frontMatter.description : `verse.db isn't just a database, it's your universal data bridge. Designed for unmatched flexibility, security, and performance, verse.db empowers you to manage your data with ease.`;
     const ogImage = frontMatter.image || imageUrl.toString();
 
     return (
