@@ -14,6 +14,7 @@
   "docs": {
     "title": "Documentation",
     "type": "page",
+    "href": "docs/introduction/installation",
     "theme": {
       "sidebar": true
     }
