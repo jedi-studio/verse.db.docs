@@ -10,7 +10,7 @@ const HeroSection = () => {
     gap: "10px",
   };
   return (
-    <div className="hero min-h-screen">
+    <div className="hero min-h-screen full">
       <div className="hero-content text-center">
         <div className="max-w-md main-text">
           <Logo height={"120"} />

@@ -4,6 +4,11 @@ import Logo from "./components/logo";
 import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
+  useNextSeoProps() {
+    return {
+      titleTemplate: 'VERSE.DB | %s'
+    }
+  },
   logo: () => {
     return (
       <>
@@ -35,6 +40,9 @@ const config: DocsThemeConfig = {
   },
   primaryHue: { dark: 0, light: 230 },
   primarySaturation: { dark: 0, light: 100 },
+  sidebar: {
+    toggleButton: true
+  },
   head: () => {
     const { route, locale } = useRouter();
     const { frontMatter, title } = useConfig();
@@ -134,7 +142,9 @@ const config: DocsThemeConfig = {
         <meta name="og:email" content="support@jedi-studio.com" />
 
         {/*  OG META TAGS WITH NAME*/}
+
         <meta property="og:title" content={ogTitle} />
+
         <meta property="og:type" content="database" />
         <meta property="og:url" content="http://jedi-studio.com" />
         <meta property="og:image" content={ogImage} />

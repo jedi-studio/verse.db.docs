@@ -1,9 +1,10 @@
 import "../styles.css";
+import MainLayout from '../app/layout';
 
 export default function Nextra({ Component, pageProps }) {
   return (
-    <>
+    <MainLayout>
       <Component {...pageProps} />
-    </>
+    </MainLayout>
   );
 }
