@@ -26,7 +26,7 @@ html {
     ),
     fixed 0 0 / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0),
     fixed 10px 10px / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0); */
-    /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(161,195,241,1) 100%); */
+  /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(161,195,241,1) 100%); */
 }
 
 .dark .main {
@@ -49,4 +49,15 @@ html {
 
 .dark .blue-main-bg {
   /* background: radial-gradient(circle, rgba(10,25,47,1) 0%, rgba(13,16,20,1) 100%); */
+}
+
+.full {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+  width: 100vw;
 }

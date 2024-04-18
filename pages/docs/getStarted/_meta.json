@@ -1,0 +1,14 @@
+{
+  "introduction": {
+    "title": "Introduction"
+  },
+  "gettingstarted": {
+    "title": "Getting Started"
+  },
+  "installation": {
+    "title": "installation"
+  },
+  "localWay": {
+    "title": "How the local database works ?"
+  }
+}
