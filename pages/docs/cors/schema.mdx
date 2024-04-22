@@ -28,12 +28,12 @@ const { connect, Schema } = require("verse.db")
 
 const UsersSchema = new schema({
   username: {
-    type: String, // set the type of the item
+    type: string, // set the type of the item
     required: true, // set if it's required or not
     unique: true, // set if you want it to be unique or not
   },
   age: {
-    type: Number, // set the type of the item
+    type: number, // set the type of the item
     min: 16, // set the minimum number you want
     max: 60, // set the maximum number you want
     default: 20, // set the default number
