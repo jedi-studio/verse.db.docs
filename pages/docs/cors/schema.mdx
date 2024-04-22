@@ -16,35 +16,39 @@ we recommand you add the schema in external file and exporting to to use it free
 this is an example of how you can make a new schema for users database files
 
 ```js filename="/models/userSchema.js" {23} /schema/ showLineNumbers copy
-const versedb = require("versedb");
+const versedb = require("verse.db");
 const schema = versedb.Schema;
 const db = new versedb.connect({
   // your connection settings here
   // NOTE*: that you can only use JSON/YAML adapters in Schemas
   adapter: "json" | "ymal", // choose one of them per connection
 });
+//# or 
+const { connect, Schema } = require("verse.db")
 
 const UsersSchema = new schema({
   username: {
-    type: string, // set the type of the item
+    type: String, // set the type of the item
     required: true, // set if it's required or not
     unique: true, // set if you want it to be unique or not
   },
   age: {
-    type: number, // set the type of the item
+    type: Number, // set the type of the item
     min: 16, // set the minimum number you want
     max: 60, // set the maximum number you want
     default: 20, // set the default number
   },
 });
 
-module.exports = versedb.model("Users", UsersSchema);
+module.exports = db.model("Users", UsersSchema);
 ```
 
 ### using the schema
 
 then all you need to do is importing your schema in the file you want to use it in and using the commands
+note that you when you use the schema the schema name will be the dataname so you don't need to provide the dataname in each function anymore
 for Example:
+
 
 ```js filename="index.js" {8} /USERS/ showLineNumbers copy
 const USERS =  require("./models/userSchema.js");
