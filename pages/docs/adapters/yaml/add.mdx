@@ -1,0 +1,35 @@
+---
+title: Add method
+---
+
+import { Steps, Callout, FileTree } from "nextra/components";
+
+# Using the `add` Method with the `yaml` Adapter
+
+After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `yaml` adapter to interact with your data.
+
+### Calling the `add` Method
+
+adding an object to a data file
+
+```js copy showLineNumbers {8}
+const newData = {
+  // Object data properties here
+};
+const dataname = "dataname"; // Replace with the desired dataname
+// or
+const dataname = "subfolder/dataname"; // Replace with the desired dataname with a subfolder
+
+await db.add(dataname, newData);
+```
+
+- The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+
+### the results:
+
+```json
+{
+  "acknowledged": true,
+  "message": "Data added successfully."
+}
+```

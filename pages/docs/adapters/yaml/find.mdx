@@ -1,0 +1,68 @@
+---
+title: Find method
+---
+
+import { Steps, Callout, FileTree } from "nextra/components";
+
+# Using the `Find` Method with the `yaml` Adapter
+
+First After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `yaml` adapter to interact with your data.
+
+### Calling the `Find` Method
+
+```js copy showLineNumbers
+const results = await db.load(dataname);
+
+console.log(results);
+```
+
+The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+
+For instance, if you have a YAML file named `users.yaml` containing user data, you'd use the following code to load it:
+
+```js
+const results = await db.load("users");
+
+console.log(results);
+```
+
+### the results:
+
+```json
+[
+  {
+    // Object data properties here
+  },
+  {
+    // Object data properties here
+  }
+  // ... more objects
+]
+```
+
+The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded YAML file. This allows you to efficiently manage your data using the provided methods like `.add` (to add new objects), `.update` (to modify existing objects), `.remove` (to delete objects), and `.find` (to search for specific objects).
+
+### Loading Data from Subfolders
+
+The `load` method also supports loading data from subfolders within the `dataPath` directory. To achieve this, simply include the subfolder path in the `dataname` parameter, separated by a forward slash `(/)`. Here's an example:
+
+```js
+const results = await db.load("subfolder/dataname");
+
+console.log(results);
+```
+### Using Promises (Optional)
+
+If you prefer working with promises instead of `async/await`, you can utilize the `.then` method on the result of the `load` call. Here's an illustration:
+
+```js
+db.load("users")
+  .then((results) => {
+    console.log(results);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+
+By following these guidelines, you can effectively leverage the `load` method to interact with your YAML data stored using the `yaml` adapter within your project.

@@ -1,5 +1,5 @@
 ---
-title: Schema json/yaml
+title: Schema System
 description: Here you will learn how to use schema with our database however our database can work with both ways with/without schema
 ---
 
@@ -28,12 +28,12 @@ const { connect, Schema } = require("verse.db")
 
 const UsersSchema = new schema({
   username: {
-    type: string, // set the type of the item
+    type: String, // set the type of the item
     required: true, // set if it's required or not
     unique: true, // set if you want it to be unique or not
   },
   age: {
-    type: number, // set the type of the item
+    type: Number, // set the type of the item
     min: 16, // set the minimum number you want
     max: 60, // set the maximum number you want
     default: 20, // set the default number
@@ -59,4 +59,22 @@ USERS.update(query, newData); // Updats the data in the schema database
 USERS.remove(query); // Updats the data in the schema database
 USERS.find(query); // Updats the data in the schema database
 // and the rest of the noremal function of the adapter but wihtou typing the dataname
+```
+
+### Schema field types
+all the types our schema provides is :
+```ts
+type FieldType =
+  | String
+  | Number
+  | Boolean
+  | Array
+  | Object
+  | null
+  | undefined
+  | Date
+  | Enum
+  | Custom
+  | Union
+  | any;
 ```
