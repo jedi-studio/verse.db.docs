@@ -31,11 +31,11 @@ const config: DocsThemeConfig = {
     link: "https://discord.gg/EurnFWMweW",
   },
   banner: {
-    key: 'V1.1',
+    key: 'V2-coming-soon',
     text: (
-      <a href="/blog" target="_blank">
-        🎉 VERSE.DB 1.1 is released. Read more →
-      </a>
+      <p>
+        🎉 VERSE.DB v2 is coming soon.
+      </p>
     )
   },
   primaryHue: { dark: 0, light: 230 },

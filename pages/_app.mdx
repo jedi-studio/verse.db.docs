@@ -1,10 +1,13 @@
 import "../styles.css";
 import MainLayout from '../app/layout';
+import Main from '../components/Main';
 
 export default function Nextra({ Component, pageProps }) {
   return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
+    <Main>
+      <MainLayout>
+        <Component {...pageProps} />
+      </MainLayout>
+    </Main>
   );
 }

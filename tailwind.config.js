@@ -5,4 +5,8 @@ module.exports = {
     "./theme.config.tsx",
   ],
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark"],
+    darkTheme: "dark",
+  },
 };

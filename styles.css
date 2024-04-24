@@ -14,26 +14,20 @@ html {
   @apply not-sr-only fixed ml-6 top-0 bg-white text-lg px-6 py-2 mt-2 outline-none focus:ring z-50;
 }
 
+.nx-bg-primary-700\/5 {
+  background-color: hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 39% / .05);
+}
+
 .dark .invert-on-dark {
   filter: invert(1) brightness(1.8);
 }
 
-.main {
-  /* background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 0%,
-      rgb(255, 255, 255) 300px
-    ),
-    fixed 0 0 / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0),
-    fixed 10px 10px / 20px 20px radial-gradient(#d1d1d1 1px, transparent 0); */
-    /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(161,195,241,1) 100%); */
+.main-bg {
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(161,195,241,1) 100%);
 }
 
-.dark .main {
-  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #111 300px),
-    fixed 0 0 / 20px 20px radial-gradient(#29b3c591 1px, transparent 0),
-    fixed 10px 10px / 20px 20px radial-gradient(#f1f1f17c 1px, transparent 0); */
-  /* background: radial-gradient(circle, rgba(10,25,47,1) 0%, rgba(13,16,20,1) 100%); */
+.dark .main-bg {
+  background: radial-gradient(circle, rgba(10,25,47,1) 0%, rgba(13,16,20,1) 100%);
 }
 
 .main .main-text {
@@ -49,4 +43,20 @@ html {
 
 .dark .blue-main-bg {
   /* background: radial-gradient(circle, rgba(10,25,47,1) 0%, rgba(13,16,20,1) 100%); */
+}
+
+.badge-container {
+  display: flex;
+  gap: 10px;
+}
+
+.badge-mark-beta:before {
+  content: "BETA";
+}
+
+.badge-mark-beta {
+  background: radial-gradient(circle, rgb(15, 37, 70) 0%, rgba(13,16,20,1) 100%);
+  padding: 15px;
+  box-shadow: 0px 0px 20px 5px rgba(15, 37, 70, 0.5);
+  font-weight: bold;
 }

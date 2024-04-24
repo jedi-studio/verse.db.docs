@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Logo from "./logo"
 
-const HeroSection = () => {
+const HeroSection = ({ children }) => {
   let Styleing = {
     display: "flex",
     flexDirection: "column",
@@ -10,7 +10,7 @@ const HeroSection = () => {
     gap: "10px",
   };
   return (
-    <div className="hero min-h-screen full">
+    <div className="hero min-h-screen w-full">
       <div className="hero-content text-center">
         <div className="max-w-md main-text">
           <Logo height={"120"} />
@@ -20,8 +20,9 @@ const HeroSection = () => {
             Designed for unmatched flexibility, security, and performance,
             verse.db empowers you to manage your data with ease.
           </p>
+          {children}
           <Link
-            className="btn btn-primary"
+            className="btn btn-outline btn-primary"
             href="docs/introduction/installation"
           >
             Get Started
