@@ -2,6 +2,9 @@
     "introduction": {
         "title": "Introduction"
     },
+    "getStarted": {
+        "title": "Get Started"
+    },
     "cors": {
       "title": "CORS"
     },

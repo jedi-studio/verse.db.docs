@@ -1,13 +1,14 @@
 import React from "react";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
 import Logo from "./components/logo";
+import Npm from "./components/npm";
 import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
   useNextSeoProps() {
     return {
-      titleTemplate: 'VERSE.DB | %s'
-    }
+      titleTemplate: "VERSE.DB | %s",
+    };
   },
   logo: () => {
     return (
@@ -25,26 +26,26 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/jedi-studio/verse.db",
   },
+  navbar: {
+    extraContent: <Npm />
+  },
   docsRepositoryBase:
     "https://github.com/jedi-studio/verse.db.docs/tree/master/",
   chat: {
     link: "https://discord.gg/EurnFWMweW",
   },
   banner: {
-    key: 'V2-coming-soon',
-    text: (
-      <p>
-        🎉 VERSE.DB v2 is coming soon.
-      </p>
-    )
+    key: "V2-coming-soon",
+    text: <p>🎉 VERSE.DB v2 is coming soon.</p>,
   },
   primaryHue: { dark: 0, light: 230 },
   primarySaturation: { dark: 0, light: 100 },
   sidebar: {
-    toggleButton: true
+    toggleButton: true,
   },
   head: () => {
     const { route, locale } = useRouter();
+    const router = useRouter();
     const { frontMatter, title } = useConfig();
 
     const imageUrl = new URL(
@@ -56,7 +57,9 @@ const config: DocsThemeConfig = {
     }
 
     const ogTitle = title ? `VERSE.DB | ${title}` : `VERSE.DB`;
-    const ogDescription = frontMatter.description ? frontMatter.description : `verse.db isn't just a database, it's your universal data bridge. Designed for unmatched flexibility, security, and performance, verse.db empowers you to manage your data with ease.`;
+    const ogDescription = frontMatter.description
+      ? frontMatter.description
+      : `verse.db isn't just a database, it's your universal data bridge. Designed for unmatched flexibility, security, and performance, verse.db empowers you to manage your data with ease.`;
     const ogImage = frontMatter.image || imageUrl.toString();
 
     return (
@@ -98,7 +101,7 @@ const config: DocsThemeConfig = {
         <meta property="apple-mobile-web-app-title" content="VERSE.DB" />
         <meta property="msapplication-TileColor" content="#0a192f" />
         <meta property="twitter:card" content="summary_large_image" />
-        
+
         {/*  MAIN META TAGS  */}
         <meta
           name="keywords"
@@ -108,12 +111,12 @@ const config: DocsThemeConfig = {
         <meta name="description" content={ogDescription} />
         <meta name="copyright" content="JEDI Studio." />
         <meta name="language" content="EN" />
-        <meta name="author" content="JEDI Studio, support@jedi-studio.com" />
-        <meta name="designer" content="JEDI" />
-        <meta name="copyright" content="JEDI" />
+        <meta name="author" content="JEDI Studio." />
+        <meta name="designer" content="JEDI Studio." />
+        <meta name="copyright" content="JEDI Studio." />
         <meta name="reply-to" content="support@jedi-studio.com" />
-        <meta name="owner" content="JEDI Studio (jedi-studio)" />
-        <meta name="url" content="http://jedi-studio.com" />
+        <meta name="owner" content="JEDI Studio." />
+        <meta name="url" content={`http://jedi-studio.com${router.pathname}`} />
 
         {/*  MAIN META TAGS  */}
         <meta
@@ -124,34 +127,38 @@ const config: DocsThemeConfig = {
         <meta property="description" content={ogDescription} />
         <meta property="copyright" content="JEDI Studio." />
         <meta property="language" content="EN" />
-        <meta property="author" content="JEDI Studio, support@jedi-studio.com" />
-        <meta property="designer" content="JEDI" />
-        <meta property="copyright" content="JEDI" />
+        <meta
+          property="author"
+          content="JEDI Studio."
+        />
+        <meta property="designer" content="JEDI Studio." />
+        <meta property="copyright" content="JEDI Studio." />
         <meta property="reply-to" content="support@jedi-studio.com" />
-        <meta property="owner" content="JEDI Studio (jedi-studio)" />
-        <meta property="url" content="http://jedi-studio.com" />        
+        <meta property="owner" content="JEDI Studio." />
+        <meta property="url" content={`http://jedi-studio.com${router.pathname}`} />
 
         {/*  OG META TAGS WITH NAME*/}
         <meta name="og:title" content={ogTitle} />
         <meta name="og:type" content="database" />
-        <meta name="og:url" content="http://jedi-studio.com" />
+        <meta name="og:url" content={`http://jedi-studio.com${router.pathname}`} />
         <meta name="og:image" content={ogImage} />
-        <meta name="og:site_name" content={ogTitle} />
+        <meta name="og:site_name" content="JEDI Studio." />
         <meta name="og:description" content={ogDescription} />
-        <meta name="fb:page_id" content={ogTitle} />
+        <meta name="fb:page_id" content="JEDI Studio." />
         <meta name="og:email" content="support@jedi-studio.com" />
+        <meta name="og:author" content="JEDI Studio." />
 
         {/*  OG META TAGS WITH NAME*/}
 
         <meta property="og:title" content={ogTitle} />
-
         <meta property="og:type" content="database" />
-        <meta property="og:url" content="http://jedi-studio.com" />
+        <meta property="og:url" content={`http://jedi-studio.com${router.pathname}`} />
         <meta property="og:image" content={ogImage} />
-        <meta property="og:site_name" content={ogTitle} />
+        <meta property="og:site_name" content="JEDI Studio." />
         <meta property="og:description" content={ogDescription} />
-        <meta property="fb:page_id" content={ogTitle} />
+        <meta property="fb:page_id" content="JEDI Studio." />
         <meta property="og:email" content="support@jedi-studio.com" />
+        <meta property="og:author" content="JEDI Studio." />
 
         {/* TITLE */}
         <title>{ogTitle}</title>

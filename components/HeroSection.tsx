@@ -23,7 +23,7 @@ const HeroSection = ({ children }) => {
           {children}
           <Link
             className="btn btn-outline btn-primary"
-            href="docs/introduction/installation"
+            href="/docs/introduction"
           >
             Get Started
           </Link>

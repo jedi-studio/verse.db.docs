@@ -20,7 +20,7 @@ and we will get started with how to setup a schema at first with our hello world
 we recommand you add the schema in external file and exporting to to use it freely everywhere in you project's codes
 this is an example of how you can make a new schema for users database files
 
-```js filename="/models/userSchema.js" {23} /schema/ showLineNumbers copy
+```js showLineNumbers filename="/models/userSchema.js" {23} /schema/ copy
 const versedb = require("verse.db");
 const schema = versedb.Schema;
 const db = new versedb.connect({
@@ -33,12 +33,12 @@ const { connect, Schema } = require("verse.db")
 
 const UsersSchema = new schema({
   username: {
-    type: String, // set the type of the item
+    type: schemaType.String, // set the type of the item
     required: true, // set if it's required or not
     unique: true, // set if you want it to be unique or not
   },
   age: {
-    type: Number, // set the type of the item
+    type: schemaType.Number, // set the type of the item
     min: 16, // set the minimum number you want
     max: 60, // set the maximum number you want
     default: 20, // set the default number
@@ -68,18 +68,21 @@ USERS.find(query); // Updats the data in the schema database
 
 ### Schema field types
 all the types our schema provides is :
+you have two options to choose the type by useing `type: schemaType.String{:js}` or using `type: "String"{:js}`
 ```ts
 type FieldType =
-  | String
-  | Number
-  | Boolean
-  | Array
-  | Object
-  | null
-  | undefined
-  | Date
-  | Enum
-  | Custom
-  | Union
-  | any;
+  | (schemaType.String | "String") 
+  | (schemaType.Number | "Number")
+  | (schemaType.Boolean | "Boolean")
+  | (schemaType.Array | "Array")
+  | (schemaType.Object | "Object")
+  | (schemaType.Null | "Null")
+  | (schemaType.Undefined | "Undefined")
+  | (schemaType.Date | "Date")
+  | (schemaType.Enum | "Enum")
+  | (schemaType.Custom | "Custom")
+  | (schemaType.Union | "Union")
+  | (schemaType.Any | "Any")
+  | (schemaType.Color | "Color")
+  | (schemaType.Url | "Url");
 ```
