@@ -6,11 +6,31 @@ description: verse.db isn't just a database, it's your universal data bridge. De
 import Main from "components/main";
 import Feutares from "components/Feutares";
 import HeroSection from "components/HeroSection";
+import { Tabs } from 'nextra/components'
 
 <Main>
 <HeroSection>
-```bash npm2yarn copy
-npm install verse.db
-```
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash copy
+    npm create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    pnpm create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    yarn create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    bun create verse.db@latest
+    ```
+  </Tabs.Tab>
+</Tabs>
 </HeroSection>
 </Main>

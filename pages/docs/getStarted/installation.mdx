@@ -1,0 +1,175 @@
+---
+title: Local Installation
+description: Installing and setting up the database to use in your project like the MAGIC ✨
+---
+import { Steps, Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+
+# Installation of the local database
+
+## Creating a database
+our recommanded options is to use our `npm create verse.db@latest{:bash}` to create a new database conenction but in [`installing database without create function{:md}`](#) you can do everything manual if you want
+### Create a new database
+
+First you need to create a new database using the following command
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tabs.Tab>
+    ```bash copy
+    npm create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    pnpm create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    yarn create verse.db@latest
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash copy
+    bun create verse.db@latest
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+you will have to answer this questions to setup the connection...
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [36m./Logs[0m
+[32m?[0m Enable securing data? [36mYes[0m
+[32m?[0m Data Encrption secret [36m******[0m
+[32m?[0m Package Manager type [36mnpm[0m
+[32m[Successful]:[0m Database connection setup successfully.
+
+[32m[Successful]:[0m Database Logs Folder Setup Successfully.
+
+[32m[Successful]:[0m First Log
+[34m[Info]:[0m First Log
+[33m[Warning]:[0m First Log
+
+[34m[Info]:[0m Secret is added in an .env in /.secret dir in your database dir.
+
+[34m[Info]:[0m Installing The needed packages.....
+
+Installing the packages [32m\[0m
+added 16 packages in 15s
+
+1 package is looking for funding
+  run `npm fund` for details
+[32m[Successful]:[0m Installation complete!
+```
+<Steps>
+### Name the connection
+you need to name your connection a name without spaces
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+```
+### select an adapter
+the avaliable adapters will show up for you to select one of them
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [30m(Use arrow keys)[0m
+[36m> JSON Adapter[0m
+  YAML Adapter
+  SQL Adapter
+```
+### Set the DataPath
+set the conenction path for the data file (Data Path)
+it's set by default to "./Data" you can just press Enter to select the default option
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [30m(./Data)[0m
+```
+### Enable Developer Logs
+if you want to enable the developer logs to log any trafic happens with the database into a log files you can enable this options.
+it's set by default to (N) NO you can just press Enter to select the default option
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [30m(y/N)[0m
+```
+if you selected (y) Yes you will need to Enter the Logs Directory 
+it's set by default to "./Logs" you can just press Enter to select the default option
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [30m(./Logs)[0m
+```
+### Securing Data
+if you want to secure the data file with our encryption method and save the data in our secure file (`.verse`) you can enable it by typing (y)yes
+it's set by default to (N) NO you can just press Enter to select the default option
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [36m./Logs[0m
+[32m?[0m Enable securing data? [30m(y/N)[0m
+```
+if you selected (y) Yes you will need to Enter the Encryption Secret
+it's set by default to "versedb" you can just press Enter to select the default option
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [36m./Logs[0m
+[32m?[0m Enable securing data? [36mYes[0m
+[32m?[0m Data Encrption secret [36m******[0m
+```
+### Choosing your package manger to install the database package 
+if you are using any package manger you can select the one you are using to install the package with it
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [36m./Logs[0m
+[32m?[0m Enable securing data? [36mYes[0m
+[32m?[0m Data Encrption secret [36m******[0m
+[32m?[0m Package Manager type [30m(Use arrow keys)[0m
+[36m> npm[0m
+  yarn
+  bun
+  pnpm
+```
+and now you can see everything happens like **MAGIC ✨** so you can start using the database as soon as it finish
+</Steps>

@@ -1,0 +1,8 @@
+{
+  "installation": {
+      "title": "Local Installation"
+  },
+  "onlineInstallation": {
+      "title": "Online Installation"
+  },
+}

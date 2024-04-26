@@ -8,13 +8,14 @@
       "footer": true,
       "sidebar": false,
       "toc": true,
-      "pagination": false
+      "pagination": false,
+      "timestamp": false
     }
   },
   "docs": {
     "title": "Documentation",
     "type": "page",
-    "href": "docs/introduction/installation",
+    "href": "/docs/introduction",
     "theme": {
       "sidebar": true
     }
@@ -23,14 +24,24 @@
     "title": "Blog",
     "type": "page",
     "theme": {
-      "sidebar": false
+      "breadcrumb": false,
+      "footer": true,
+      "sidebar": false,
+      "toc": true,
+      "pagination": false,
+      "timestamp": false
     }
   },
    "about": {
     "title": "About Us",
     "type": "page",
     "theme": {
-      "sidebar": false
+      "breadcrumb": false,
+      "footer": true,
+      "sidebar": false,
+      "toc": true,
+      "pagination": false,
+      "timestamp": false
     }
   }
 }
