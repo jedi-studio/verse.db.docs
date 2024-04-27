@@ -1,0 +1,50 @@
+{
+  "load": {
+    "title": "Load Methode"
+  },
+  "allData": {
+    "title": "All Data Method"
+  },
+  "drop": {
+    "title": "Drop Method"
+  },
+  "find": {
+    "title": "Find Method"
+  },
+  "search": {
+    "title": "Search Method"
+  },
+  "createTable": {
+    "title": "Create Table Method"
+  },
+  "insertData": {
+    "title": "Insert Data Method"
+  },
+  "removeData": {
+    "title": "Remove Data Method"
+  },
+  "removeKey": {
+    "title": "Remove Key Method"
+  },
+  "update": {
+    "title": "UpdateMethod"
+  },
+  "updateMany": {
+    "title": "Update Many Method"
+  },
+  "countDoc": {
+    "title": "Count Document Method"
+  },
+  "countTable": {
+    "title": "Count Table Method"
+  },
+  "dataSize": {
+    "title": "Data Size Method"
+  },
+  "migrateTable": {
+    "title": "Migrate Table Method"
+  },
+  "toJSON": {
+    "title": "To JSON Method"
+  }
+}

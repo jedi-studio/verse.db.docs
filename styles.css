@@ -18,6 +18,10 @@ html {
   background-color: hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) 39% / .05);
 }
 
+.nx-bg-black {
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+}
+
 .dark .nextra-banner-container {
   background-image: linear-gradient(90deg, #383838, #212121);
 }

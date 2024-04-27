@@ -3,15 +3,33 @@ title: Introduction
 description: Introduction into verse.db database to let you know what is verse.db and what are we special with and what can you use 
 ---
 
-import { Cards, Card } from 'nextra/components'
+import { Cards, Card, Steps } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 
-# Introduction
-Introduction into verse.db database to let you know what is verse.db and what are we special with and what can you use 
- 
+# Introduction to verse.db
+
+**Welcome to verse.db!** Allow us to introduce you to the universe of verse.db, a powerful database solution. Whether you're building applications, conducting research, or organizing information, verse.db offers a versatile set of tools to streamline your data-related tasks.
+
+Here are some key features of verse.db:
+<Steps>
+### Local and Online Database:
+   - verse.db provides both local and online database options, allowing you to choose the setup that best suits your needs.
+   - Use it as a local database for offline applications or connect to an online server for real-time data access.
+
+### Adapter Flexibility:
+   - We offer multiple adapters to cater to different use cases.
+   - For example, you can use the JSON adapter to store data in JSON format or explore other adapters like YAML and SQL.
+
+### Efficient Data Management:
+   - verse.db optimizes data handling, ensuring efficient retrieval, storage, and manipulation.
+   - Whether you're storing user profiles, game scores, or scientific data, verse.db has you covered.
+</Steps>
+Feel free to dive into the universe of verse.db and unlock its potential for seamless data management! 🌐🚀
 <Cards>
   <Card icon={<ArrowRightIcon />} title="Get Started" href="/docs/getStarted" />
   <Card icon={<ArrowRightIcon />} title="Cors" href="/docs/cors" />
-  <Card icon={<ArrowRightIcon />} title="Adapters" href="/docs/adapters" />
   <Card icon={<ArrowRightIcon />} title="Utils" href="/docs/utils" />
+  <Card icon={<ArrowRightIcon />} title="JSON" href="/docs/adapters/json" />
+  <Card icon={<ArrowRightIcon />} title="YAML" href="/docs/adapters/yaml" />
+  <Card icon={<ArrowRightIcon />} title="SQL" href="/docs/adapters/sql" />
 </Cards>

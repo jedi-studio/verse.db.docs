@@ -38,8 +38,8 @@ const config: DocsThemeConfig = {
     key: "V2-coming-soon",
     text: <p>🎉 VERSE.DB v2 is coming soon.</p>,
   },
-  primaryHue: { dark: 0, light: 230 },
-  primarySaturation: { dark: 0, light: 100 },
+  primaryHue: { dark: 230, light: 230 },
+  primarySaturation: { dark: 45, light: 100 },
   sidebar: {
     toggleButton: true,
   },

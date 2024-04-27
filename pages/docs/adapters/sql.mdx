@@ -1,0 +1,56 @@
+---
+title: SQL Adapter
+description: The SQL Adapter in verse.db allows seamless interaction with your data stored in SQL files. Here's how you can set it up and use it
+---
+
+import { Cards, Card } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
+
+# SQL Adapter
+
+The **SQL Adapter** in **verse.db** allows seamless interaction with your data stored in SQL files. Here's how you can set it up and use it:
+
+### Setting Up the Database:
+   - First, establish a connection to your database using the `versedb.connect` function.
+   - Specify the adapter as `"sql"` and provide the path to the directory containing your SQL files using the `dataPath` parameter.
+   - Optionally, enable development logs (`devLogs`) and encryption (not recommended for now) using the respective settings.
+   - Example configuration:
+
+     ```javascript
+     const versedb = require("verse.db");
+     const db = versedb.connect({
+       adapter: "sql",
+       dataPath: "./data", // Path to your SQL files
+       devLogs: {
+         enable: true,
+         path: "./logs",
+       },
+       encryption: {
+         enable: false,
+         secret: "", // Your secret passphrase (optional)
+       }
+     });
+     ```
+
+Feel free to explore the power of the **SQL Adapter** in **verse.db** for efficient data management! 📂✨
+
+### Functions:
+
+<Cards>
+  <Card icon={<ArrowRightIcon />} title="Load()" href="/docs/adapters/sql/load" />
+  <Card icon={<ArrowRightIcon />} title="allData()" href="/docs/adapters/sql/allData" />
+  <Card icon={<ArrowRightIcon />} title="drop()" href="/docs/adapters/sql/drop" />
+  <Card icon={<ArrowRightIcon />} title="find()" href="/docs/adapters/sql/find" />
+  <Card icon={<ArrowRightIcon />} title="search()" href="/docs/adapters/sql/search" />
+  <Card icon={<ArrowRightIcon />} title="createTable()" href="/docs/adapters/sql/createTable" />
+  <Card icon={<ArrowRightIcon />} title="insertData()" href="/docs/adapters/sql/insertData" />
+  <Card icon={<ArrowRightIcon />} title="removeData()" href="/docs/adapters/sql/removeData" />
+  <Card icon={<ArrowRightIcon />} title="removeKey()" href="/docs/adapters/sql/removeKey" />
+  <Card icon={<ArrowRightIcon />} title="update()" href="/docs/adapters/sql/update" />
+  <Card icon={<ArrowRightIcon />} title="updateMany()" href="/docs/adapters/sql/updateMany" />
+  <Card icon={<ArrowRightIcon />} title="countDoc()" href="/docs/adapters/sql/countDoc" />
+  <Card icon={<ArrowRightIcon />} title="countTable()" href="/docs/adapters/sql/countTable" />
+  <Card icon={<ArrowRightIcon />} title="dataSize()" href="/docs/adapters/sql/dataSize" />
+  <Card icon={<ArrowRightIcon />} title="migrateTable()" href="/docs/adapters/sql/migrateTable" />
+  <Card icon={<ArrowRightIcon />} title="toJSON()" href="/docs/adapters/sql/toJSON" />
+</Cards>

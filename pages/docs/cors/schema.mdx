@@ -1,77 +1,74 @@
 ---
 title: Schema System
-description: Here you will learn how to use schema with our database however our database can work with both ways with/without schema
+description: The schema system allows you to define structured data models for your database. By using schemas, you can enforce data types, validation rules, and default values. Let's walk through the process of setting up and using a schema.
 ---
 
-import { Steps } from "nextra/components";
+import { Steps } from "nextra/components"
+ 
+# Schema System in `verse.db`
 
-<div className="flex flex-row items-center justify-between w-full">
-  <h1 class="nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100nx-mt-2 nx-text-4xl nx-font-bold nx-tracking-tight nx-text-slate-900 dark:nx-text-slate-100">Schema System</h1>
-  <div class="badge-container" >
-    <div className="badge badge-mark-beta"></div>
-  </div>
-</div>
+The schema system allows you to define structured data models for your database. By using schemas, you can enforce data types, validation rules, and default values. Let's walk through the process of setting up and using a schema.
+<Steps>
+### Setting Up a New Schema
+Create an External Schema File:
+   - We recommend creating an external file for your schema and exporting it. This way, you can reuse the schema across different parts of your project.
+   - Here's an example of setting up a schema for a users database:
 
-in here you will learn how to use schema with our database however our database can work with both ways with/without schema
-and we will get started with how to setup a schema at first with our hello world example
-
-### setting up a new schema
-
-we recommand you add the schema in external file and exporting to to use it freely everywhere in you project's codes
-this is an example of how you can make a new schema for users database files
-
-```js showLineNumbers filename="/models/userSchema.js" {23} /schema/ copy
+```javascript ShowLineNumbers copy filename="/models/UserSchema.js" /schema/model/
 const versedb = require("verse.db");
 const schema = versedb.Schema;
-const db = new versedb.connect({
-  // your connection settings here
-  // NOTE*: that you can only use JSON/YAML adapters in Schemas
-  adapter: "json" | "ymal", // choose one of them per connection
-});
-//# or 
-const { connect, Schema } = require("verse.db")
 
+// Create a new connection (choose JSON or YAML adapter)
+const db = new versedb.connect({
+  adapter: "json", // Choose the desired adapter (json or yaml)
+  // Other connection settings...
+});
+
+// Define the UsersSchema
 const UsersSchema = new schema({
   username: {
-    type: schemaType.String, // set the type of the item
-    required: true, // set if it's required or not
-    unique: true, // set if you want it to be unique or not
+    type: schemaType.String, // Set the type of the item
+    required: true, // Specify if it's required or not
+    unique: true, // Specify if you want it to be unique or not
   },
   age: {
-    type: schemaType.Number, // set the type of the item
-    min: 16, // set the minimum number you want
-    max: 60, // set the maximum number you want
-    default: 20, // set the default number
+    type: schemaType.Number, // Set the type of the item
+    min: 16, // Set the minimum allowed age
+    max: 60, // Set the maximum allowed age
+    default: 20, // Set the default age
   },
 });
 
 module.exports = db.model("Users", UsersSchema);
 ```
 
-### using the schema
+### Using the Schema
 
-then all you need to do is importing your schema in the file you want to use it in and using the commands
-note that you when you use the schema the schema name will be the dataname so you don't need to provide the dataname in each function anymore
-for Example:
+Import and Use the Schema:
+   - In your application code, import the schema you've defined.
+   - The schema name becomes the data name, so you don't need to provide the data name explicitly in each function call.
+   - For example:
 
+```javascript ShowLineNumbers /USERS/ filename="index.js"
+const USERS = require("./models/userSchema.js");
 
-```js filename="index.js" {8} /USERS/ showLineNumbers copy
-const USERS =  require("./models/userSchema.js");
-
-USERS.load(); // loads the data from it
-USERS.add(newData); // Add a new data to the schema database
-USERS.update(query, newData); // Updats the data in the schema database
-USERS.remove(query); // Updats the data in the schema database
-USERS.find(query); // Updats the data in the schema database
-// and the rest of the noremal function of the adapter but wihtou typing the dataname
+USERS.load(); // Load data from the schema
+USERS.add(newData); // Add new data to the schema database
+USERS.update(query, newData); // Update data in the schema database
+USERS.remove(query); // Remove data from the schema database
+USERS.find(query); // Find data in the schema database
+// You can use other normal adapter functions without typing the data name explicitly
 ```
 
-### Schema field types
-all the types our schema provides is :
-you have two options to choose the type by useing `type: schemaType.String{:js}` or using `type: "String"{:js}`
-```ts
+### Schema Field Types
+
+Available Field Types:
+   - The schema system provides various field types. You can specify them using either `schemaType.String` or `"String"` syntax.
+   - Here are the available field types:
+
+```typescript
 type FieldType =
-  | (schemaType.String | "String") 
+  | (schemaType.String | "String")
   | (schemaType.Number | "Number")
   | (schemaType.Boolean | "Boolean")
   | (schemaType.Array | "Array")
@@ -86,3 +83,5 @@ type FieldType =
   | (schemaType.Color | "Color")
   | (schemaType.Url | "Url");
 ```
+</Steps>
+Feel free to explore the schema system and tailor it to your specific data requirements! 🚀

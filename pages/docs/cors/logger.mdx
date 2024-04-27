@@ -2,96 +2,60 @@
 title: Logger System
 description: built-in logger system with simple and nice usage for loggin in the console and the file
 ---
-# Logger System
 
-we have a built-in logger system for our package with a nice and simple way to use.
+# Logger System in verse.db
 
-For Example:
-```js copy showLineNumbers
-const versedb = require("verse.db")
+At **verse.db**, we've incorporated a powerful built-in logger system that simplifies the process of logging information within our package. Whether you're debugging, monitoring, or simply keeping track of events, our logger provides an intuitive and straightforward way to manage logs.
 
-const log = versedb.logger
+## Example Usage:
 
+```javascript
+const versedb = require("verse.db");
+
+// Initialize the logger
+const log = versedb.logger;
+
+// Log a success message
 log.logSuccess({
-  content: "the log content",
+  content: "This is a success log message",
   devLogs: {
     enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-
-log.logError({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
+    path: "./path/to/log/dir",
   },
-  throwErr: true
-})
+});
 
-log.logInfo({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-
-log.logWarn({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-```
-
-### Import the logger
-```js 
-const versedb = require("verse.db")
-
-const log = versedb.logger
-
-```
-
-### logSuccess, logInfo, logWarning
-
-those 3 are the same in thir options and simple to use
-Example:
-```js copy showLineNumbers
-log.logSuccess({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-
-log.logInfo({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-
-log.logWarn({
-  content: "the log content",
-  devLogs: {
-    enable: true,
-    path: "./path/to/log/dir"
-  }
-})
-```
-
-### logError
-```js copy showLineNumbers
+// Log an error message
 log.logError({
-  content: "the log content",
+  content: "This is an error log message",
   devLogs: {
     enable: true,
-    path: "./path/to/log/dir"
+    path: "./path/to/log/dir",
   },
-  throwErr: true // if you want to use (throw new Error) insted of console.log just turn this on with true
-})
+  throwErr: true, // If you want to throw an error instead of console.log, set this to true
+});
+
+// Log an informational message
+log.logInfo({
+  content: "This is an informational log message",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir",
+  },
+});
+
+// Log a warning message
+log.logWarn({
+  content: "This is a warning log message",
+  devLogs: {
+    enable: true,
+    path: "./path/to/log/dir",
+  },
+});
 ```
+
+## How to Use:
+
+1. Import the logger module using `const log = versedb.logger`.
+2. Utilize the various log methods (`logSuccess`, `logInfo`, `logWarn`, and `logError`) with appropriate content and options.
+
+Feel free to explore the versatility of our logger system and keep your development process organized! 📝🚀

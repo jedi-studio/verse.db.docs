@@ -5,6 +5,9 @@
   "logger": {
     "title": "Logger system"
   },
+  "security": {
+    "title": "Database Security"
+  },
   "schema": {
     "title": "Schema System"
   }

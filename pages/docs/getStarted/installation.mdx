@@ -8,7 +8,7 @@ import { Tabs } from 'nextra/components';
 # Installation of the local database
 
 ## Creating a database
-our recommanded options is to use our `npm create verse.db@latest{:bash}` to create a new database conenction but in [`installing database without create function{:md}`](#) you can do everything manual if you want
+our recommanded options is to use our `npm create verse.db@latest{:bash}` to create a new database conenction but in [`installing database without create function{:md}`](/docs/cors/connect) you can do everything manual if you want
 ### Create a new database
 
 First you need to create a new database using the following command
@@ -48,6 +48,7 @@ you will have to answer this questions to setup the connection...
 [32m?[0m Developer logs path [36m./Logs[0m
 [32m?[0m Enable securing data? [36mYes[0m
 [32m?[0m Data Encrption secret [36m******[0m
+[32m?[0m Select a variant: [36mJavaScript[0m
 [32m?[0m Package Manager type [36mnpm[0m
 [32m[Successful]:[0m Database connection setup successfully.
 
@@ -64,8 +65,6 @@ you will have to answer this questions to setup the connection...
 Installing the packages [32m\[0m
 added 16 packages in 15s
 
-1 package is looking for funding
-  run `npm fund` for details
 [32m[Successful]:[0m Installation complete!
 ```
 <Steps>
@@ -152,6 +151,23 @@ it's set by default to "versedb" you can just press Enter to select the default 
 [32m?[0m Enable securing data? [36mYes[0m
 [32m?[0m Data Encrption secret [36m******[0m
 ```
+### Choosing a variant
+
+```ansi
+              [32m VERSE.DB [0m
+        [30mPowered by JEDI STUDIO.[0m
+
+[32m?[0m Connection name: [36mdataname[0m
+[32m?[0m Database adapter type: [36mJSON Adapter[0m
+[32m?[0m Directory set data folder at: [36m./Data[0m
+[32m?[0m Enable Developer logs? [36mYes[0m
+[32m?[0m Developer logs path [36m./Logs[0m
+[32m?[0m Enable securing data? [36mYes[0m
+[32m?[0m Data Encrption secret [36m******[0m
+[32m?[0m Select a variant: [30m(Use arrow keys)[0m
+[36m> JavaScript[0m
+  TypeScript
+```
 ### Choosing your package manger to install the database package 
 if you are using any package manger you can select the one you are using to install the package with it
 ```ansi
@@ -165,6 +181,7 @@ if you are using any package manger you can select the one you are using to inst
 [32m?[0m Developer logs path [36m./Logs[0m
 [32m?[0m Enable securing data? [36mYes[0m
 [32m?[0m Data Encrption secret [36m******[0m
+[32m?[0m Select a variant: [36mJavaScript[0m
 [32m?[0m Package Manager type [30m(Use arrow keys)[0m
 [36m> npm[0m
   yarn

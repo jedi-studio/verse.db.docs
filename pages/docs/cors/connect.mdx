@@ -1,84 +1,94 @@
 ---
-title: Connections and Setup
+title: Database Connections and Setup
+description: In verse.db, we use the built-in .connect method to establish connections to databases. Let's dive into the key options and how to use them effectively.
 ---
 import { Callout } from 'nextra/components';
 
-# Database Connections and Setup
+## Database Connections and Setup
 
-In `verse.db` we are using our built-in `.connect` to let you connect to a database. And we have until now some nice options for out database that is being improved with time.
+In `verse.db`, we use the built-in `.connect` method to establish connections to databases. Let's dive into the key options and how to use them effectively.
 
-### Adapter(s)
-our first and the most important option, The `adapter` option. <br />
-here in the adapter option you can use it to select the adapter you want 
+### Adapter Selection
 
-For Example:
-```js showLineNumbers copy {2}
+The **adapter** option is crucial for defining the type of database you want to connect to. You can choose from the following adapters:
+
+1. **JSON**: Use `"json"` as the adapter value.
+2. **YAML**: Specify `"yaml"` for the YAML adapter.
+3. **SQL**: For SQL databases, set the adapter to `"sql"`.
+
+Here's an example of connecting to a JSON database:
+
+```javascript
 const db = new versedb.connect({
-  adapter: "json", // Specify the 'json' adapter
+  adapter: "json",
 });
 ```
-of course you just should select only one adapter in the single connection.
-you can make a multiple connections in the same time with the next example:
-```js showLineNumbers copy {2,5,8}
+
+You can also create multiple connections simultaneously, each with a different adapter:
+
+```javascript
 const jsonDb = new versedb.connect({
-  adapter: "json", // Specify the 'json' adapter
+  adapter: "json",
 });
+
 const yamlDb = new versedb.connect({
-  adapter: "yaml", // Specify the 'json' adapter
+  adapter: "yaml",
 });
+
 const sqlDb = new versedb.connect({
-  adapter: "sql", // Specify the 'json' adapter
+  adapter: "sql",
 });
 ```
+
 <Callout type="info" emoji="ℹ️">
-  Until now we only have 3 adapters which is `json`, `yaml` and `sql`. and they are going to be more in the next updates.
+  Currently, we support three adapters: `json`, `yaml`, and `sql`. Expect more adapters in future updates.
 </Callout>
 
-### Data Path
-This is the second most important option in our database connection options. <br />
-selectign the path of the connection to use with `dataPath` option
+### Data Path Configuration
 
-For Example: 
-```js copy showLineNumbers {3}
+The **dataPath** option specifies the directory where your data resides. Set it to the appropriate path:
+
+```javascript
 const db = new versedb.connect({
-  adapter: "adapter", // the adapter (json, ymal or sql)
-  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+  adapter: "adapter", // Choose the desired adapter (json, yaml, or sql)
+  dataPath: "./path/to/the/data/folder", // Specify the path to the data directory (a folder)
 });
 ```
 
-### Dev Logs
-we have a logger system which can be easily enabled/disabled with each connection.<be />
+### Developer Logs
 
-For Example:
-```js copy showLineNumbers {4-7}
+Our database includes a flexible logger system that you can enable or disable for each connection. Here's how to configure it:
+
+```javascript
 const db = new versedb.connect({
-  adapter: "adapter", // the adapter (json, ymal or sql)
-  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+  adapter: "adapter", // Choose the desired adapter (json, yaml, or sql)
+  dataPath: "./path/to/the/data/folder", // Specify the path to the data directory (a folder)
   devLogs: {
-    enable: true | false, // here you can set the dev logs to true to let the database write logs in a files in the logs folder
-    path: "./path/tp/the/logs/folder", // and this is the path to the logs folder
-  }
+    enable: true, // Set to true to enable dev logs (writes logs to files in the logs folder)
+    path: "./path/to/the/logs/folder", // Specify the logs folder path
+  },
 });
 ```
-The logger system also supports using outside the database it-self. just follow the insteractions in the [Logger system page](logger)
 
-### Secure Data (encryption)
-we have our special build-in encoder & encryptor which give us more secure for the data and less-sized data files with faster database than ever. <be /> 
-we save all the data files for all the adapters in (`.verse`) files 
+The logger system can also be used externally. Refer to the Logger System page for further details.
 
-you can set your own secret for the encryption because we use our defualt secret `versedb` to encrypt the data.
-<br />
-For Example: 
-```js copy showLineNumbers {8-10}
+### Secure Data (Encryption)
+
+To enhance security and reduce data file sizes, we provide a built-in encoder and encryptor. By default, we use the secret key `"versedb"` for encryption. However, you can set your own secret:
+
+```javascript
 const db = new versedb.connect({
-  adapter: "adapter", // the adapter (json, ymal or sql)
-  dataPath: "./path/to/the/data/folder", // here you type the path to the data direction which is a folder 
+  adapter: "adapter", // Choose the desired adapter (json, yaml, or sql)
+  dataPath: "./path/to/the/data/folder", // Specify the path to the data directory (a folder)
   devLogs: {
-    enable: true | false, // here you can set the dev logs to true to let the database write logs in a files in the logs folder
-    path: "./path/tp/the/logs/folder", // and this is the path to the logs folder
+    enable: true, // Set to true to enable dev logs (writes logs to files in the logs folder)
+    path: "./path/to/the/logs/folder", // Specify the logs folder path
   },
   encryption: {
-    secret: "put-your-secret-here"
-  }
+    enable: true,
+    secret: "put-your-secret-here", // Set your custom secret
+  },
 });
 ```
+
+Feel free to explore these options and tailor your `verse.db` connections to your specific needs! 🚀

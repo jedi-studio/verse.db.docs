@@ -1,0 +1,57 @@
+---
+title: Create Table
+description: The primary purpose of the createTable function is to define and create a new table in a database. Tables are fundamental components of relational databases, where data is organized into rows and columns.
+---
+
+# Create Table
+
+## Purpose:
+The primary purpose of the `createTable` function is to define and create a new table in a database. Tables are fundamental components of relational databases, where data is organized into rows and columns.
+
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the new table will be created.
+
+2. **`tableName`:**
+   - Replace `'your_table_name'` with the desired name for your table.
+   - The table name serves as an identifier for the table in your queries.
+
+3. **`tableDefinition`:**
+   - The `tableDefinition` parameter defines the structure of the table.
+   - It specifies the columns (fields) that the table will contain and their data types.
+   - In the example provided, we have the following table definition:
+
+     ```sql
+     id INT PRIMARY KEY, name VARCHAR(255), age INT
+     ```
+     and in the data file it will be like this automaticly by our database handler
+     ```sql
+     CREATE TABLE your_table_name (id INT PRIMARY KEY, name VARCHAR(255), age INT);
+     ```
+     - `id`: An integer column representing a unique identifier (often used as the primary key).
+     - `name`: A variable-length character column (string) with a maximum length of 255 characters.
+     - `age`: An integer column representing a person's age.
+
+### Execution:
+1. **Setting Up the Data Source:**
+   - Before calling the `createTable` function, ensure that you have established a connection to your database (data source).
+   - The data source should be accessible and properly configured in your application.
+
+2. **Calling the `createTable` Method:**
+   - Once you've set the appropriate values for `dataname`, `tableName`, and `tableDefinition`, invoke the `createTable` method.
+   - This action sends a query to the database engine to create the specified table.
+
+### Example Usage:
+```js
+const dataname = 'your_data_source_name';
+const tableName = 'your_table_name';
+const tableDefinition = 'id INT PRIMARY KEY, name VARCHAR(255), age INT';
+
+// Call the createTable method
+db.createTable(dataname, tableName, tableDefinition);
+```
+
+### Notes:
+> Adjust the `tableDefinition` according to your specific requirements. You can add more columns, specify data types, and define constraints (such as primary keys or unique constraints). <br />
+> Ensure that the data source exists and that you have the necessary permissions to create tables within it.

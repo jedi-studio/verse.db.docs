@@ -1,81 +1,61 @@
 ---
-title: Load method
+title: JSON Load method
+description: The load method allows you to retrieve data from an JSON file. It is a fundamental operation when working with JSON databases, enabling you to access structured information stored in your database files.
 ---
 
-import { Steps, Callout, FileTree } from "nextra/components";
+import { Steps } from "nextra/components"
 
 # Using the `load` Method with the `json` Adapter
 
-First After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
+After successfully establishing a connection to your database (as described in the documentation on Connecting to a Database), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 
-### Calling the `load` Method
+## Overview of the `load` Method
 
-```js copy showLineNumbers
-const results = await db.load(dataname);
+The `load` method allows you to retrieve data from an JSON file. It is a fundamental operation when working with JSON databases, enabling you to access structured information stored in your database files.
 
-console.log(results);
-```
+### How to Use the `load` Method
+<Steps>
+### Syntax:
+    ```javascript
+    const results = await db.load(dataname);
+    console.log(results);
+    ```
+    - Replace `dataname` with the actual filename (without the `.json` extension) of the JSON file you want to load.
+    - The `dataname` parameter is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
-The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+### Example:
+    Suppose you have an JSON file named `users.json` containing user data. You'd load it like this:
+    ```javascript
+    const results = await db.load("users");
+    console.log(results);
+    ```
+    This code fetches the contents of the `users.json` file and stores them in the `results` variable.
+</Steps>
+### Understanding the Results
 
-For instance, if you have a JSON file named `users.json` containing user data, you'd use the following code to load it:
+The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. This array structure allows you to efficiently manage your data using other provided methods:
 
-```js
-const results = await db.load("users");
-
-console.log(results);
-```
-
-This will fetch the contents of the `users.json` file and store them in the `results` variable.
-
-<FileTree>
-  <FileTree.Folder name="data" defaultOpen>
-    <FileTree.File name="users.json" />
-    <FileTree.File name="dataname.json" />
-  </FileTree.Folder>
-</FileTree>
-
-### the results:
-
-```json showLineNumbers
-[
-  {
-    // Object data properties here
-  },
-  {
-    // Object data properties here
-  }
-  // ... more objects
-]
-```
-
-The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. This allows you to efficiently manage your data using the provided methods like `.add` (to add new objects), `.update` (to modify existing objects), `.remove` (to delete objects), and `.find` (to search for specific objects).
+- `.add`: Add new objects to the dataset.
+- `.update`: Modify existing objects.
+- `.remove`: Delete objects.
+- `.find`: Search for specific objects.
 
 ### Loading Data from Subfolders
 
-The `load` method also supports loading data from subfolders within the `dataPath` directory. To achieve this, simply include the subfolder path in the `dataname` parameter, separated by a forward slash `(/)`. Here's an example:
+The `load` method also supports loading data from subfolders within the `dataPath` directory. To do this, include the subfolder path in the `dataname` parameter, separated by a forward slash (`/`). For example:
 
-```js
+```javascript
 const results = await db.load("subfolder/dataname");
-
 console.log(results);
 ```
 
-<FileTree>
-  <FileTree.Folder name="data" defaultOpen>
-    <FileTree.File name="users.json" />
-    <FileTree.File name="dataname.json" />
-    <FileTree.Folder name="subfolder" defaultOpen>
-      <FileTree.File name="dataname.json" />
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
+This will load data from the `dataname.json` file located in the `subfolder`.
 
 ### Using Promises (Optional)
 
-If you prefer working with promises instead of `async/await`, you can utilize the `.then` method on the result of the `load` call. Here's an illustration:
+If you prefer working with promises instead of `async/await`, you can use the `.then` method on the result of the `load` call:
 
-```js
+```javascript
 db.load("users")
   .then((results) => {
     console.log(results);
@@ -85,4 +65,4 @@ db.load("users")
   });
 ```
 
-By following these guidelines, you can effectively leverage the `load` method to interact with your JSON data stored using the `json` adapter within your project.
+By following these guidelines, you can effectively leverage the `load` method to interact with your JSON data stored using the `json` adapter within your project. Feel free to explore and manipulate your data with confidence! 😊

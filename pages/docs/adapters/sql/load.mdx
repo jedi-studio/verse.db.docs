@@ -1,0 +1,82 @@
+---
+title: Load method
+description: The load method allows you to retrieve data from an SQL file. It is a fundamental operation when working with SQL databases, enabling you to access structured information stored in your database files.
+---
+
+import { Steps } from "nextra/components"
+
+# Using the `load` Method with the `sql` Adapter
+
+After successfully establishing a connection to your database (as described in the documentation on Connecting to a Database), you can leverage the `load` method provided by the `sql` adapter to interact with your data.
+
+## Overview of the `load` Method
+
+The `load` method allows you to retrieve data from an SQL file. It is a fundamental operation when working with SQL databases, enabling you to access structured information stored in your database files.
+
+### How to Use the `load` Method
+<Steps>
+### Syntax:
+    ```javascript
+    const results = await db.load(dataname);
+    console.log(results);
+    ```
+    - Replace `dataname` with the actual filename (without the `.sql` extension) of the SQL file you want to load.
+    - The `dataname` parameter is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+
+### Example:
+    Suppose you have an SQL file named `users.sql` containing user data. You'd load it like this:
+    ```javascript
+    const results = await db.load("users");
+    console.log(results);
+    ```
+    This code fetches the contents of the `users.sql` file and stores them in the `results` variable.
+</Steps>
+### Understanding the Results
+
+The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded SQL file. This array contains an string called `results` too and this tis the contetn of it but it will be a string
+and this is the results of it `results.results{:js}`:
+```sql
+CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n)
+```
+
+### Loading Data from Subfolders
+
+The `load` method also supports loading data from subfolders within the `dataPath` directory. To do this, include the subfolder path in the `dataname` parameter, separated by a forward slash (`/`). For example:
+
+```javascript
+const results = await db.load("subfolder/dataname");
+console.log(results);
+```
+
+This will load data from the `dataname.sql` file located in the `subfolder`.
+
+### Using Promises (Optional)
+
+If you prefer working with promises instead of `async/await`, you can use the `.then` method on the result of the `load` call:
+
+```javascript
+db.load("users")
+  .then((results) => {
+    console.log(results); // returns object that contains an item called `results` that contains the reults of the file
+    console.log(results.results); // returns the data of the data file
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+### Notes:
+
+> `results.results` returns the data which looks like this
+```sql
+"CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);"
+```
+> `results` returns an object that looks like this
+```json
+{
+  "acknowledged": true,
+  "message": "Data Loaded Successfully",
+  "results": "CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);",
+}
+```
+
+By following these guidelines, you can effectively leverage the `load` method to interact with your SQL data stored using the `sql` adapter within your project. Feel free to explore and manipulate your data with confidence! 😊

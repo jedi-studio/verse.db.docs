@@ -1,0 +1,48 @@
+---
+title: JSON Adapter
+description: The JSON Adapter in verse.db allows seamless interaction with your data stored in JSON files. Here's how you can set it up and use it
+---
+
+import { Cards, Card } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
+
+# JSON Adapter
+
+The **JSON Adapter** in **verse.db** allows seamless interaction with your data stored in JSON files. Here's how you can set it up and use it:
+
+### Setting Up the Database:
+   - First, establish a connection to your database using the `versedb.connect` function.
+   - Specify the adapter as `"json"` and provide the path to the directory containing your JSON files using the `dataPath` parameter.
+   - Optionally, enable development logs (`devLogs`) and encryption (not recommended for now) using the respective settings.
+   - Example configuration:
+
+     ```javascript
+     const versedb = require("verse.db");
+     const db = versedb.connect({
+       adapter: "json",
+       dataPath: "./data", // Path to your JSON files
+       devLogs: {
+         enable: true,
+         path: "./logs",
+       },
+       encryption: {
+         enable: false,
+         secret: "", // Your secret passphrase (optional)
+       }
+     });
+     ```
+
+Feel free to explore the power of the **JSON Adapter** in **verse.db** for efficient data management! 📂✨
+
+### Functions:
+
+<Cards>
+  <Card icon={<ArrowRightIcon />} title="Load()" href="/docs/adapters/json/load" />
+  <Card icon={<ArrowRightIcon />} title="drop()" href="/docs/adapters/json/drop" />
+  <Card icon={<ArrowRightIcon />} title="add()" href="/docs/adapters/json/add" />
+  <Card icon={<ArrowRightIcon />} title="remove()" href="/docs/adapters/json/remove" />
+  <Card icon={<ArrowRightIcon />} title="update()" href="/docs/adapters/json/update" />
+  <Card icon={<ArrowRightIcon />} title="updateMany()" href="/docs/adapters/json/updateMany" />
+  <Card icon={<ArrowRightIcon />} title="find()" href="/docs/adapters/json/find" />
+  <Card icon={<ArrowRightIcon />} title="search()" href="/docs/adapters/json/search" />
+</Cards>

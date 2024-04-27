@@ -2,7 +2,7 @@
   "installation": {
       "title": "Local Installation"
   },
-  "onlineInstallation": {
+  "online-installation": {
       "title": "Online Installation"
-  },
+  }
 }
