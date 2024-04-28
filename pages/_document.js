@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { Analytics } from "@vercel/analytics/react"
 import { SkipNavLink } from "nextra-theme-docs";
 
 class MyDocument extends Document {
@@ -11,6 +12,7 @@ class MyDocument extends Document {
           <SkipNavLink styled />
           <Main />
           <NextScript />
+          <Analytics />
         </body>
       </Html>
     );
