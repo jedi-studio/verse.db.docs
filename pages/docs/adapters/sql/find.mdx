@@ -1,0 +1,84 @@
+---
+title: SQL Find Method
+description: The find method is used to query a table within a data source (database) and retrieve matching records based on specified conditions.
+---
+
+import { Steps } from "nextra/components"
+
+# find Method
+
+## find:
+The `find` method retrieves specific data from a table within a given data source (database). It allows you to filter records based on conditions and obtain relevant information.
+
+<Steps>
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the table exists.
+
+2. **`tableName`:**
+   - Replace `'your_table_name'` with the name of the table you want to search within.
+   - The table name serves as the target for the search operation.
+
+3. **`condition` (Optional):**
+   - The `condition` parameter allows you to filter the search results.
+   - Specify a condition using SQL syntax (e.g., `'age > 25'`).
+   - If no condition is provided, the method retrieves all records from the table.
+
+### Execution:
+1. **Setting Up the Data Source:**
+   - Ensure that you've established a connection to the specified data source (database) before calling the `find` method.
+
+2. **Calling the `find` Method:**
+   - Once you've set the appropriate values for `dataname`, `tableName`, and optionally `condition`, invoke the `find` method.
+   - The method sends a query to the database engine to retrieve matching records.
+
+3. **Handling the Result:**
+   - The method returns a promise that resolves with an object containing the following properties:
+     - `acknowledged`: A boolean indicating whether the operation was successful.
+     - `message`: A success message if data is found or an error message if not.
+     - `results`: An array of objects representing the retrieved data (matching records).
+
+### Example Usage:
+Suppose we have a table named `Employees` with the following columns: `id`, `name`, and `age`. We want to find employees older than 25 years. Here's how you can use the `find` method:
+
+```js /find/results/
+const dataname = 'your_data_source_name';
+const tableName = 'Employees'; // Assume this table exists
+const condition = 'age > 25';
+
+// Call the find method
+db.find(dataname, tableName, condition)
+  .then((result) => {
+    if (result.acknowledged) {
+      if (result.results !== null) {
+        console.log('Data found successfully:');
+        console.log(result.results); // Log the found data
+      } else {
+        console.log(result.message); // Log a success message if no data is found
+      }
+    } else {
+      console.error(result.errorMessage); // Log the error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Example Result:
+```json
+{
+  "acknowledged": true,
+  "message": "Data found successfully",
+  "results": [
+    { "id": 1, "name": "John", "age": 30 },
+    { "id": 2, "name": "Alice", "age": 28 },
+    { "id": 3, "name": "Bob", "age": 35 }
+  ]
+}
+```
+</Steps>
+### Notes:
+- Adjust the condition according to your specific search criteria (e.g., other columns, different operators).
+- Handle any errors by catching exceptions using `.catch()`.

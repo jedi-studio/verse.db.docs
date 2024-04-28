@@ -68,29 +68,29 @@ const config: DocsThemeConfig = {
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+          href="https://i.ibb.co/wRxVjYf/verse-db-circle.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+          href="https://i.ibb.co/wRxVjYf/verse-db-circle.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+          href="https://i.ibb.co/wRxVjYf/verse-db-circle.png"
         />
         <link
           rel="icon"
           type="image/svg+xml"
-          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+          href="https://i.ibb.co/wRxVjYf/verse-db-circle.png"
         />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link
           rel="mask-icon"
-          href="https://i.ibb.co/VLsPsKf/w-simple-logo.png"
+          href="https://i.ibb.co/wRxVjYf/verse-db-circle.png"
           color="#000000"
         />
         {/* META DATA */}

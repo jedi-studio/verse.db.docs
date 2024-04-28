@@ -2,7 +2,7 @@
   "load": {
     "title": "Load Methode"
   },
-  "allData": {
+  "displayAll": {
     "title": "All Data Method"
   },
   "drop": {
@@ -26,8 +26,8 @@
   "removeKey": {
     "title": "Remove Key Method"
   },
-  "update": {
-    "title": "UpdateMethod"
+  "updateData": {
+    "title": "Update Method"
   },
   "updateMany": {
     "title": "Update Many Method"

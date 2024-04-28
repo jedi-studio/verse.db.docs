@@ -1,0 +1,64 @@
+---
+title: SQL Remove Key Method
+description: The removeKey function allows you to remove a specific column (key) from a table within a given data source (database). This operation is useful when you need to modify the table structure by eliminating unnecessary columns.
+---
+
+import { Steps } from "nextra/components"
+
+# Remove Key Method
+
+## removeKey:
+The `removeKey` function allows you to remove a specific column (key) from a table within a given data source (database). This operation is useful when you need to modify the table structure by eliminating unnecessary columns.
+<Steps>
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the table exists.
+
+2. **`tableName`:**
+   - Replace `'your_table_name'` with the name of the table from which you want to remove a column.
+   - The table name identifies the target table for the operation.
+
+3. **`keyToRemove`:**
+   - Replace `'column_name_to_remove'` with the name of the column (key) you want to remove.
+   - Ensure that the specified column exists in the table.
+
+### Execution:
+1. **Setting Up the Data Source:**
+   - Ensure that you've established a connection to the specified data source (database) before calling the `removeKey` method.
+
+2. **Calling the `removeKey` Method:**
+   - Once you've set the appropriate values for `dataname`, `tableName`, and `keyToRemove`, invoke the `removeKey` method.
+   - The method sends a query to the database engine to remove the specified column.
+
+3. **Handling the Result:**
+   - The method returns a promise that resolves with an object containing the following properties:
+     - `acknowledged`: A boolean indicating whether the operation was successful.
+     - `message`: A success message if the column removal is successful.
+     - `errorMessage`: An error message if the operation encounters any issues.
+
+### Example Usage:
+Suppose we have a table named `Employees` with columns `id`, `name`, `age`, and `department`. We want to remove the `department` column. Here's how you can use the `removeKey` method:
+
+```js
+const dataname = 'your_data_source_name';
+const tableName = 'Employees'; // Assume this table exists
+const keyToRemove = 'department';
+
+// Call the removeKey method
+adapter.removeKey(dataname, tableName, keyToRemove)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+</Steps>
+### Notes:
+- Adjust the `keyToRemove` according to the specific column you want to delete.
+- Handle any errors by catching exceptions using `.catch()`.

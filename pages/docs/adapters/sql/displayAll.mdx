@@ -1,0 +1,88 @@
+---
+title: SQL Display All Method
+description: The displayAll method retrieves data from a table within a specified data source (database). It allows you to apply filters, sorting, pagination, and grouping to control the output.
+---
+
+import { Steps } from "nextra/components"
+
+# Display All Method
+
+### displayAll:
+The `displayAll` method retrieves data from a table within a specified data source (database). It allows you to apply filters, sorting, pagination, and grouping to control the output.
+<Steps>
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the table exists.
+
+2. **`displayOptions`:**
+   - The `displayOptions` object contains various settings for retrieving data:
+     - **`filters` (Optional):**
+       - Specifies filters to apply to the data.
+       - Example: `{ tableName: { column: 'value' } }{:js}`
+     - **`sortOrder` (Optional):**
+       - Specifies the sort order ('asc' or 'desc').
+       - Example: `'desc'{:js}`
+     - **`page` (Optional):**
+       - Specifies the page number for pagination.
+       - Example: `1{:js}`
+     - **`pageSize` (Optional):**
+       - Specifies the number of items per page.
+       - Example: `10{:js}`
+     - **`displayment` (Optional):**
+       - Specifies the maximum number of items to display.
+       - Example: `20{:js}`
+     - **`groupBy` (Optional):**
+       - Specifies the column to group by.
+       - Example: `'columnName'{:js}`
+
+### Execution:
+1. **Setting Up the Data Source:**
+   - Ensure that you've established a connection to the specified data source (database) before calling the `displayAll` method.
+
+2. **Calling the `displayAll` Method:**
+   - Once you've set the appropriate values for `dataname` and `displayOptions`, invoke the `displayAll` method.
+   - The method sends a query to the database engine to retrieve the requested data.
+
+3. **Handling the Result:**
+   - The method returns a promise that resolves with an object containing the following properties:
+     - `acknowledged`: A boolean indicating whether the operation was successful.
+     - `message`: A success message.
+     - `results`: An array of objects representing the retrieved data.
+
+### Example Usage:
+Suppose we have a table named `Employees` with columns `id`, `name`, `age`, and `department`. We want to retrieve data with the following options:
+- Apply a filter: `age > 25`
+- Sort in descending order
+- Display 10 items per page
+- Group by the `department` column
+
+Here's how you can use the `displayAll` method:
+
+```js
+const dataname = 'your_data_source_name';
+const displayOptions = {
+  filters: { age: { $gt: 25 } },
+  sortOrder: 'desc',
+  pageSize: 10,
+  groupBy: 'department'
+};
+
+// Call the displayAll method
+adapter.displayAll(dataname, displayOptions)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+      console.log('Retrieved data:', result.results); // Log the retrieved data
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+</Steps>
+### Notes:
+- Adjust the `displayOptions` according to your specific requirements.
+- Handle any errors by catching exceptions using `.catch()`.

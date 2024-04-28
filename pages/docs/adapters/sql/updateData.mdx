@@ -1,0 +1,90 @@
+---
+title: SQL Update Data Method
+description: The updateData method allows you to modify existing records (rows) in a table within a specified data source (database). You can apply various operations to update specific fields based on certain conditions.
+---
+
+import { Steps } from "nextra/components"
+
+# Update Data Method
+
+## updateData:
+The `updateData` method allows you to modify existing records (rows) in a table within a specified data source (database). You can apply various operations to update specific fields based on certain conditions.
+
+<Steps>
+
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the table exists.
+
+2. **`tableName`:**
+   - Replace `'your_table_name'` with the name of the table you want to update.
+   - The table name identifies the target table for the update operation.
+
+3. **`query`:**
+   - The `query` parameter specifies the criteria for identifying the row(s) to update.
+   - In your example, `{ id: 1 } {:js}` means we're targeting rows where the `id` column has a value of 1.
+
+4. **`newData`:**
+   - The `newData` object contains various update operations to perform on the matched rows.
+   - Let's explore the available options for `newData`:
+
+### Options for `newData`:
+- **`$set`:**
+  - Sets the specified fields to the provided values.
+  - Example: `{ $set: { name: 'UpdatedName', age: 40 } } {:js}`
+- **`$inc`:**
+  - Increments the value of specified numeric fields by the provided value.
+  - Example: `{ $inc: { visits: 1 } } {:js}`
+- **`$push`:**
+  - Appends the specified values to arrays within the document.
+  - Example: `{ $push: { hobbies: 'Reading' } } {:js}`
+- **`$min`:**
+  - Updates the specified numeric fields to the provided value if it is less than the current value.
+  - Example: `{ $min: { score: 80 } } {:js}`
+- **`$max`:**
+  - Updates the specified numeric fields to the provided value if it is greater than the current value.
+  - Example: `{ $max: { rating: 5 } } {:js}`
+- **`$currentDate`:**
+  - Sets the specified fields to the current date.
+  - Example: `{ $currentDate: { lastModified: true } } {:js}`
+- **`upsert`:**
+  - Optional. If set to `true`, inserts a new row if no matching rows are found based on the query.
+  - Example: `{ upsert: true } {:js}`
+
+### Example Usage:
+Suppose we have a table named `Employees` with columns `id`, `name`, `age`, `visits`, `hobbies`, `score`, and `lastModified`. We want to update the record with `id` equal to 1. Here's how you can use the `updateData` method:
+
+```js
+const dataname = 'your_data_source_name';
+const tableName = 'Employees'; // Assume this table exists
+const query = { id: 1 };
+const newData = {
+  $set: { name: 'UpdatedName', age: 40 },
+  $inc: { visits: 1 },
+  $push: { hobbies: 'Reading' },
+  $min: { score: 80 },
+  $currentDate: { lastModified: true },
+  upsert: true
+};
+
+// Call the updateData method
+adapter.updateData(dataname, tableName, query, newData)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+      console.log('Updated row:', result.results); // Log the updated row
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+</Steps>
+
+### Notes:
+- Adjust the `query` and `newData` according to your specific update requirements.
+- Handle any errors by catching exceptions using `.catch()`.

@@ -1,26 +1,26 @@
 {
   "load": {
-    "title": "Load Methode"
+    "title": "Load Method"
   },
   "drop": {
-    "title": "Drop Methode"
+    "title": "Drop Method"
   },
   "add": {
-    "title": "Add Methode"
+    "title": "Add Method"
   },
   "remove": {
-    "title": "Remove Methode"
+    "title": "Remove Method"
   },
   "update": {
-    "title": "Update Methode"
+    "title": "Update Method"
   },
   "updateMany": {
-    "title": "UpdateMany Methode"
+    "title": "UpdateMany Method"
   },
   "find": {
-    "title": "Find Methode"
+    "title": "Find Method"
   },
   "search": {
-    "title": "Search Methode"
+    "title": "Search Method"
   }
 }

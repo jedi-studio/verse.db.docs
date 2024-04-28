@@ -1,0 +1,70 @@
+---
+title: SQL Remove Data Method
+description: The removeData function allows you to delete specific records (rows) from a table within a given data source (database). You can selectively remove data based on certain conditions.
+---
+
+import { Steps } from "nextra/components"
+
+# Remove Data Method
+
+## removeData:
+The `removeData` function allows you to delete specific records (rows) from a table within a given data source (database). You can selectively remove data based on certain conditions.
+<Steps>
+### Parameters:
+1. **`dataname` (Data Source Name):**
+   - Replace `'your_data_source_name'` with the actual name of your data source (database).
+   - This parameter specifies the database where the table exists.
+
+2. **`tableName`:**
+   - Replace `'your_table_name'` with the name of the table from which you want to remove data.
+   - The table name identifies the target table for the removal operation.
+
+3. **`dataToRemove`:**
+   - This parameter is an array of arrays, where each inner array represents a record (row) to be removed.
+   - Each inner array contains values corresponding to the columns in the table.
+   - In your example, we have two records to remove:
+     - `[1, 'John', 30]`
+     - `[3, 'Bob', 35]`
+
+### Execution:
+1. **Setting Up the Data Source:**
+   - Ensure that you've established a connection to the specified data source (database) before calling the `removeData` method.
+
+2. **Calling the `removeData` Method:**
+   - Once you've set the appropriate values for `dataname`, `tableName`, and `dataToRemove`, invoke the `removeData` method.
+   - The method sends a query to the database engine to delete the specified records.
+
+3. **Handling the Result:**
+   - The method returns a promise that resolves with an object containing the following properties:
+     - `acknowledged`: A boolean indicating whether the operation was successful.
+     - `message`: A success message if data removal is successful.
+     - `errorMessage`: An error message if the operation encounters any issues.
+
+### Example Usage:
+Suppose we have a table named `Employees` with columns `id`, `name`, and `age`. We want to remove the records for employees with IDs 1 and 3. Here's how you can use the `removeData` method:
+
+```js
+const dataname = 'your_data_source_name';
+const tableName = 'Employees'; // Assume this table exists
+const dataToRemove = [
+  [1, 'John', 30],
+  [3, 'Bob', 35]
+];
+
+// Call the removeData method
+adapter.removeData(dataname, tableName, dataToRemove)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+</Steps>
+### Notes:
+- Adjust the `dataToRemove` array to match the specific records you want to delete.
+- Handle any errors by catching exceptions using `.catch()`.
