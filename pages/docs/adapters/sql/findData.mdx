@@ -8,7 +8,7 @@ import { Steps } from "nextra/components"
 
 # Find Method
 
-## find:
+## Find:
 The `find` method retrieves specific data from a table within a given data source (database). It allows you to filter records based on conditions and obtain relevant information.
 
 <Steps>
@@ -49,7 +49,7 @@ const tableName = 'Employees'; // Assume this table exists
 const condition = 'age > 25';
 
 // Call the find method
-db.find(dataname, tableName, condition)
+db.findData(dataname, tableName, condition)
   .then((result) => {
     if (result.acknowledged) {
       if (result.results !== null) {

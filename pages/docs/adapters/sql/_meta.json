@@ -5,14 +5,14 @@
   "displayAll": {
     "title": "All Data Method"
   },
-  "drop": {
-    "title": "Drop Method"
+  "dropData": {
+    "title": "Drop Data Method"
   },
-  "find": {
-    "title": "Find Method"
+  "findData": {
+    "title": "Find Data Method"
   },
-  "search": {
-    "title": "Search Method"
+  "join": {
+    "title": "Join Method"
   },
   "createTable": {
     "title": "Create Table Method"
@@ -26,11 +26,11 @@
   "removeKey": {
     "title": "Remove Key Method"
   },
-  "updateData": {
-    "title": "Update Method"
+  "multiUpdate": {
+    "title": "Multi Update Method"
   },
-  "updateMany": {
-    "title": "Update Many Method"
+  "updateData": {
+    "title": "Update Data Method"
   },
   "countDoc": {
     "title": "Count Document Method"
@@ -41,8 +41,8 @@
   "dataSize": {
     "title": "Data Size Method"
   },
-  "migrateTable": {
-    "title": "Migrate Table Method"
+  "moveTable": {
+    "title": "MoveTable Method"
   },
   "toJSON": {
     "title": "To JSON Method"
