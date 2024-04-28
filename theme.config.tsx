@@ -160,6 +160,10 @@ const config: DocsThemeConfig = {
         <meta property="og:email" content="support@jedi-studio.com" />
         <meta property="og:author" content="JEDI Studio." />
 
+        {/* TWITTER OG */}
+        <meta property="twitter:image" content={ogImage} />
+        <meta property="twitter:title" content={ogTitle} />
+        <meta property="twitter:description" content={ogDescription} />
         {/* TITLE */}
         <title>{ogTitle}</title>
       </>
