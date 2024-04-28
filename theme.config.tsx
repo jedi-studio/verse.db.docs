@@ -51,15 +51,17 @@ const config: DocsThemeConfig = {
     const imageUrl = new URL(
       "https://og.jedi-studio.com/api/og/versedb?type=DOCUMENTATION&title=VERSE%2EDB&description=description%2Etest"
     );
-    if (!/\/index\.+/.test(route)) {
-      imageUrl.searchParams.set("title", title);
-      imageUrl.searchParams.set("description", frontMatter.description);
-    }
-
     const ogTitle = title ? `VERSE.DB | ${title}` : `VERSE.DB`;
+    const adapterTitle = frontMatter.adapter ? `${frontMatter.adapter} ${title}` : `${title}`;
     const ogDescription = frontMatter.description
       ? frontMatter.description
       : `verse.db isn't just a database, it's your universal data bridge. Designed for unmatched flexibility, security, and performance, verse.db empowers you to manage your data with ease.`;
+    
+      if (!/\/index\.+/.test(route)) {
+      imageUrl.searchParams.set("title", adapterTitle);
+      imageUrl.searchParams.set("description", ogDescription);
+    }
+
     const ogImage = frontMatter.image || imageUrl.toString();
 
     return (
