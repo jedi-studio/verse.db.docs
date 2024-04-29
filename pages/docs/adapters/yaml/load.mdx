@@ -4,80 +4,66 @@ description: The load method allows you to retrieve data from an YAML file. It i
 adapter: YAML
 ---
 
-import { Steps } from "nextra/components"
-
 # Load YAML Method
 
-After successfully establishing a connection to your database (as described in the documentation on Connecting to a Database), you can leverage the `load` method provided by the `yaml` adapter to interact with your data.
+The `load` method allows you to retrieve data from a specific data set (YAML file) within your **verse.db** database. It's a fundamental operation for accessing and managing your data. Here's how you can use it:
 
-## Overview of the `load` Method
-
-The `load` method allows you to retrieve data from an YAML file. It is a fundamental operation when working with YAML databases, enabling you to access structured information stored in your database files.
-
-### How to Use the `load` Method
-<Steps>
-### Syntax:
-    ```javascript
-    const results = await db.load(dataname);
-    console.log(results);
-    ```
-    - Replace `dataname` with the actual filename (without the `.yaml` extension) of the YAML file you want to load.
-    - The `dataname` parameter is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
-
-### Example:
-    Suppose you have an YAML file named `users.yaml` containing user data. You'd load it like this:
-    ```javascript
-    const results = await db.load("users");
-    console.log(results);
-    ```
-    This code fetches the contents of the `users.yaml` file and stores them in the `results` variable.
-</Steps>
-### Understanding the Results
-
-The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded YAML file. This array contains an string called `results` too and this tis the contetn of it but it will be a string
-and this is the results of it `results.results{:js}`:
-```yaml
-CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n)
-```
-
-### Loading Data from Subfolders
-
-The `load` method also supports loading data from subfolders within the `dataPath` directory. To do this, include the subfolder path in the `dataname` parameter, separated by a forward slash (`/`). For example:
+### Syntax
 
 ```javascript
-const results = await db.load("subfolder/dataname");
-console.log(results);
+const dataname = "users"; // Replace with the desired data name
+const result = await db.load(dataname);
+
+console.log(result.results);
 ```
 
-This will load data from the `dataname.yaml` file located in the `subfolder`.
+### Parameters
 
-### Using Promises (Optional)
+- `dataname`: The filename (without the `.yaml` extension) of the YAML file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
-If you prefer working with promises instead of `async/await`, you can use the `.then` method on the result of the `load` call:
+### Return Value
 
-```javascript
-db.load("users")
-  .then((results) => {
-    console.log(results); // returns object that contains an item called `results` that contains the reults of the file
-    console.log(results.results); // returns the data of the data file
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-```
-### Notes:
+Certainly! Let me describe how the results of the `load` method in the **verse.db** YAML adapter look like:
 
-> `results.results` returns the data which looks like this
-```yaml
-"CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);"
-```
-> `results` returns an object that looks like this
-```yaml
+The `load` method returns an object with the following properties:
+
+- `acknowledged`: A boolean indicating whether the operation was successful (`true`) or not (`false`).
+- `message`: A descriptive message indicating the outcome of the load operation (e.g., "Data Loaded Successfully").
+- `results`: An array of objects representing the records within the loaded YAML file.
+
+The `results` array contains individual objects, each representing a single record from the specified data set. These objects typically include key-value pairs corresponding to the fields and values within the data file.
+
+For example, if you load data from a `"users.yaml"` file, the `results` might look like this:
+
+```json
 {
   "acknowledged": true,
   "message": "Data Loaded Successfully",
-  "results": "CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);",
+  "results": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "age": 30,
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Alice Smith",
+      "age": 28,
+      "email": "alice@example.com"
+    },
+    // ... more user records
+  ]
 }
 ```
 
-By following these guidelines, you can effectively leverage the `load` method to interact with your YAML data stored using the `yaml` adapter within your project. Feel free to explore and manipulate your data with confidence! 😊
+Each object within the `results` array corresponds to a user entry, with fields such as `"id"`, `"name"`, `"age"`, and `"email"`.
+
+### Example
+
+In your provided example:
+- We load data from the `"users.yaml"` file.
+- The `results` object contains an array of objects, each representing a single record within the loaded YAML file.
+
+#### Outcome
+The `load` method efficiently retrieves data from your specified data set, allowing you to manage your data effectively within your **verse.db** project.
