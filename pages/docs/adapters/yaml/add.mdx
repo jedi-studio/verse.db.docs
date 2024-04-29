@@ -1,35 +1,59 @@
 ---
 title: Add method
+description: The add method allows you to insert a new object into a specified data file. Here's a step-by-step breakdown
+adapter: YAML
 ---
 
-import { Steps, Callout, FileTree } from "nextra/components";
+# Add YAML Method
 
-# Using the `add` Method with the `yaml` Adapter
+The `add` method allows you to insert a new object into a specified data file. Here's a step-by-step breakdown:
 
-After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `yaml` adapter to interact with your data.
+### 1. **Creating Your Data Object:**
+   - Before using the `add` method, prepare your data object. This object should contain the properties relevant to your data model. For example:
 
-### Calling the `add` Method
+     ```javascript
+     const newData = {
+       id: 123,
+       name: "John Doe",
+       age: 30,
+       // Other properties...
+     };
+     ```
 
-adding an object to a data file
+### 2. **Choosing the Data File (Dataname):**
+   - The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file where you want to add the data.
+   - You can specify the `dataname` directly or include subfolders if needed. For instance:
 
-```js copy showLineNumbers {8}
-const newData = {
-  // Object data properties here
-};
-const dataname = "dataname"; // Replace with the desired dataname
-// or
-const dataname = "subfolder/dataname"; // Replace with the desired dataname with a subfolder
+     ```javascript
+     const dataname = "users"; // Refers to a file named "users.yaml"
+     // or
+     const dataname = "subfolder/users"; // Refers to a file in a subfolder
+     ```
 
-await db.add(dataname, newData);
-```
+### 3. **Invoking the `add` Method:**
+   - Use the `add` method to insert your data object into the specified file:
 
-- The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+     ```javascript
+     await db.add(dataname, newData);
+     ```
 
-### the results:
+### 4. **Results and Acknowledgment:**
+   - Upon successful execution, the method returns an acknowledgment object with the following structure:
 
-```json
-{
-  "acknowledged": true,
-  "message": "Data added successfully."
-}
-```
+     ```yaml
+     {
+       "acknowledged": true,
+       "message": "Data added successfully.",
+       "results": [
+        "xxxxV-xxxxE-xxxxR-xxxxS-xxxxE",
+        // IDs of the added data
+       ]
+     }
+     ```
+
+## Best Practices:
+- **Error Handling**: Wrap the `add` method in a try-catch block to handle any exceptions that might occur during the process.
+- **Validation**: Validate your data object before adding it to ensure consistency and correctness.
+- **Atomic Operations**: Consider using transactions or atomic operations if you need to perform multiple actions (e.g., adding multiple records) as a single unit.
+
+Remember that the `add` method is a powerful tool for managing your YAML data. By following these guidelines, you'll be able to maintain a professional and robust data management process. If you have any further questions or need additional assistance, feel free to ask! 😊

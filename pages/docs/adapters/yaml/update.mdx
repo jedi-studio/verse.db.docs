@@ -1,148 +1,94 @@
 ---
 title: Update method
+description: The update method allows you to modify an existing object within a specified data file. Here's a comprehensive guide on how to use it effectively
+adapter: YAML
 ---
 
-import { Steps, Callout, FileTree } from "nextra/components";
+# Update YAML Method
 
-# Using the `update` Method with the `json` Adapter
+The `update` method allows you to modify an existing object within a specified data file. Here's a comprehensive guide on how to use it effectively:
 
-After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
+### 1. **Data Preparation:**
+   - Assume you have a YAML file containing data, similar to the example you provided:
 
-<Steps>
-  ### Setting Up the Database
+     ```javascript
+     const data = [
+       { _id: "1234", name: "John" },
+       { _id: "5678", name: "Jane" },
+       // ... more objects
+     ];
+     ```
 
-```javascript copy showLineNumbers
-const versedb = require("verse.db");
-// Alternatively, use import for modern JavaScript projects:
-import versedb from "versedb";
+### 2. **Query for Update:**
+   - Define a query to identify the object you want to update. In your case, you're searching for an object with `name` equal to `"John"`:
 
-// Create a connection to the database using the `versedb.connect` function:
-const db = new versedb.connect({
-  adapter: "json", // Specify the 'json' adapter
-  dataPath: "./data", // Path to the directory containing your JSON files
-  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
-});
-```
+     ```javascript
+     const query = { name: "John" };
+     ```
 
-### Calling the `update` Method
+### 3. **Update Operation (Using `$set`):**
+   - Specify the update operation using the `$set` operator. This operator modifies an existing field's value or adds a new field if it doesn't exist. For example, you want to change the name to `"Mike"`:
 
-adding an object to a data file
+     ```javascript
+     const updateQuery = { $set: { name: "Mike" } };
+     ```
 
-```js copy showLineNumbers {14}
-// this is the data we have
-const data = [
-  { _id: "1234", name: "John" },
-  { _id: "5678", name: "Jane" },
-];
-// and this is out update query what we want to update and how to update it with our operation methods
-const updateQuery = { $set: { name: "Mike" } };
-// this is the search query of the item that we will update
-const query = { name: "John" };
-// this is the name of the json file "dataname.json"
-const dataname = "dataname";
+### 4. **Specifying the Data File (Dataname):**
+   - The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file where you want to perform the update.
+   - For instance, if your YAML file is named `dataname.yaml`, set the `dataname` accordingly:
 
-// Act
-const result = await db.update(dataname, query, updateQuery);
-```
+     ```javascript
+     const dataname = "dataname";
+     ```
 
-- The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+### 5. **Invoking the `update` Method:**
+   - Use the `update` method to modify the specified object in the data file:
 
-</Steps>
+     ```javascript
+     const result = await db.update(dataname, query, updateQuery);
+     ```
 
-### the results:
+### 6. **Results and Acknowledgment:**
+   - Upon successful execution, the method returns an acknowledgment object with details, including the updated object:
 
-after running the commands you will get an a result and this is the result :
+     ```yaml
+     {
+       "acknowledged": true,
+       "message": "1 document(s) updated successfully.",
+       "results": {
+         "_id": "1234",
+         "name": "Mike"
+       }
+     }
+     ```
 
-```json showLineNumbers {4-7}
-{
-  "acknowledged": true,
-  "message": "1 document(s) updated successfully.",
-  "results": {
-    "_id": "1234",
-    "name": "Mike"
-  }
-}
-```
+### Operation Keys:
 
-### Operation Keys
+- **`$set`:**
+  - Sets the specified fields to the provided values.
+  - Example: `{ $set: { name: 'UpdatedName', age: 40 } } {:js}`
+- **`$inc`:**
+  - Increments the value of specified numeric fields by the provided value.
+  - Example: `{ $inc: { visits: 1 } } {:js}`
+- **`$push`:**
+  - Appends the specified values to arrays within the document.
+  - Example: `{ $push: { hobbies: 'Reading' } } {:js}`
+- **`$min`:**
+  - Updates the specified numeric fields to the provided value if it is less than the current value.
+  - Example: `{ $min: { score: 80 } } {:js}`
+- **`$max`:**
+  - Updates the specified numeric fields to the provided value if it is greater than the current value.
+  - Example: `{ $max: { rating: 5 } } {:js}`
+- **`$currentDate`:**
+  - Sets the specified fields to the current date.
+  - Example: `{ $currentDate: { lastModified: true } } {:js}`
+- **`upsert`:**
+  - Optional. If set to `true`, inserts a new row if no matching rows are found based on the query.
+  - Example: `{ upsert: true } {:js}`
 
-<Steps>
-### `$set`
-Modifies an existing field's value or adds a new field if it doesn't exist.
-```js showLineNumbers {9,12}
-// this is our data for example
-const data = [
-    {_id: "1234", name: "Marco"},
-    {_id: "5678", name: "Anas"}
-]
-// this is the query that we use to get the object and edit it
-const query = { name: "Marco" }
-// and this is outr update query with $set operationKey
-const updateQuery = { $set: { name: "Kmosha" } }
+## Best Practices:
+- **Error Handling**: Wrap the `update` method in a try-catch block to handle any exceptions that might occur during the process.
+- **Validation**: Ensure that your query accurately identifies the object you intend to update.
+- **Atomic Operations**: Consider using transactions or atomic operations if you need to perform multiple actions (e.g., updating multiple records) as a single unit.
 
-// here we call our method to work
-db.update("dataname", query, updateQuery);
-
-```
-
-### `$unset`
-Deletes a particular field.
-
-### `$inc`
-Increments the value of a field by a specified amount.
-
-### `$currentDate`
-Sets the value of a field to the current date, either as a Date or a Timestamp.
-
-### `$push`
-Adds an element to an array.
-
-### `$pull`
-Removes all array elements that match a specified query.
-
-### `$position`
-Modifies the $push operator to specify the position in the array to add elements.
-
-### `$max`
-Updates the value of the field to the specified value if the specified value is greater than the current value.
-
-### `$min`
-Updates the value of the field to the specified value if the specified value is less than the current value.
-
-### `$or`
-Performs a logical OR operation on an array of two or more query expressions.
-
-### `$addToSet`
-Adds elements to an array only if they do not already exist in the set.
-
-### `$pushAll`
-Adds multiple values to an array.
-
-### `$pop`
-Removes the first or last element of an array.
-
-### `$pullAll`
-Removes all occurrences of specified values from an array.
-
-### `$rename`
-Renames a field.
-
-### `$bit`
-Performs bitwise AND, OR, and XOR updates of integer values.
-
-### `$mul`
-Multiplies the value of a field by a specified amount.
-
-### `$each`
-Modifies the $push and $addToSet operators to append multiple values to an array.
-
-### `$slice`
-Limits the number of elements in an array that matches the query condition.
-
-### `$sort`
-Orders the elements of an array.
-
-
-</Steps>
-```
+By following these guidelines and examples, you can effectively manage your YAML data using the `update` method within your project. If you have any further questions or need additional assistance, feel free to ask! 😊

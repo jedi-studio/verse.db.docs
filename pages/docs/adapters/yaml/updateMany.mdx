@@ -1,154 +1,83 @@
 ---
 title: UpdateMany method
+description: The updateMany method allows you to modify multiple documents within a data set (YAML file) based on specified criteria. It's a powerful operation for making bulk updates to your data. Here's how you can use it
+adapter: YAML
 ---
 
-import { Steps, Callout, FileTree } from "nextra/components";
+# Update Many YAML Method
 
-# Using the `updateMany` Method with the `json` Adapter
+The `updateMany` method allows you to modify multiple documents within a data set (YAML file) based on specified criteria. It's a powerful operation for making bulk updates to your data. Here's how you can use it:
 
-After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
+### Syntax
 
-<Steps>
-### Setting Up the Database
-
-```javascript copy showLineNumbers
-const versedb = require("verse.db");
-// Alternatively, use import for modern JavaScript projects:
-import versedb from "versedb";
-
-// Create a connection to the database using the `versedb.connect` function:
-const db = new versedb.connect({
-  adapter: "json", // Specify the 'json' adapter
-  dataPath: "./data", // Path to the directory containing your JSON files
-  devLogs: { enable: true, path: "./logs" }, // Enable development logs (optional)
-  encryption: { secret: "" }, // Encryption just add your secret to make the data more secure (defualt secret: "versedb")
-});
-```
-
-### Calling the `updateMany` Method
-
-adding an object to a data file
-
-```js copy showLineNumbers {7,14}
-// For example this is our data
-const data = [
-  { _id: "1234", name: "John" },
-  { _id: "5678", name: "Jane" },
-];
-// this is the filter we are using for this example
-const filter = { name: ["John", "Jane"] };
-// this is our update query
-const updateQuery = { name: "Mike" };
-// and this is the dataname (dataname.verse)
-const dataname = "updateMany";
+```javascript
+// Arrange
+const dataname = "users";
+const query = { age: { $gte: 25 } }; // Find documents with age greater than or equal to 25
+const updateQuery = {
+    $set: { name: "Updated Name" }, // Set the name field to "Updated Name"
+    $inc: { age: 1 }, // Increment the age field by 1
+    $addToSet: { hobbies: "Swimming" }, // Add "Swimming" to the hobbies array if not already present
+    $push: { friends: "Alice" }, // Push "Alice" into the friends array
+    $unset: { email: "" }, // Remove the email field
+    $currentDate: { lastModified: true } // Set the lastModified field to the current date
+};
 
 // Act
-const result = await db.updateMany(dataname, filter, updateQuery);
+const result = await db.updateMany(dataname, query, updateQuery);
+
+// Results:
+return {
+  acknowledged: true,
+  message: `${updatedCount} document(s) updated successfully.`,
+  results: updatedDocument,
+};
 ```
 
-- The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+### Operation Keys:
 
-</Steps>
+- **`$set`:**
+  - Sets the specified fields to the provided values.
+  - Example: `{ $set: { name: 'UpdatedName', age: 40 } } {:js}`
+- **`$inc`:**
+  - Increments the value of specified numeric fields by the provided value.
+  - Example: `{ $inc: { visits: 1 } } {:js}`
+- **`$push`:**
+  - Appends the specified values to arrays within the document.
+  - Example: `{ $push: { hobbies: 'Reading' } } {:js}`
+- **`$min`:**
+  - Updates the specified numeric fields to the provided value if it is less than the current value.
+  - Example: `{ $min: { score: 80 } } {:js}`
+- **`$max`:**
+  - Updates the specified numeric fields to the provided value if it is greater than the current value.
+  - Example: `{ $max: { rating: 5 } } {:js}`
+- **`$currentDate`:**
+  - Sets the specified fields to the current date.
+  - Example: `{ $currentDate: { lastModified: true } } {:js}`
+- **`upsert`:**
+  - Optional. If set to `true`, inserts a new row if no matching rows are found based on the query.
+  - Example: `{ upsert: true } {:js}`
 
-### the results:
+### Parameters
 
-after running the commands you will get an a result and this is the result :
+- `dataname`: The filename (without the `.yaml` extension) of the YAML file you want to update.
+- `query`: An object specifying the criteria for selecting documents to update (e.g., `{ age: { $gte: 25 } }`).
+- `updateQuery`: An object containing the update operations to apply (e.g., `$set`, `$inc`, `$addToSet`, `$push`, `$unset`, `$currentDate`).
 
-```json showLineNumbers {4-13}
-{
-  "acknowledged": true,
-  "message": "2 document(s) updated successfully.",
-  "results": [
-    {
-      "_id": "1234",
-      "name": "Mike"
-    },
-    {
-      "_id": "5678",
-      "name": "Mike"
-    }
-  ]
-}
-```
+### Return Value
 
-### Operation Keys
+The `updateMany` method returns an object with the following properties:
 
-<Steps>
-### `$set`
-Modifies an existing field's value or adds a new field if it doesn't exist.
-```js showLineNumbers {9,12}
-// this is our data for example
-const data = [
-    {_id: "1234", name: "Marco"},
-    {_id: "5678", name: "Anas"}
-]
-// this is the query that we use to get the object and edit it
-const query = { name: "Marco" }
-// and this is outr update query with $set operationKey
-const updateQuery = { $set: { name: "Kmosha" } }
+- `acknowledged`: A boolean indicating whether the operation was successful (`true`) or not (`false`).
+- `message`: A descriptive message indicating the outcome of the update (e.g., `"2 document(s) updated successfully."`).
+- `results`: An array of updated documents (if needed).
 
-// here we call our method to work
-db.update("dataname", query, updateQuery);
+### Example
 
-```
+In your provided example:
+- We search for documents in the `"users"` data set where the age is greater than or equal to 25.
+- We apply various update operations to these documents, such as setting the name, incrementing the age, adding hobbies, pushing friends, removing the email, and updating the lastModified date.
+- The result indicates the number of documents updated and provides the updated document details.
 
-### `$unset`
-Deletes a particular field.
-
-### `$inc`
-Increments the value of a field by a specified amount.
-
-### `$currentDate`
-Sets the value of a field to the current date, either as a Date or a Timestamp.
-
-### `$push`
-Adds an element to an array.
-
-### `$pull`
-Removes all array elements that match a specified query.
-
-### `$position`
-Modifies the $push operator to specify the position in the array to add elements.
-
-### `$max`
-Updates the value of the field to the specified value if the specified value is greater than the current value.
-
-### `$min`
-Updates the value of the field to the specified value if the specified value is less than the current value.
-
-### `$or`
-Performs a logical OR operation on an array of two or more query expressions.
-
-### `$addToSet`
-Adds elements to an array only if they do not already exist in the set.
-
-### `$pushAll`
-Adds multiple values to an array.
-
-### `$pop`
-Removes the first or last element of an array.
-
-### `$pullAll`
-Removes all occurrences of specified values from an array.
-
-### `$rename`
-Renames a field.
-
-### `$bit`
-Performs bitwise AND, OR, and XOR updates of integer values.
-
-### `$mul`
-Multiplies the value of a field by a specified amount.
-
-### `$each`
-Modifies the $push and $addToSet operators to append multiple values to an array.
-
-### `$slice`
-Limits the number of elements in an array that matches the query condition.
-
-### `$sort`
-Orders the elements of an array.
-
-
-</Steps>
-```
+#### Outcome
+The `updateMany` method efficiently modifies multiple documents based on your specified criteria, allowing you to manage your data effectively within your **verse.db** project.
