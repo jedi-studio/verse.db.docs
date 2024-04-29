@@ -1,0 +1,59 @@
+---
+title: Convert to JSON Method
+description: The toJSON method allows you to convert data from your SQL database into JSON format. This can be useful for exporting data or sharing it with other systems that expect JSON data.
+adapter: SQL
+---
+
+# Convert to JSON SQL Method
+
+The `toJSON` method allows you to convert data from your SQL database into JSON format. This can be useful for exporting data or sharing it with other systems that expect JSON data.
+
+### Syntax
+
+```javascript
+adapter.toJSON(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      // If the operation was successful, log the message and the output files
+      console.log(result.message);
+      console.log("Output files:", result.results);
+    } else {
+      // If there was an error, log the error message
+      console.error(result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    // If there was an unhandled exception, log the error
+    console.error("An error occurred:", error);
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your SQL database.
+
+### Example
+
+Suppose you have an SQL database named `your_database.db` with two tables: `users` and `orders`. You want to convert the data from these tables into JSON format. Here's how you would use the `toJSON` method:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+
+adapter.toJSON(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      // If the operation was successful, log the message and the output files
+      console.log(result.message);
+      console.log("Output files:", result.results);
+    } else {
+      // If there was an error, log the error message
+      console.error(result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    // If there was an unhandled exception, log the error
+    console.error("An error occurred:", error);
+  });
+```
+
+The resulting JSON files will contain data for each table, as shown in the example you provided. Feel free to adapt this example to your specific use case! 😊

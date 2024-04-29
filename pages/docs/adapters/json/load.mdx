@@ -1,11 +1,12 @@
 ---
-title: JSON Load method
+title: Load method
 description: The load method allows you to retrieve data from an JSON file. It is a fundamental operation when working with JSON databases, enabling you to access structured information stored in your database files.
+adapter: JSON
 ---
 
 import { Steps } from "nextra/components"
 
-# Using the `load` Method with the `json` Adapter
+# Load JSON Method
 
 After successfully establishing a connection to your database (as described in the documentation on Connecting to a Database), you can leverage the `load` method provided by the `json` adapter to interact with your data.
 
@@ -33,12 +34,11 @@ The `load` method allows you to retrieve data from an JSON file. It is a fundame
 </Steps>
 ### Understanding the Results
 
-The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. This array structure allows you to efficiently manage your data using other provided methods:
-
-- `.add`: Add new objects to the dataset.
-- `.update`: Modify existing objects.
-- `.remove`: Delete objects.
-- `.find`: Search for specific objects.
+The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. This array contains an string called `results` too and this tis the contetn of it but it will be a string
+and this is the results of it `results.results{:js}`:
+```json
+CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n)
+```
 
 ### Loading Data from Subfolders
 
@@ -58,11 +58,26 @@ If you prefer working with promises instead of `async/await`, you can use the `.
 ```javascript
 db.load("users")
   .then((results) => {
-    console.log(results);
+    console.log(results); // returns object that contains an item called `results` that contains the reults of the file
+    console.log(results.results); // returns the data of the data file
   })
   .catch((error) => {
     console.error(error);
   });
+```
+### Notes:
+
+> `results.results` returns the data which looks like this
+```json
+"CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);"
+```
+> `results` returns an object that looks like this
+```json
+{
+  "acknowledged": true,
+  "message": "Data Loaded Successfully",
+  "results": "CREATE TABLE users (\n  id INT PRIMARY KEY,\n  name VARCHAR(50),\n  age INT\n);",
+}
 ```
 
 By following these guidelines, you can effectively leverage the `load` method to interact with your JSON data stored using the `json` adapter within your project. Feel free to explore and manipulate your data with confidence! 😊

@@ -1,16 +1,14 @@
 ---
 title: Find method
+description: To retrieve specific records from your JSON data, you'll use the find method. Here's how you can call it
+adapter: JSON
 ---
 
-import { Steps, Callout, FileTree } from "nextra/components";
+# Find JSON Method
 
-# Using the `Find` Method with the `json` Adapter
+To retrieve specific records from your JSON data, you'll use the `find` method. Here's how you can call it:
 
-First After successfully establishing a connection to your database (refer to the documentation on [Connecting to a Database](/docs/introduction/installation)), you can leverage the `load` method provided by the `json` adapter to interact with your data.
-
-### Calling the `Find` Method
-
-```js copy showLineNumbers
+```javascript
 const results = await db.load(dataname);
 
 console.log(results);
@@ -18,15 +16,17 @@ console.log(results);
 
 The `dataname` parameter represents the filename (without the `.json` extension) of the JSON file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
 
-For instance, if you have a JSON file named `users.json` containing user data, you'd use the following code to load it:
+For example, if you have a JSON file named `users.json` containing user data, you'd use the following code to load it:
 
-```js
+```javascript
 const results = await db.load("users");
 
 console.log(results);
 ```
 
-### the results:
+## Understanding the Results
+
+The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. Here's what the output looks like:
 
 ```json
 [
@@ -40,29 +40,5 @@ console.log(results);
 ]
 ```
 
-The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. This allows you to efficiently manage your data using the provided methods like `.add` (to add new objects), `.update` (to modify existing objects), `.remove` (to delete objects), and `.find` (to search for specific objects).
-
-### Loading Data from Subfolders
-
-The `load` method also supports loading data from subfolders within the `dataPath` directory. To achieve this, simply include the subfolder path in the `dataname` parameter, separated by a forward slash `(/)`. Here's an example:
-
-```js
-const results = await db.load("subfolder/dataname");
-
-console.log(results);
-```
-### Using Promises (Optional)
-
-If you prefer working with promises instead of `async/await`, you can utilize the `.then` method on the result of the `load` call. Here's an illustration:
-
-```js
-db.load("users")
-  .then((results) => {
-    console.log(results);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-```
-
-By following these guidelines, you can effectively leverage the `load` method to interact with your JSON data stored using the `json` adapter within your project.
+- Each object represents a record in your data set.
+- The properties within each object contain the data associated with that record.

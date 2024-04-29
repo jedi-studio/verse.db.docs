@@ -6,9 +6,8 @@ adapter: SQL
 
 import { Steps } from "nextra/components"
 
-# Update Data Method
+# Update Data SQL Method
 
-## updateData:
 The `updateData` method allows you to modify existing records (rows) in a table within a specified data source (database). You can apply various operations to update specific fields based on certain conditions.
 
 <Steps>
@@ -30,7 +29,7 @@ The `updateData` method allows you to modify existing records (rows) in a table 
    - The `newData` object contains various update operations to perform on the matched rows.
    - Let's explore the available options for `newData`:
 
-### Options for `newData`:
+### Operation Keys:
 - **`$set`:**
   - Sets the specified fields to the provided values.
   - Example: `{ $set: { name: 'UpdatedName', age: 40 } } {:js}`

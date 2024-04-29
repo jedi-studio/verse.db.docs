@@ -1,0 +1,60 @@
+---
+title: Insert Data Method
+description: The insertData method allows you to add new records to a specific table within your SQL database. Whether you’re inserting a single row or multiple rows, this method streamlines the process. Let’s explore how to use it effectively.
+adapter: SQL
+---
+
+# Insert Data SQL Method
+
+The `insertData` method allows you to add new records to a specific table within your SQL database. Whether you're inserting a single row or multiple rows, this method streamlines the process. Let's explore how to use it effectively.
+
+## 1. Purpose
+
+The primary purpose of the `insertData` method is to insert data into a specified table. You can add individual records or multiple records at once.
+
+## 2. Syntax
+
+```javascript
+const dataname = 'your_data_source_name';
+const tableName = 'your_table_name'; // Specify the name of the table where data will be added
+const data = [
+  [1, 'John', 30], // First set
+  [2, 'Alice', 25], // Second set
+  [3, 'Bob', 35] // Third set
+]; // Adding multiple sets of data (Add Many)
+
+// Call the insertData method
+adapter.insertData(dataname, tableName, data)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+## 3. Parameters
+
+- `dataname`: The name of your SQL database.
+- `tableName`: The name of the table where data will be added.
+- `data`: An array containing sets of data to insert. Each set corresponds to a row in the table.
+
+## 4. Example
+
+Suppose you have an SQL database named `your_data_source_name` and a table named `your_table_name`. You want to insert the following data:
+
+1. User with ID 1, name "John," and age 30.
+2. User with ID 2, name "Alice," and age 25.
+3. User with ID 3, name "Bob," and age 35.
+
+The `insertData` method adds these records to the specified table.
+
+## 5. Results
+
+Upon successful execution, the method logs a success message. If there are any errors, it logs an error message.
+
+Feel free to adapt this example to your specific use case! 😊

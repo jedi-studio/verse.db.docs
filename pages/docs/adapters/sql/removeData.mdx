@@ -4,13 +4,10 @@ description: The removeData function allows you to delete specific records (rows
 adapter: SQL
 ---
 
-import { Steps } from "nextra/components"
+# Remove Data SQL Method
 
-# Remove Data Method
+The `removeData` function allows you to Remove specific records (rows) / Data from a table within a given data source (database). You can selectively remove data based on certain conditions.
 
-## removeData:
-The `removeData` function allows you to delete specific records (rows) from a table within a given data source (database). You can selectively remove data based on certain conditions.
-<Steps>
 ### Parameters:
 1. **`dataname` (Data Source Name):**
    - Replace `'your_data_source_name'` with the actual name of your data source (database).
@@ -53,7 +50,7 @@ const dataToRemove = [
 ];
 
 // Call the removeData method
-adapter.removeData(dataname, tableName, dataToRemove)
+db.removeData(dataname, tableName, dataToRemove)
   .then((result) => {
     if (result.acknowledged) {
       console.log(result.message); // Log success message
@@ -65,7 +62,7 @@ adapter.removeData(dataname, tableName, dataToRemove)
     console.error('An error occurred:', error); // Catch any unexpected errors
   });
 ```
-</Steps>
+
 ### Notes:
 - Adjust the `dataToRemove` array to match the specific records you want to delete.
 - Handle any errors by catching exceptions using `.catch()`.

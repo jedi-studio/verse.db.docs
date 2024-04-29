@@ -1,0 +1,85 @@
+---
+title: Multi Update Method
+description: The multiUpdate method allows you to update multiple rows in a SQL database table based on specified conditions. You can use this method to modify existing records efficiently.
+adapter: SQL
+---
+
+# Multi Update SQL Method
+
+The `multiUpdate` method allows you to update multiple rows in a SQL database table based on specified conditions. You can use this method to modify existing records efficiently.
+
+### Syntax
+
+```javascript
+db.multiUpdate(dataname, tableName, queries, newData)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your SQL database.
+- `tableName`: The name of the table you want to update.
+- `queries`: An array of conditions to match for updating rows. Each query object specifies the fields and values to match.
+- `newData`: An object containing the updates to apply to the matching rows. Use the `$set` operator to specify the new values.
+
+### Example
+
+Suppose we have a SQL database with a table named `employees`. We want to update the `age`, `department`, and `salary` fields for employees with `id` 1 and 2. Here's how you would use the `multiUpdate` method:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+const tableName = 'employees'; // Specify the name of the table
+const queries = [
+  { id: 1 },
+  { id: 2 }
+];
+const newData = {
+  $set: {
+    age: 31, // Set the age to 31
+    department: 'Engineering', // Change the department to Engineering
+    salary: 6000.00 // Change the salary to 6000.00
+  }
+};
+
+db.multiUpdate(dataname, tableName, queries, newData)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Expected Results
+
+After executing the above code, the following rows will be updated:
+
+```js
+Updated rows: [
+  {
+    "id": 1,
+    "name": 'John',
+    "age": 30
+  },
+  {
+    "id": 2,
+    "name": 'Alice',
+    "age": 25
+  }
+]
+```
+
+Feel free to adapt this example to your specific use case! 😊

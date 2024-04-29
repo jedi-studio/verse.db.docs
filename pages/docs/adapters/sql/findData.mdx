@@ -4,14 +4,10 @@ description: The find method is used to query a table within a data source (data
 adapter: SQL
 ---
 
-import { Steps } from "nextra/components"
+# Find SQL Method
 
-# Find Method
-
-## Find:
 The `find` method retrieves specific data from a table within a given data source (database). It allows you to filter records based on conditions and obtain relevant information.
 
-<Steps>
 ### Parameters:
 1. **`dataname` (Data Source Name):**
    - Replace `'your_data_source_name'` with the actual name of your data source (database).
@@ -79,7 +75,7 @@ db.findData(dataname, tableName, condition)
   ]
 }
 ```
-</Steps>
+
 ### Notes:
 - Adjust the condition according to your specific search criteria (e.g., other columns, different operators).
 - Handle any errors by catching exceptions using `.catch()`.

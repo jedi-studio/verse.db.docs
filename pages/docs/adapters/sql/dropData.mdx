@@ -1,0 +1,78 @@
+---
+title: Drop Method
+description: The dropData method allows you to remove data from your SQL database. You can use it to drop specific tables or even the entire database.
+adapter: SQL
+---
+
+# Drop Data SQL Method
+
+The `dropData` method allows you to remove / drop data from your SQL database. You can use it to drop specific tables or even the entire database.
+
+### Syntax
+
+```js
+db.dropData(dataname, tableName)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+      console.log(result.results); // Log the results
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your SQL database.
+- `tableName` (optional): The name of the specific table you want to drop. If not provided, all tables in the database will be dropped.
+
+### Example
+
+1. **Drop a Specific Table:**
+
+Suppose you have a SQL database named `your_database.db` and you want to drop the `users` table. Here's how you would use the `dropData` method:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+const tableName = 'users'; // Specify the name of the table
+
+db.dropData(dataname, tableName)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+      console.log(result.results); // Log the results
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+2. **Drop All Tables:**
+
+If you want to drop all tables in the database, omit the `tableName` parameter:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+
+db.dropData(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log success message
+      console.log(result.results); // Log the results
+    } else {
+      console.error(result.errorMessage); // Log error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+Feel free to adapt these examples to your specific use case! 😊

@@ -1,0 +1,49 @@
+---
+title: Move Table Method
+description: The moveTable method allows you to relocate a table from one SQL database file to another. This can be useful when you need to transfer data between databases or consolidate information.
+adapter: SQL
+---
+
+# Move Table SQL Method
+
+The `moveTable` method allows you to relocate a table from one SQL database file to another. This can be useful when you need to transfer data between databases or consolidate information.
+
+### Syntax
+
+```javascript
+db.moveTable({
+  from: "old_database.sql", // Specify the source database file
+  to: "new_database.sql", // Specify the target database file
+  table: "users", // Specify the name of the table to move
+}).then((result) => {
+  console.log(result.message); // Log the result message
+  if (!result.acknowledged) {
+    console.error("Error:", result.errorMessage); // Log any error message
+  }
+});
+```
+
+### Parameters
+
+- `from`: The name of the source SQL database file.
+- `to`: The name of the target SQL database file.
+- `table`: The name of the specific table you want to move.
+
+### Example
+
+Suppose you have an existing SQL database file named `old_database.sql` containing a table named `users`. You want to move this table to a new database file named `new_database.sql`. Here's how you would use the `moveTable` method:
+
+```javascript
+db.moveTable({
+  from: "old_database.sql",
+  to: "new_database.sql",
+  table: "users",
+}).then((result) => {
+  console.log(result.message); // Log the result message
+  if (!result.acknowledged) {
+    console.error("Error:", result.errorMessage); // Log any error message
+  }
+});
+```
+
+Feel free to adapt this example to your specific use case! 😊
