@@ -1,0 +1,82 @@
+---
+title: Search Method
+description: The search method allows you to query your verse.db database and retrieve specific records based on specified filters. It's a powerful tool for finding relevant data within your JSON files. Here's how you can use it
+adapter: JSON
+---
+
+# Search JSON Method
+
+The `search` method allows you to query your **verse.db** database and retrieve specific records based on specified filters. It's a powerful tool for finding relevant data within your JSON files. Here's how you can use it:
+
+### Syntax
+
+```javascript
+const collectionFilters = [
+  {
+    dataname: "users",
+    displayment: 5,
+    filter: { age: 30, gender: "male" }, // Search for male users with age 30
+  },
+  {
+    dataname: "products",
+    displayment: null, // No limit on displayment
+    filter: { category: "electronics", price: { $lt: 500 } }, // Search for electronics products with price less than 500
+  },
+];
+
+const searchResult = await db.search("/path/to/data folder", collectionFilters);
+```
+
+### Parameters
+
+- `collectionFilters`: An array of filter objects, each representing a specific data set (JSON file) to search within. Each filter object contains:
+  - `dataname`: The filename (without the `.json` extension) of the JSON file you want to search.
+  - `displayment`: The maximum number of records to return (optional; set to `null` for no limit).
+  - `filter`: An object specifying the search criteria (e.g., `{ age: 30, gender: "male" }`).
+
+### Return Value
+
+The `search` method returns an object with the following properties:
+
+- `acknowledged`: A boolean indicating whether the operation was successful (`true`) or not (`false`).
+- `message`: A descriptive message indicating the outcome of the search (e.g., `"Successfully searched in data for the given query."`).
+- `results`: An object containing the search results for each specified data set. The keys correspond to the `dataname` values, and the values are arrays of objects representing the matching records.
+
+```json
+{
+  "acknowledged": true,
+  "message": "Successfully searched in data for the gived query.",
+  "results": {
+    // Assert the first 5 male users with age 30
+    "users": [
+      { age: 30, gender: "male" },
+      { age: 30, gender: "male" },
+      { age: 30, gender: "male" },
+      { age: 30, gender: "male" },
+      { age: 30, gender: "male" },
+    ]
+    ,
+    "products": [
+       // Assert the products that match the filter criteria
+       { category: "electronics", price: expect.toBeLessThan(500) }, // this is a test code don't care about it the `expect.toBeLessThan(500)` this just mean that it will be less than 500
+    ]
+  }
+}
+```
+
+### Example
+
+In your provided example, we have two filters:
+
+1. **Users Filter**:
+   - Search for male users with an age of 30.
+   - Retrieve the first 5 matching records from the `"users"` data set.
+
+2. **Products Filter**:
+   - Search for electronics products with a price less than 500.
+   - Retrieve all matching records from the `"products"` data set.
+
+The `searchResult.results` object will contain the filtered data for both users and products.
+
+#### Outcome
+The `search` method efficiently retrieves relevant data based on your specified criteria, allowing you to manage your data effectively within your **verse.db** project.
