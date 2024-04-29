@@ -1,0 +1,75 @@
+---
+title: Join Method
+description: The join method allows you to search for data within the same SQL file but across different tables. It's a powerful tool for combining related information and retrieving relevant records. Let's explore how to use it effectively.
+adapter: SQL
+---
+
+# Join SQL Method
+
+The `join` method allows you to search for data within the same SQL file but across different tables. It's a powerful tool for combining related information and retrieving relevant records. Let's explore how to use it effectively.
+
+## 1. Purpose
+
+The primary purpose of the `join` method is to perform SQL joins across multiple tables. By specifying search conditions and display options, you can retrieve consolidated data based on your criteria.
+
+## 2. Syntax
+
+```javascript
+const searchOptions = [
+  { table: 'users', query: 'username = "user1"' },
+  { table: 'products', query: 'price > 600' },
+  { table: 'orders', query: 'quantity > 2' }
+];
+
+const displayOptions = {
+  page: 1,
+  pageSize: 2,
+  sortOrder: 'desc',
+  displayment: 1,
+  groupBy: { column: 'user_id' }
+};
+
+const result = await db.join('data', searchOptions, displayOptions);
+console.log("Search results:", result.results);
+```
+
+## 3. Parameters
+
+- `dataname`: The name of your SQL database.
+- `searchOptions`: An array of objects specifying the tables to search (`table`) and the search conditions (`query`).
+- `displayOptions`: An object defining how the results should be displayed, including pagination, sorting, and grouping.
+
+## 4. Example
+
+Suppose we have an SQL database with three tables: `users`, `products`, and `orders`. We want to find records that match the following criteria:
+- Users with the username "user1"
+- Products with a price greater than $600
+- Orders with a quantity greater than 2
+
+The `join` method combines data from these tables based on the specified conditions. The resulting JSON output provides relevant information for each table.
+
+## 5. Results
+
+The search results include relevant records grouped by the `user_id`. For example:
+
+```json
+{
+  "users": [
+    [
+      { "user_id": 1, "username": "user1", "email": "user1@example.com" }
+    ]
+  ],
+  "products": [
+    [
+      { "product_id": 1, "product_name": "Laptop", "price": 1200.00 }
+    ]
+  ],
+  "orders": [
+    [
+      { "order_id": 2, "user_id": 2, "product_id": 2, "quantity": 3 }
+    ]
+  ]
+}
+```
+
+Feel free to adapt this example to your specific use case! 😊

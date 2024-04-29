@@ -4,13 +4,10 @@ description: The removeKey function allows you to remove a specific column (key)
 adapter: SQL
 ---
 
-import { Steps } from "nextra/components"
+# Remove Key SQL Method
 
-# Remove Key Method
+The Remove Key (`removeKey`) function allows you to Remove a specific column (key) from a table within a given data source (database). This operation is useful when you need to modify the table structure by eliminating unnecessary columns. You can just use it to remove key from the database
 
-## removeKey:
-The `removeKey` function allows you to remove a specific column (key) from a table within a given data source (database). This operation is useful when you need to modify the table structure by eliminating unnecessary columns.
-<Steps>
 ### Parameters:
 1. **`dataname` (Data Source Name):**
    - Replace `'your_data_source_name'` with the actual name of your data source (database).
@@ -47,7 +44,7 @@ const tableName = 'Employees'; // Assume this table exists
 const keyToRemove = 'department';
 
 // Call the removeKey method
-adapter.removeKey(dataname, tableName, keyToRemove)
+db.removeKey(dataname, tableName, keyToRemove)
   .then((result) => {
     if (result.acknowledged) {
       console.log(result.message); // Log success message
@@ -59,7 +56,7 @@ adapter.removeKey(dataname, tableName, keyToRemove)
     console.error('An error occurred:', error); // Catch any unexpected errors
   });
 ```
-</Steps>
+
 ### Notes:
 - Adjust the `keyToRemove` according to the specific column you want to delete.
 - Handle any errors by catching exceptions using `.catch()`.

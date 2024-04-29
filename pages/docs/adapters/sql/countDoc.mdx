@@ -1,0 +1,55 @@
+---
+title: Count Documents Method
+description: The countDoc method allows you to retrieve the total number of entries (documents) in a specific table within your SQL database.
+adapter: SQL
+---
+
+# Count Documents SQL Method
+
+The `countDoc` method allows you to retrieve the total number of entries (documents) in a specific table within your SQL database.
+
+### Syntax
+
+```javascript
+db.countDoc(dataname, tableName)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log the success message
+      console.log("Document count:", result.results); // Log the document count
+    } else {
+      console.error(result.errorMessage); // Log any error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your SQL database.
+- `tableName`: The name of the specific table for which you want to count the documents.
+
+### Example
+
+Suppose you have a SQL database named `your_database.db` and a table named `users`. You want to determine the total number of user records in the `users` table. Here's how you would use the `countDoc` method:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+const tableName = 'users'; // Specify the name of the table
+
+db.countDoc(dataname, tableName)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log the success message
+      console.log("Document count:", result.results); // Log the document count
+    } else {
+      console.error(result.errorMessage); // Log any error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+Feel free to adapt this example to your specific use case! 😊

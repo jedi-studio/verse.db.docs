@@ -1,0 +1,53 @@
+---
+title: Count Table Method
+description: The countTable method allows you to determine the total number of tables within your SQL database.
+adapter: SQL
+---
+
+# Count Table SQL Method
+
+The `countTable` method allows you to determine the total number of tables within your SQL database.
+
+### Syntax
+
+```javascript
+db.countTable(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log the success message
+      console.log("Table count:", result.results); // Log the table count
+    } else {
+      console.error(result.errorMessage); // Log any error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your SQL database.
+
+### Example
+
+Suppose you have a SQL database named `your_database.db`. To find out how many tables exist in this database, you can use the `countTable` method as follows:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+
+db.countTable(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log(result.message); // Log the success message
+      console.log("Table count:", result.results); // Log the table count
+    } else {
+      console.error(result.errorMessage); // Log any error message
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+Feel free to adapt this example to your specific use case! 😊
