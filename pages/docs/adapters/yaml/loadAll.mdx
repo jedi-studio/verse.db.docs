@@ -1,0 +1,105 @@
+---
+title: Load All Data Method
+description: The loadAll method retrieves all assets located at the specified path within the Resources folder.
+adapter: YAML
+---
+
+# Load All Data YAML Method
+
+The loadAll method retrieves all assets located at the specified path within the Resources folder.
+
+```typescript
+/**
+ * Fetches data from the database using the `loadAll` function with specified query options.
+ * @async
+ */
+async function fetchData() {
+  try {
+    // Define query options
+    const queryOptions = {
+      searchText: "example",          // Search for items containing the search text "example"
+      fields: "name, age, city",     // Select specific fields to retrieve
+      filter: {                       // Filter data based on specific criteria
+        status: "active",
+        category: "electronics"
+      },
+      projection: {                   // Project only specific fields
+        name: true,
+        age: true,
+        city: false
+      },
+      sortOrder: "asc",               // Sort data in ascending order
+      sortField: "name",              // Sort based on the "name" field
+      groupBy: "category",            // Group data by the "category" field
+      distinct: "name",               // Retrieve distinct values of the "name" field
+      dateRange: {                    // Filter data based on a date range
+        startDate: new Date("2023-01-01"),
+        endDate: new Date("2023-12-31"),
+        dateField: "createdAt"
+      },
+      limitFields: 2,                 // Limit the number of fields returned per item
+      page: 1,                        // Pagination - Page number
+      pageSize: 10,                   // Pagination - Number of items per page
+      displayment: 20                 // Limit the total number of items returned
+    };
+
+    // Load data with specified query options
+    const results = await dataAdapter.loadAll("your-data-name", queryOptions);
+
+    console.log(results);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Execute the fetchData function
+fetchData();
+```
+
+### Explanation:
+
+1. **`searchText`**:  
+   - Allows filtering data based on a provided search query.
+   - Example: Searching for items containing the search text "example".
+
+2. **`fields`**:  
+   - Selects specific fields from the data.
+   - Example: Retrieving only the "name", "age", and "city" fields.
+
+3. **`filter`**:  
+   - Filters data based on specific criteria provided in an object.
+   - Example: Filtering items with "status" as "active" and "category" as "electronics".
+
+4. **`projection`**:  
+   - Projects only specific fields from the data.
+   - Example: Including "name" and "age" fields but excluding "city".
+
+5. **`sortOrder`** and **`sortField`**:  
+   - Sorts data based on a specified field and order.
+   - Example: Sorting data in ascending order based on the "name" field.
+
+6. **`groupBy`**:  
+   - Groups data based on a specified field.
+   - Example: Grouping data by the "category" field.
+
+7. **`distinct`**:  
+   - Retrieves distinct values of a specified field.
+   - Example: Retrieving unique values of the "name" field.
+
+8. **`dateRange`**:  
+   - Filters data based on a specified date range.
+   - Example: Filtering items with a "createdAt" date falling within the range of 2023.
+
+9. **`limitFields`**:  
+   - Limits the number of fields returned per item.
+   - Example: Returning only the first 2 fields for each item.
+
+10. **`page`** and **`pageSize`**:  
+    - Facilitates pagination by specifying the page number and the number of items per page.
+    - Example: Retrieving the first page with 10 items per page.
+
+11. **`displayment`**:  
+    - Limits the total number of items returned.
+    - Example: Limiting the result to a maximum of 20 items.
+
+Feel free to adjust the query options according to your specific use case and requirements. Remember to replace `"your-data-name"` with the actual name of your data collection in Verse.db.

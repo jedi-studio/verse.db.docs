@@ -72,9 +72,9 @@ const db = new versedb.connect({
 
 The logger system can also be used externally. Refer to the Logger System page for further details.
 
-### Secure Data (Encryption)
+### Secure Data (Secure)
 
-To enhance security and reduce data file sizes, we provide a built-in encoder and encryptor. By default, we use the secret key `"versedb"` for encryption. However, you can set your own secret:
+To enhance security and reduce data file sizes, we provide a built-in encoder and encryptor. By default, we use the secret key `"versedb"` for secure. However, you can set your own secret:
 
 ```javascript
 const db = new versedb.connect({
@@ -84,7 +84,7 @@ const db = new versedb.connect({
     enable: true, // Set to true to enable dev logs (writes logs to files in the logs folder)
     path: "./path/to/the/logs/folder", // Specify the logs folder path
   },
-  encryption: {
+  secure: {
     enable: true,
     secret: "put-your-secret-here", // Set your custom secret
   },
