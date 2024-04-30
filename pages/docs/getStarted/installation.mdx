@@ -194,6 +194,23 @@ and now you can see everything happens like **MAGIC ✨** so you can start using
 after that there will be a file created for your connection contains an exported `db` with the connection name just check it out 
 
 to use it import the exported db and and use it normaly
+<Tabs items={['JS', 'TS', 'yarn']}>
+  <Tabs.Tab>
+    ```js
+    const { db } = require("./data-dir/connection-name.versedb.js");
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```js
+    import { db } from "./data-dir/connection-name.versedb.ts";
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+```js
+const { db } = require("./data-dir/connection-name.versedb.js")
+```
 </Steps>
 
 ### Notes*: 
