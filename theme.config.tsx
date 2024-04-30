@@ -35,8 +35,12 @@ const config: DocsThemeConfig = {
     link: "https://discord.gg/EurnFWMweW",
   },
   banner: {
-    key: "V2-coming-soon",
-    text: <p>🎉 VERSE.DB v2 is coming soon.</p>,
+    key: '2.0-release',
+    text: (
+      <a href="/docs/introduction" target="_blank">
+        🎉 VERSE.DB 2.0 is released. Read more →
+      </a>
+    )
   },
   primaryHue: { dark: 230, light: 230 },
   primarySaturation: { dark: 45, light: 100 },
