@@ -1,0 +1,56 @@
+---
+title: Buffer Zone Method
+description: Specifies the geometry to be buffered. It should be an object containing the `type` property indicating the type of geometry (`"point"`, `"line"`, `"polygon"`, etc.), and `coordinates` property containing the latitude and longitude coordinates.
+adapter: JSON
+---
+
+# Buffer Zone JSON Adapter
+
+```typescript
+async function bufferGeometry() {
+  try {
+    const geometry = {
+      type: "point",                        // Type of geometry to buffer ("point", "line", "polygon", etc.)
+      coordinates: {                        // Coordinates of the geometry
+        latitude: 40.7128,
+        longitude: -74.0060
+      }
+    };
+
+    const bufferDistance = 0.1;             // Distance by which to buffer the geometry
+
+    // Buffer the geometry based on the provided type and coordinates
+    const results = await dataAdapter.bufferZone(geometry, bufferDistance);
+
+    console.log(results);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+bufferGeometry();
+```
+
+### Explanation:
+
+1. **geometry**:  
+   - Specifies the geometry to be buffered. It should be an object containing the `type` property indicating the type of geometry (`"point"`, `"line"`, `"polygon"`, etc.), and `coordinates` property containing the latitude and longitude coordinates.
+
+2. **bufferDistance**:  
+   - Defines the distance by which to buffer the geometry. It determines the size of the buffer zone around the geometry, measured in the units of the coordinates (e.g., degrees for latitude and longitude).
+
+3. **Buffering Logic**:
+   - The function determines the type of geometry provided (`point`, `line`, `polygon`, etc.).
+   - Based on the geometry type, it calculates the buffered geometry:
+     - For a point, it adds the buffer distance to the latitude and longitude coordinates.
+     - For a line, it adds the buffer distance to the start and end coordinates.
+     - For polygons and multi-geometries, it iterates through each feature and vertex, adding the buffer distance to each vertex's coordinates.
+
+4. **Handling Invalid Types**:
+   - If the provided geometry has an invalid type, an error is logged, and an appropriate response is returned.
+
+5. **Handling Missing Type Property**:
+   - If the geometry object does not have a `type` property, an error is logged, and an appropriate response is returned.
+
+6. **Result**:  
+   - The function returns an object containing acknowledgment of the operation's success, a message indicating the outcome, and the buffered geometry.

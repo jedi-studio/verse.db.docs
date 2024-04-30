@@ -1,0 +1,135 @@
+---
+title: Batch Tasks Method
+description: 
+adapter: JSON
+---
+
+# Batch Tasks JSON Method
+
+```typescript
+async function executeBatchTasks() {
+  try {
+    const operations = [
+      {
+        type: "add",
+        dataname: "users",
+        document: {
+          name: "John Doe",
+          age: 30,
+          city: "New York"
+        }
+      },
+      {
+        type: "update",
+        dataname: "users",
+        query: { name: "John Doe" },
+        update: { $set: { age: 31 } }
+      },
+      {
+        type: "remove",
+        dataname: "users",
+        query: { name: "John Doe" }
+      },
+      {
+        type: "bufferZone",
+        dataname: "geometries",
+        geometry: {
+          type: "point",
+          coordinates: { latitude: 40.7128, longitude: -74.0060 }
+        },
+        bufferDistance: 0.1
+      },
+      {
+        type: "polygonArea",
+        dataname: "geometries",
+        polygonCoordinates: [
+          { latitude: 0, longitude: 0 },
+          { latitude: 1, longitude: 1 },
+          { latitude: 2, longitude: 2 }
+        ]
+      },
+      {
+        type: "nearBy",
+        dataname: "vectors",
+        data: {
+          dataName: "vectors",
+          point: { x: 0, y: 0 },
+          radius: 10
+        }
+      },
+      {
+        type: "find",
+        dataname: "users",
+        query: { age: { $gt: 30 } }
+      },
+      {
+        type: "updateMany",
+        dataname: "users",
+        query: { age: { $lt: 30 } },
+        newData: { $set: { status: "inactive" } }
+      },
+      {
+        type: "loadAll",
+        dataname: "data",
+        query: { searchText: "example", fields: "name, age" }
+      },
+      {
+        type: "drop",
+        dataname: "data"
+      },
+      {
+        type: "load",
+        dataname: "data"
+      },
+      {
+        type: "search",
+        collectionFilters: { category: "electronics", price: { $gt: 100 } }
+      },
+      {
+        type: "dataSize",
+        dataname: "data"
+      },
+      {
+        type: "countDoc",
+        dataname: "data"
+      }
+    ];
+
+    const results = await dataAdapter.batchTasks(operations);
+
+    console.log(results);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+executeBatchTasks();
+```
+
+### Explanation:
+
+1. **operations**:  
+   - An array containing objects representing individual operations to be executed in the batch. Each operation object should include:
+     - `type`: Type of operation to perform (`"add"`, `"update"`, `"remove"`, etc.).
+     - `dataname`: Name of the data to perform the operation on.
+     - Additional operation-specific parameters required for executing the operation.
+
+2. **Operation Handlers**:  
+   - A set of functions defined to handle each type of operation supported by the data adapter. Each handler function is associated with a specific operation type and executes the corresponding operation.
+   - Example operations include adding data (`add`), updating data (`update`), removing data (`remove`), etc.
+
+3. **Executing Operations**:  
+   - The function iterates through each operation in the `operations` array.
+   - For each operation, it determines the handler function corresponding to the operation type.
+   - It then executes the handler function with the appropriate parameters, including the data name and any operation-specific parameters.
+   - The result of each operation is stored in the `results` object, categorized by operation type.
+
+4. **Handling Errors**:  
+   - If an error occurs during the execution of any operation, it is logged, and an appropriate response is returned.
+   - If an unsupported operation type is encountered, an error is logged, and the function continues processing remaining operations.
+
+5. **Result**:  
+   - Upon successful completion of all operations, the function returns an object containing acknowledgment of the batch operation's success, a message indicating the outcome, and the results of each operation categorized by type.
+
+6. **Logging**:  
+   - Logs are maintained throughout the function execution, recording successful completion of batch operations and any encountered errors for debugging purposes.
