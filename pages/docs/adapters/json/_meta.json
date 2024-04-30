@@ -2,6 +2,9 @@
   "load": {
     "title": "Load Method"
   },
+  "loadAll": {
+    "title": "Load All Method"
+  },
   "drop": {
     "title": "Drop Method"
   },
@@ -22,5 +25,14 @@
   },
   "search": {
     "title": "Search Method"
+  },
+  "nearbyVectors": {
+    "title": "Nearby Vectors Method"
+  },
+  "BufferZone": {
+    "title": "Buffer Zone Method"
+  },
+  "batchTasks": {
+    "title": "Batch Tasks Method"
   }
 }

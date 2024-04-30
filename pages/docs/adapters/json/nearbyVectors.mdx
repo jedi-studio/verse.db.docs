@@ -1,0 +1,68 @@
+---
+title: Nearcy Vectors Method
+description: The nearbyVectors method in the JSON adapter for Verse.db allows you to search for vectors that are nearby a specified point within a given radius.
+adapter: JSON
+---
+
+# Nearby Vectors JSON Method
+
+The nearbyVectors method in the JSON adapter for Verse.db allows you to search for vectors that are nearby a specified point within a given radius. It’s particularly useful when dealing with spatial data, such as geographical coordinates or geometric shapes. By providing the dataset name, the target point, and the search radius, you can retrieve vectors that fall within the defined proximity. Feel free to customize the options according to your specific use case! 🌟
+
+```typescript
+/**
+ * Searches for vectors near a specified point within a given radius.
+ * @async
+ */
+async function findNearbyVectors() {
+  try {
+    // Define nearby search options
+    const nearbyOptions = {
+      dataName: "your-data-name",       // Name of the dataset to search nearby vectors in
+      point: { x: 0, y: 0 },            // Coordinates of the point to search around
+      radius: 10,                       // Radius within which to search for nearby vectors (units relevant to the dataset)
+      visitedVectors: new Set(),        // Optional set to track visited vectors for performance optimization
+    };
+
+    // Find nearby vectors based on the provided options
+    const results = await dataAdapter.nearbyVectors(nearbyOptions);
+
+    console.log(results);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Execute the findNearbyVectors function
+findNearbyVectors();
+```
+
+### Explanation:
+
+1. **`dataName`**:  
+   - Specifies the name of the dataset from which nearby vectors will be retrieved.
+   - Replace `"your-data-name"` with the actual name of your dataset.
+
+2. **`point`**:  
+   - Defines the coordinates (x, y) of the point around which to search for nearby vectors.
+   - Adjust the coordinates according to your specific use case.
+
+3. **`radius`**:  
+   - Sets the search radius within which to find nearby vectors.
+   - The unit of measurement (e.g., meters, kilometers) depends on the dataset context.
+
+4. **`visitedVectors`** (optional):  
+   - An optional set to track visited vectors during the search.
+   - Helps optimize performance by avoiding redundant calculations when dealing with large datasets or complex geometries.
+
+5. **Switch Case Logic**:  
+   - The method iterates through each vector in the dataset and determines its type.
+   - Depending on the vector type (e.g., `point`, `line`, `polygon`), specific logic is applied to determine if the vector is nearby the specified point within the given radius.
+
+6. **Handling Invalid Types**:  
+   - If an invalid vector type is encountered, an error is logged, and an appropriate response is returned.
+
+7. **Handling Missing Type Property**:  
+   - If none of the entries in the dataset have a specified type property, an error is logged, and an appropriate response is returned.
+
+8. **Result**:  
+   - The method returns an object containing acknowledgment of the operation's success, a message indicating the outcome, and the nearby vectors found.

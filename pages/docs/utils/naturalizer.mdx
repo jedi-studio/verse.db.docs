@@ -5,3 +5,54 @@ description: VERSE Naturalizer is a tool for converting files between the.verse 
 
 # VERSE Naturalizer
 VERSE Naturalizer is a tool for converting files between the.verse extension and common data formats like JSON, YAML, and SQL. The.verse extension is a proprietary format with enhanced encryption and encoding. This tool enables users to convert data to/from the.verse format, allowing them to leverage its security features while still working with their data in various tools and environments. The conversion process is customizable, letting users choose the specific format and encoding options that best suit their data.
+
+```typescript
+import { neutralizer } from 'your-neutralizer-module';
+
+async function processFiles() {
+  try {
+    const folderPath = '/path/to/your/folder';  // Path to the folder containing files to be neutralized
+    const dataType = 'json';                    // Data type of the files ('json', 'yaml', or 'sql')
+    const secret = 'your-secret-key';           // Secret key for decoding encrypted files
+
+    // Neutralize files in the specified folder with the provided data type and secret
+    const foundFiles = await neutralizer(folderPath, { dataType, secret });
+
+    console.log('Neutralized files:', foundFiles);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+processFiles();
+```
+
+### Explanation:
+
+1. **folderPath**:  
+   - Specifies the path to the folder containing the files to be neutralized.
+
+2. **info**:  
+   - An object containing additional parameters:
+     - `dataType`: Specifies the type of data in the files ('json', 'yaml', or 'sql').
+     - `secret`: Secret key used for decoding encrypted files.
+
+3. **Error Handling**:  
+   - The function checks if all required parameters (`dataType`, `secret`, `folderPath`) are provided. If any of them is missing, it throws an error.
+   - It also throws an error if decoding of any file fails.
+
+4. **Searching Files**:  
+   - The function searches recursively through the specified folder to find all files with the extension '.verse'.
+
+5. **Decoding and Neutralizing Files**:  
+   - For each found file, it reads the content and decodes it based on the specified data type and secret.
+   - If the data type is 'json', it decodes the JSON data, converts it back to a JSON string, and writes it to a new file with the extension '.json'.
+   - If the data type is 'yaml', it decodes the YAML data, converts it back to a YAML string, and writes it to a new file with the extension '.yaml'.
+   - If the data type is 'sql', it decodes the SQL data and writes it to a new file with the extension '.sql'.
+   - The original file is not modified.
+
+6. **Returned Value**:  
+   - The function returns an array containing the paths of all the files that were neutralized.
+
+7. **Logging**:  
+   - Information about the neutralized files is logged to the console for monitoring and debugging purposes.
