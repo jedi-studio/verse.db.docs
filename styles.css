@@ -70,10 +70,53 @@ html {
 }
 
 /* about */
+.about{
+  background: rgba(255, 255, 255, 0.44);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
 
+.dark .about {
+  background: rgba(0, 0, 0, 0.44);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.about-cards {
+  margin-top: 25px;
+}
+
+.about-cards .card {
+  margin-bottom: 20px;
+}
+
+.logos {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
 
 .span-logo-plus {
   font-size: 50px;
   font-weight: light;
 }
+
+.logo-padding {
+  padding: 15px;
+}
+
+/* .card-image {
+  height: 250px;
+  width: 250px;
+} */
