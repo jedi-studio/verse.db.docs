@@ -23,16 +23,22 @@ function About() {
               Studio.
             </p>
             <p className="py-6" style={{ opacity: "0.5" }}>
-              <span className="font-bold">JEDI Studio</span> isn't just a team we are a big family who wantes to show off all the skills we have
-              we are sure that we can do the impossible and we wants to make the world a better place with coding from now on 
-              we are <span className="font-bold">JavaScript Experienced Developers International Studios</span> (JEDI Studio).
+              <span className="font-bold">JEDI Studio</span>: We're more than
+              just a team; we're a close-knit family of passionate individuals.
+              Our mission? To showcase our diverse skills and tackle the
+              seemingly impossible. With code as our weapon, we're committed to
+              making the world a better place. Welcome to{" "}
+              <span className="font-bold">
+                JavaScript Experienced Developers International Studios
+              </span>{" "}
+              (JEDI Studio). 🚀🌟
             </p>
             <a
-            className="btn btn-outline btn-error"
-            href="https://jedi-studio.com"
-          >
-            Team Website
-          </a>
+              className="btn btn-outline btn-error"
+              href="https://jedi-studio.com"
+            >
+              Team Website
+            </a>
           </div>
         </div>
       </div>
