@@ -1,12 +1,12 @@
 ---
 title: Count Documents Method
-description: The countDoc method allows you to retrieve the total number of entries (documents) in a specific table within your SQL database.
-adapter: SQL
+description: The countDoc method allows you to retrieve the total number of entries (documents) in a specific table within your YAML database.
+adapter: YAML
 ---
 
-# Count Documents SQL Method
+# Count Documents YAML Method
 
-The `countDoc` method allows you to retrieve the total number of entries (documents) in a specific table within your SQL database.
+The `countDoc` method allows you to retrieve the total number of entries (documents) in a specific table within your YAML database.
 
 ### Syntax
 
@@ -27,11 +27,11 @@ db.countDoc(dataname)
 
 ### Parameters
 
-- `dataname`: The name of your SQL database.
+- `dataname`: The name of your YAML database.
 
 ### Example
 
-Suppose you have a SQL database named `your_database.db` and a table named `users`. You want to determine the total number of user records in the `users` table. Here's how you would use the `countDoc` method:
+Suppose you have a YAML database named `your_database.db` and a table named `users`. You want to determine the total number of user records in the `users` table. Here's how you would use the `countDoc` method:
 
 ```javascript
 const dataname = 'your_database.db'; // Specify the name of your database

@@ -1,0 +1,59 @@
+---
+title: Data Size Method
+description: The dataSize method allows you to retrieve information about the size of your YAML data file. You can use this method to determine the file size in different units (bytes, kilobytes, megabytes, and gigabytes).
+adapter: YAML
+---
+
+# Data Size YAML Method
+
+The `dataSize` method allows you to retrieve information about the size of your YAML data file. You can use this method to determine the file size in different units (bytes, kilobytes, megabytes, and gigabytes).
+
+### Syntax
+
+```javascript
+db.dataSize(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      const sizeInfo = result.results;
+      console.log("Size in bytes:", sizeInfo.bytes);
+      console.log("Size in kilobytes:", sizeInfo.kilobytes);
+      console.log("Size in megabytes:", sizeInfo.megabytes);
+      console.log("Size in gigabytes:", sizeInfo.gigabytes);
+    } else {
+      console.error("Error:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+### Parameters
+
+- `dataname`: The name of your YAML database.
+
+### Example
+
+Suppose you have a YAML database named `your_database.db`. To retrieve the size information for this database, you can use the `dataSize` method as follows:
+
+```javascript
+const dataname = 'your_database.db'; // Specify the name of your database
+
+db.dataSize(dataname)
+  .then((result) => {
+    if (result.acknowledged) {
+      const sizeInfo = result.results;
+      console.log("Size in bytes:", sizeInfo.bytes);
+      console.log("Size in kilobytes:", sizeInfo.kilobytes);
+      console.log("Size in megabytes:", sizeInfo.megabytes);
+      console.log("Size in gigabytes:", sizeInfo.gigabytes);
+    } else {
+      console.error("Error:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error('An error occurred:', error); // Catch any unexpected errors
+  });
+```
+
+Feel free to adapt this example to your specific use case! 😊
