@@ -32,6 +32,9 @@
   "BufferZone": {
     "title": "Buffer Zone Method"
   },
+  "polygonArea": {
+    "title": "Polygon Area Method"
+  },
   "batchTasks": {
     "title": "Batch Tasks Method"
   },
