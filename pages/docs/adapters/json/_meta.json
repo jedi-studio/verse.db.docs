@@ -43,5 +43,8 @@
   },
   "countDoc": {
     "title": "Count Documents Method"
+  },
+  "moveData": {
+    "title": "Move Data Method"
   }
 }

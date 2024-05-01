@@ -1,0 +1,68 @@
+---
+title: Move Data Method
+description: Moves data from a file to another 
+adapter: JSON
+---
+
+# Move Data JSON Method
+Moves data from a file to another 
+
+### Syntax
+```typescript
+async function moveData() {
+  try {
+    const from = "source-data";     // Name of the source data
+    const to = "destination-data";  // Name of the destination data
+
+    const options = {
+      query: { searchText: "example" },  // Optional query to filter data
+      dropSource: true                    // Optional flag to drop source data after moving
+    };
+
+    // Move data from the source to the destination with optional parameters
+    const results = await dataAdapter.moveData(from, to, options);
+
+    console.log(results);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+moveData();
+```
+
+### Explanation:
+
+1. **from**:  
+   - Specifies the name of the source data from which the data will be moved.
+
+2. **to**:  
+   - Specifies the name of the destination data where the data will be moved.
+
+3. **options**:  
+   - An optional object containing additional parameters:
+     - `query`: Optional query to filter the data before moving.
+     - `dropSource`: Optional boolean flag indicating whether to drop the source data after moving.
+
+4. **Filtering Source Data**:  
+   - If the `query` option is provided, the function loads all data from the source data matching the specified query using the `loadAll` method.
+   - If the filtered data is not empty, it replaces the source data with the filtered data.
+
+5. **Dropping Source Data**:  
+   - If the `dropSource` option is `true`, the function removes the source data after moving it to the destination.
+   - If a query is provided, it removes only the filtered data from the source.
+   - If no query is provided, it removes all data from the source.
+
+6. **Moving Data to Destination**:  
+   - The function loads data from the destination using the `load` method.
+   - It appends the source data to the existing data in the destination.
+   - It then writes the combined data to the destination file.
+
+7. **Encoding Data (if secure)**:  
+   - If data encryption is enabled, the function encodes the data before writing it to the file.
+
+8. **Logging**:  
+   - Success or error logs are maintained throughout the function execution for debugging and monitoring purposes.
+
+9. **Result**:  
+   - The function returns an object containing acknowledgment of the operation's success, a message indicating the outcome, and the moved data in the destination.
