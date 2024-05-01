@@ -194,6 +194,20 @@ and now you can see everything happens like **MAGIC ✨** so you can start using
 after that there will be a file created for your connection contains an exported `db` with the connection name just check it out 
 
 to use it import the exported db and and use it normaly
+<Tabs items={['JS', 'TS']}>
+  <Tabs.Tab>
+    ```js
+    const { db } = require("./data-dir/.config/connection-name.versedb.js");
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```ts
+    import { db } from "./data-dir/.config/connection-name.versedb.ts";
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 </Steps>
 
-### Note*: That the secret is saved in a dir called `./.secret` with a file called `./.secret/.env` this file contains the encryption secret if you need it
+### Notes*: 
+- **Secret**: The secret is saved in a dir called `./Data-Dir/.config/.secret` with a file called `./Data-Dir/.config/.secret/.env` this file contains the encryption secret if you need it

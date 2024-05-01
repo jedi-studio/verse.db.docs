@@ -32,7 +32,19 @@
   "BufferZone": {
     "title": "Buffer Zone Method"
   },
+  "polygonArea": {
+    "title": "Polygon Area Method"
+  },
   "batchTasks": {
     "title": "Batch Tasks Method"
+  },
+  "dataSize": {
+    "title": "Data Size Method"
+  },
+  "countDoc": {
+    "title": "Count Documents Method"
+  },
+  "moveData": {
+    "title": "Move Data Method"
   }
 }

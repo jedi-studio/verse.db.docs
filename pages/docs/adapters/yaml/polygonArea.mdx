@@ -1,0 +1,43 @@
+---
+title: Polygon Area Method
+description: the polygonArea method provides a straightforward and efficient means to determine the area of a polygon defined by its coordinate points, enhancing geometric computations within your application. 
+adapter: JSON
+---
+
+# Polygon Area JSON Method
+the polygonArea method provides a straightforward and efficient means to determine the area of a polygon defined by its coordinate points, enhancing geometric computations within your application. 
+
+### Parameters 
+
+1. **Input Validation**: It first checks if the number of coordinates provided for the polygon is less than 3, as a polygon must have at least 3 coordinates to form a valid shape. If it finds less than 3 coordinates, it logs an error and returns with a failure message.
+
+2. **Area Calculation**: It then iterates through each pair of coordinates in the polygon. For each pair of consecutive coordinates (i and j), it calculates the area of the corresponding trapezoid formed by the line segments connecting the pair of coordinates to the x-axis. It uses the shoelace formula to calculate the area of each trapezoid: `(xi * yj - xj * yi)`, where xi and yi are the latitude and longitude of the ith coordinate, and xj and yj are the latitude and longitude of the (i + 1)th coordinate.
+
+3. **Summation**: It accumulates the area of each trapezoid to find the total signed area of the polygon.
+
+4. **Absolute Value**: Since the signed area may be negative depending on the order of vertices, it takes the absolute value of the total signed area to get the final area of the polygon.
+
+5. **Result**: It returns the calculated area along with a success message if the calculation succeeds. If an error occurs during the calculation, it logs the error and returns with a failure message.
+
+### Example
+
+```javascript
+const polygonCoordinates = [
+  { latitude: 0, longitude: 0 },
+  { latitude: 0, longitude: 1 },
+  { latitude: 1, longitude: 1 },
+  { latitude: 1, longitude: 0 },
+];
+
+adapter.polygonArea(polygonCoordinates)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("Area:", result.results);
+    } else {
+      console.error("Error:", result.message);
+    }
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+```
