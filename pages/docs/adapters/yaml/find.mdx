@@ -6,29 +6,35 @@ adapter: YAML
 
 # Find YAML Method
 
-To retrieve specific records from your YAML data, you'll use the `find` method. Here's how you can call it:
+The `find` method allows you to retrieve specific records from your YAML data. It's useful for querying and filtering data based on specific criteria. Here's how you can use it:
+
+### Syntax
 
 ```javascript
-const results = await db.load(dataname);
+const results = await db.find(dataname, query);
+```
 
+- `dataname`: The name of the data collection (e.g., `"users"`).
+- `query`: An object representing the search criteria. You can specify fields and their corresponding values to filter the data.
+
+### Example
+
+Suppose you have a YAML collection of user data, and you want to find users with the name "Mark Maher." You can use the `find` method like this:
+
+```javascript
+const results = await db.find("users", { name: "Mark Maher" });
 console.log(results);
 ```
 
-The `dataname` parameter represents the filename (without the `.yaml` extension) of the YAML file you want to load. This name is also used when performing other operations like `.add`, `.update`, `.remove`, and `.find` on the corresponding data set.
+This will return an array of user objects that match the specified query. Adjust the `dataname` and `query` parameters according to your data structure and search requirements.
 
-For example, if you have a YAML file named `users.yaml` containing user data, you'd use the following code to load it:
-
-```javascript
-const results = await db.load("users");
-
-console.log(results);
-```
+Remember to replace `"users"` with the actual name of your data collection and adjust the query criteria as needed. Happy querying! 😊🔍
 
 ## Understanding the Results
 
-The `load` method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded YAML file. Here's what the output looks like:
+The find method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded YAML file. Here's what the output looks like:
 
-```yaml
+```json
 [
   {
     // Object data properties here
