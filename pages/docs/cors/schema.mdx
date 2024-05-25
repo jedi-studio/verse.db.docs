@@ -14,33 +14,75 @@ Create an External Schema File:
    - We recommend creating an external file for your schema and exporting it. This way, you can reuse the schema across different parts of your project.
    - Here's an example of setting up a schema for a users database:
 
-```javascript ShowLineNumbers copy filename="/models/UserSchema.js" /schema/model/
-const versedb = require("verse.db");
-const schema = versedb.Schema;
+<Tabs items={['JS', 'TS']}>
+  <Tabs.Tab>
+    ```javascript ShowLineNumbers copy filename="/models/UserSchema.js" /schema/model/SchemaTypes/
+    const { Schema, SchemaTypes } = require("verse.db);
 
-// Create a new connection (choose JSON or YAML adapter)
-const db = new versedb.connect({
-  adapter: "json", // Choose the desired adapter (json or yaml)
-  // Other connection settings...
-});
+    const userSchemaFields = {
+      name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
+      age: { type: SchemaTypes.Number, min: 18, max: 100 },
+      active: { type: SchemaTypes.Boolean },
+      hobbies: {
+        type: SchemaTypes.Array,
+        required: false,
+        minlength: 1,
+        maxlength: 5,
+        schema: {
+          stringField: { type: SchemaTypes.String },
+          numberField: { type: SchemaTypes.Number }
+        }
+      },
+      customField: {
+        type: SchemaTypes.Custom,
+        validate: (value: any) => typeof value === 'string' && value.length <= 10 || 'Custom field must be a string with length less than or equal to 10.'
+      },
+      unionField: {
+        type: SchemaTypes.Union,
+        schema: [SchemaTypes.String, SchemaTypes.Number],
+      }
+    };
 
-// Define the UsersSchema
-const UsersSchema = new schema({
-  username: {
-    type: schemaType.String, // Set the type of the item
-    required: true, // Specify if it's required or not
-    unique: true, // Specify if you want it to be unique or not
-  },
-  age: {
-    type: schemaType.Number, // Set the type of the item
-    min: 16, // Set the minimum allowed age
-    max: 60, // Set the maximum allowed age
-    default: 20, // Set the default age
-  },
-});
+    const UsersSchema = new Schema(userSchemaFields);
 
-module.exports = db.model("Users", UsersSchema);
-```
+    module.exports = db.model("Users", UsersSchema);
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript ShowLineNumbers copy filename="/models/UserSchema.ts" /schema/model/SchemaTypes/
+    import { Schema, SchemaTypes } from 'verse.db'
+
+
+    const userSchemaFields = {
+      name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
+      age: { type: SchemaTypes.Number, min: 18, max: 100 },
+      active: { type: SchemaTypes.Boolean },
+      hobbies: {
+        type: SchemaTypes.Array,
+        required: false,
+        minlength: 1,
+        maxlength: 5,
+        schema: {
+          stringField: { type: SchemaTypes.String },
+          numberField: { type: SchemaTypes.Number }
+        }
+      },
+      customField: {
+        type: SchemaTypes.Custom,
+        validate: (value: any) => typeof value === 'string' && value.length <= 10 || 'Custom field must be a string with length less than or equal to 10.'
+      },
+      unionField: {
+        type: SchemaTypes.Union,
+        schema: [SchemaTypes.String, SchemaTypes.Number],
+      }
+    };
+
+    const UsersSchema = new Schema(userSchemaFields);
+
+    export default db.model("Users", UsersSchema);
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Using the Schema
 
