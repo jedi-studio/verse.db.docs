@@ -50,8 +50,7 @@ Create an External Schema File:
   </Tabs.Tab>
   <Tabs.Tab>
     ```typescript ShowLineNumbers copy filename="/models/UserSchema.ts" /schema/model/SchemaTypes/
-    import { Schema, SchemaTypes } from 'verse.db'
-
+    import { Schema, SchemaTypes } from 'verse.db';
 
     const userSchemaFields = {
       name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
@@ -110,20 +109,16 @@ Available Field Types:
 
 ```typescript
 type FieldType =
-  | (schemaType.String | "String")
-  | (schemaType.Number | "Number")
-  | (schemaType.Boolean | "Boolean")
-  | (schemaType.Array | "Array")
-  | (schemaType.Object | "Object")
-  | (schemaType.Null | "Null")
-  | (schemaType.Undefined | "Undefined")
-  | (schemaType.Date | "Date")
-  | (schemaType.Enum | "Enum")
-  | (schemaType.Custom | "Custom")
-  | (schemaType.Union | "Union")
-  | (schemaType.Any | "Any")
-  | (schemaType.Color | "Color")
-  | (schemaType.Url | "Url");
+  | (SchemaType.String | "String")
+  | (SchemaType.Number | "Number")
+  | (SchemaType.Boolean | "Boolean")
+  | (SchemaType.Array | "Array")
+  | (SchemaType.Object | "Object")
+  | (SchemaType.Null | "Null")
+  | (SchemaType.Enum | "Enum")
+  | (SchemaType.Custom | "Custom")
+  | (SchemaType.Union | "Union")
+  | (SchemaType.Any | "Any");
 ```
 </Steps>
 Feel free to explore the schema system and tailor it to your specific data requirements! 🚀
