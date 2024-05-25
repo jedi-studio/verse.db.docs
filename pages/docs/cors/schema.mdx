@@ -17,7 +17,7 @@ Create an External Schema File:
 <Tabs items={['JS', 'TS']}>
   <Tabs.Tab>
     ```javascript ShowLineNumbers copy filename="/models/UserSchema.js" /schema/model/SchemaTypes/
-    const { Schema, SchemaTypes } = require("verse.db);
+    const { Schema, SchemaTypes } = require("verse.db");
 
     const userSchemaFields = {
       name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
