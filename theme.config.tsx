@@ -37,7 +37,7 @@ const config: DocsThemeConfig = {
   banner: {
     key: '2.1-release',
     text: (
-      <a href="/docs/introduction" target="_blank">
+      <a href="https://github.com/jedi-studio/verse.db/releases/tag/v2.1" target="_blank">
         🎉 VERSE.DB 2.1 is released. Read more →
       </a>
     )
