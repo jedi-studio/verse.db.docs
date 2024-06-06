@@ -46,5 +46,8 @@
   },
   "moveData": {
     "title": "Move Data Method"
+  },
+  "aggregate": {
+    "title": "Aggregate"
   }
 }

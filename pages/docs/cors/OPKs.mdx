@@ -432,3 +432,106 @@ Apologies for the oversight. Let's cover the remaining operations:
       },
     };
     ```
+
+## Aggregate Operation Keys (AOPK) [#AOPK]
+
+### Revised Example JSON Data:
+
+```json
+[
+  "data": [
+    {
+      "_id": 1,
+      "name": "John",
+      "age": 30,
+      "skills": ["JavaScript", "Python"],
+      "address": {
+        "city": "New York",
+        "country": "USA"
+      }
+    },
+    {
+      "_id": 2,
+      "name": "Alice",
+      "age": 25,
+      "skills": ["Java", "C++"],
+      "address": {
+        "city": "London",
+        "country": "UK"
+      }
+    }
+  ]
+]
+```
+
+### Usage for Each Operation:
+
+1. **$match**:
+   - This stage filters the documents to pass only the documents that match the specified condition(s).
+   - It uses the `matchesQuery` method to check if a document matches the given query.
+   - Example: `{ $match: { age: { $gt: 25 } } }`
+
+2. **$unwind**:
+   - This stage deconstructs an array field from the input documents to output a document for each element.
+   - It helps in flattening nested arrays.
+   - Example: `{ $unwind: "arrayField" }`
+
+3. **$group**:
+   - This stage groups documents by a specified identifier expression and applies the specified accumulator expressions.
+   - It's typically used with aggregate functions like `$sum`, `$avg`, `$min`, `$max`, `$first`, `$last`, `$addToSet`, and `$push`.
+   - Example: `{ $group: { _id: "field", total: { $sum: "value" } } }`
+
+4. **$addFields**:
+   - This stage adds new fields to documents.
+   - It's useful for including calculated fields or modifying existing fields.
+   - Example: `{ $addFields: { newField: expression } }`
+
+5. **$project**:
+   - This stage reshapes each document in the stream, including, excluding, or renaming fields.
+   - It's akin to a SELECT statement in SQL.
+   - Example: `{ $project: { field1: 1, field2: 1, _id: 0 } }`
+
+6. **$facet**:
+   - This stage allows for running multiple aggregation pipelines within a single stage on the same set of input documents.
+   - It's useful for generating multiple sets of aggregation results.
+   - Example: `{ $facet: { facet1: [pipeline1], facet2: [pipeline2] } }`
+
+7. **$redact**:
+   - This stage restricts the content for each document based on information stored in the document itself.
+   - It's commonly used for implementing data access control.
+   - Example: `{ $redact: expression }`
+
+8. **$bucket**:
+   - This stage categorizes incoming documents into groups, called buckets, based on a specified expression.
+   - It's helpful for creating histograms or frequency distributions.
+   - Example: `{ $bucket: { groupBy: "field", boundaries: [bound1, bound2], default: "other" } }`
+
+9. **$lookup**:
+   - This stage performs a left outer join to another collection in the same database to filter in documents from the "joined" collection for processing.
+   - It's useful for resolving references across documents.
+   - Example: `{ $lookup: { from: "collection", localField: "field", foreignField: "_id", as: "alias" } }`
+
+10. **$sample**:
+    - This stage randomly selects a specified number of documents from its input.
+    - It's used for random sampling of data.
+    - Example: `{ $sample: { size: 5 } }`
+
+11. **$sort**:
+    - This stage sorts the documents based on the specified fields.
+    - It can be ascending (`1`) or descending (`-1`).
+    - Example: `{ $sort: { field: 1 } }`
+
+12. **$limit**:
+    - This stage limits the number of documents passed to the next stage in the pipeline.
+    - It's useful for pagination or restricting the result set size.
+    - Example: `{ $limit: 10 }`
+
+13. **$skip**:
+    - This stage skips a specified number of documents.
+    - It's useful for implementing pagination.
+    - Example: `{ $skip: 10 }`
+
+14. **$out**:
+    - This stage writes the resulting documents of the aggregation pipeline to a specified collection.
+    - It's used for storing the aggregated data in a separate collection.
+    - Example: `{ $out: "outputCollection" }`

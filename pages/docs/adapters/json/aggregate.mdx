@@ -1,0 +1,25 @@
+---
+title: Aggregate
+discroption:
+adapter: JOSN
+---
+
+# Aggregate
+
+The json aggregate method in this code snippet is designed to perform data aggregation on a given dataset based on a pipeline of stages. Let's break down each operation and its usage:
+
+## Example
+
+```ts
+const pipeline = [
+  { $match: { age: { $gt: 25 } } }, // Filter documents where age is greater than 25
+  { $unwind: "skills" }, // Deconstruct the skills array
+  { $group: { _id: "skills", count: { $sum: 1 } } }, // Group by skills and count occurrences
+];
+
+const result = await this.aggregate("data", pipeline);
+
+console.log(result.results);
+```
+
+you can know more about the [**Operation Keys here**](/docs/cors/OPKs#AOPK)
