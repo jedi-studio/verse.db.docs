@@ -1,0 +1,434 @@
+---
+title: Operation Keys
+discription: All the Operation Keys in the database
+---
+
+# Operation Keys (OPKs)
+
+In **VERSE.DB** we have 3 types of the **Operation Keys (OPKs)** and here you can find them all for all your needs
+
+## Query Operation Keys (QOK) [#QOK]
+
+### Revised Example JSON Data:
+
+We'll use a sample data structure for the database to demonstrate the queries.
+
+```json
+[
+  {
+    "id": 1,
+    "username": "john_doe",
+    "age": 25,
+    "email": "john@example.com",
+    "tags": ["developer", "male"],
+    "profile": {
+      "bio": "Software developer",
+      "interests": ["coding", "reading"],
+      "verified": true
+    },
+    "created_at": "2021-01-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "username": "jane_doe",
+    "age": 30,
+    "email": "jane@example.com",
+    "tags": ["designer", "female"],
+    "profile": {
+      "bio": "Graphic designer",
+      "interests": ["art", "travel"],
+      "verified": false
+    },
+    "created_at": "2021-02-01T00:00:00Z"
+  }
+]
+```
+
+### Usage for Each Operation:
+
+1. **Equality (`$eq`)**:
+
+   ```typescript
+   const query = { age: 25 };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users whose age is exactly 25.
+
+2. **Regex (`$regex`)**:
+
+   ```typescript
+   const query = { username: { $regex: "^john" } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users whose username starts with "john".
+
+3. **Exists (`$exists`)**:
+
+   ```typescript
+   const query = { "profile.bio": { $exists: true } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users who have a bio in their profile.
+
+4. **Greater Than (`$gt`)**:
+
+   ```typescript
+   const query = { age: { $gt: 25 } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users older than 25.
+
+5. **Less Than (`$lt`)**:
+
+   ```typescript
+   const query = { age: { $lt: 30 } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users younger than 30.
+
+6. **In (`$in`)**:
+
+   ```typescript
+   const query = { tags: { $in: ["developer"] } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users who have "developer" as one of their tags.
+
+7. **Not Equal (`$ne`)**:
+
+   ```typescript
+   const query = { username: { $ne: "john_doe" } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users whose username is not "john_doe".
+
+8. **Element Match (`$elemMatch`)**:
+
+   ```typescript
+   const query = { "profile.interests": { $elemMatch: { $eq: "coding" } } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users who have "coding" as one of their interests in the profile.
+
+9. **Type Of (`$typeOf`)**:
+
+   ```typescript
+   const query = { "profile.verified": { $typeOf: "boolean" } };
+   const result = await db.find("users", query);
+   ```
+
+   - Finds users whose profile verification status is a boolean.
+
+10. **And (`$and`)**:
+
+    ```typescript
+    const query = { $and: [{ age: { $gt: 20 } }, { age: { $lt: 30 } }] };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users older than 20 and younger than 30.
+
+11. **Validate (`$validate`)**:
+
+    ```typescript
+    const query = {
+      age: { $validate: (value: number) => value > 18 && value < 40 },
+    };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users whose age is between 18 and 40 using a custom validation function.
+
+12. **Or (`$or`)**:
+
+    ```typescript
+    const query = { $or: [{ age: { $lt: 25 } }, { age: { $gt: 30 } }] };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users younger than 25 or older than 30.
+
+13. **Size (`$size`)**:
+
+    ```typescript
+    const query = { tags: { $size: 2 } };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users who have exactly 2 tags.
+
+14. **Not In (`$nin`)**:
+
+    ```typescript
+    const query = { username: { $nin: ["john_doe", "jane_doe"] } };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users whose username is neither "john_doe" nor "jane_doe".
+
+15. **Slice (`$slice`)**:
+
+    ```typescript
+    const query = { "profile.interests": { $slice: 1 } };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users and slices their interests array to only include the first element.
+
+16. **Sort (`$sort`)**:
+
+    ```typescript
+    const query = { "profile.interests": { $sort: 1 } };
+    const result = await db.find("users", query);
+    ```
+
+    - Finds users and sorts their interests array in ascending order.
+
+17. **Text (`$text`)**:
+    ```typescript
+    const query = { "profile.bio": { $text: "developer" } };
+    const result = await db.find("users", query);
+    ```
+    - Finds users whose bio includes the word "developer".
+
+- **Equality (`$eq`)**: Finds users with a specific value.
+- **Regex (`$regex`)**: Finds users whose string fields match a regular expression.
+- **Exists (`$exists`)**: Finds users with a specific field.
+- **Greater Than (`$gt`)**: Finds users with field values greater than a given value.
+- **Less Than (`$lt`)**: Finds users with field values less than a given value.
+- **In (`$in`)**: Finds users whose field values are in a given list.
+- **Not Equal (`$ne`)**: Finds users whose field values are not equal to a given value.
+- **Element Match (`$elemMatch`)**: Finds users with array fields that match a given condition.
+- **Type Of (`$typeOf`)**: Finds users whose field values are of a specific type.
+- **And (`$and`)**: Finds users who match all conditions in a given list.
+- **Validate (`$validate`)**: Finds users whose field values match a custom validation function.
+- **Or (`$or`)**: Finds users who match at least one condition in a given list.
+- **Size (`$size`)**: Finds users with array fields of a specific size.
+- **Not In (`$nin`)**: Finds users whose field values are not in a given list.
+- **Slice (`$slice`)**: Limits array fields to a specific number of elements.
+- **Sort (`$sort`)**: Sorts array fields in ascending or descending order.
+- **Text (`$text`)**: Finds users whose string fields contain a given text.
+
+## Update Operation Keys (UPK) [#UPK]
+
+### Revised Example JSON Data:
+
+We'll use a sample data structure for the database to demonstrate the queries.
+
+```json
+[
+  "person": {
+    "name": {
+      "first": "Alice",
+      "last": "Smith"
+    },
+    "age": 30,
+    "hobbies": ["reading", "swimming"],
+    "addresses": [
+      {
+        "city": "New York",
+        "country": "USA"
+      },
+      {
+        "city": "Los Angeles",
+        "country": "USA"
+      }
+    ]
+  }
+]
+```
+
+### Usage for Each Operation:
+
+1. **$set**: Sets the value of a field in the document.
+
+   ```typescript
+   const updateQuery = {
+       $set: {
+           "person.name.first": "Bob",
+            { person: { name: 35 } }
+       }
+   };
+   ```
+
+   Explanation: This will set the `name.first` field to "Bob" and the `age` field to 35 in the `person` object.
+
+2. **$unset**: Removes the specified field(s) from the document.
+
+   ```typescript
+   const updateQuery = {
+     $unset: {
+       "person.addresses[0].city": true,
+     },
+   };
+   ```
+
+   Explanation: This will remove the `city` field from the first index in `person.addresses` object.
+
+3. **$push**: Appends a value to an array field in the document.
+
+   ```typescript
+   const updateQuery = {
+     $push: {
+       "person.hobbies": "painting",
+     },
+   };
+   ```
+
+   Explanation: This will add "painting" to the `hobbies` array field in the `person` object.
+
+   - Note: you can use $each and $all in push to act as $pushAll/$pushMany.
+
+4. **$pull**: Removes all occurrences of a specified value or values from an array field.
+
+   ```typescript
+   const updateQuery = {
+     $pull: {
+       "person.hobbies": "swimming",
+     },
+   };
+   ```
+
+   Explanation: This will remove all occurrences of "swimming" from the `hobbies` array field in the `person` object.
+
+- Note: you can use $each and $all in push to act as $pullAll/$pullMany.
+
+5. **$addToSet**: Adds elements to an array field only if they are not already present.
+
+   ```typescript
+   const updateQuery = {
+     $addToSet: {
+       "person.hobbies": { $each: ["painting", "cooking"] },
+     },
+   };
+   ```
+
+   Explanation: This will add "painting" and "cooking" to the `hobbies` array field if they are not already present in the `person` object.
+
+6. **$rename**: Renames a field.
+
+   ```typescript
+   const updateQuery = {
+     $rename: {
+       "person.name.last": "person.name.surname",
+     },
+   };
+   ```
+
+   Explanation: This will rename the `last` field to `surname` in the `name` object within the `person` object.
+
+7. **$min**: Updates the value of the field to the specified value if the specified value is less than the current value of the field.
+
+   ```typescript
+   const updateQuery = {
+     $min: {
+       "person.age": 25,
+     },
+   };
+   ```
+
+   Explanation: This will update the `age` field to 25 if its current value is greater than 25 in the `person` object.
+
+8. **$max**: Updates the value of the field to the specified value if the specified value is greater than the current value of the field.
+
+   ```typescript
+   const updateQuery = {
+     $max: {
+       "person.age": 40,
+     },
+   };
+   ```
+
+   Explanation: This will update the `age` field to 40 if its current value is less than 40 in the `person` object.
+
+9. **$mul**: Multiplies the value of the field by the specified value.
+
+   ```typescript
+   const updateQuery = {
+     $mul: {
+       "person.age": 2,
+     },
+   };
+   ```
+
+   Explanation: This will multiply the `age` field by 2 in the `person` object.
+
+10. **$inc**: Increments the value of the field by the specified amount.
+
+    ```typescript
+    const updateQuery = {
+      $inc: {
+        "person.age": 5,
+      },
+    };
+    ```
+
+    Explanation: This will increment the `age` field by 5 in the `person` object.
+
+Apologies for the oversight. Let's cover the remaining operations:
+
+11. **$bit**: Performs bitwise AND, OR, and XOR updates on integral fields.
+
+    ```typescript
+    const updateQuery = {
+      $bit: {
+        "person.age": { and: 5 }, // Performs a bitwise AND operation with 5
+      },
+    };
+    ```
+
+    Explanation: This will perform a bitwise AND operation with 5 on the `age` field in the `person` object.
+
+12. **$currentDate**: Sets the value of a field to the current date or time, either as a Date or a timestamp.
+
+    ```typescript
+    const updateQuery = {
+      $currentDate: {
+        "person.lastModified": true, // Sets the field to the current date
+      },
+    };
+    ```
+
+    Explanation: This will set the `lastModified` field to the current date in the `person` object.
+
+13. **$pop**: Removes the first or last element of an array.
+
+    ```typescript
+    const updateQuery = {
+      $pop: {
+        "person.hobbies": 1, // Removes the last element
+      },
+    };
+    ```
+
+    Explanation: This will remove the last element from the `hobbies` array field in the `person` object.
+
+14. **$slice**: Limits the number of elements in an array.
+
+    ```typescript
+    const updateQuery = {
+      $slice: {
+        "person.hobbies": 2, // Limits the array to the first 2 elements
+      },
+    };
+    ```
+
+    Explanation: This will limit the `hobbies` array field to contain only the first 2 elements in the `person` object.
+
+15. **$sort**: Sorts the elements of an array.
+
+    ```typescript
+    const updateQuery = {
+      $sort: {
+        "person.hobbies": 1, // Sorts the array in ascending order
+      },
+    };
+    ```

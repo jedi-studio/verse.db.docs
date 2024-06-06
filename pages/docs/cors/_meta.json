@@ -10,5 +10,8 @@
   },
   "schema": {
     "title": "Schema System"
+  },
+  "OPKs": {
+    "title": "Operation Keys (OPKs)"
   }
 }

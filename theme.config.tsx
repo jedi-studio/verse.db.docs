@@ -35,10 +35,10 @@ const config: DocsThemeConfig = {
     link: "https://discord.gg/EurnFWMweW",
   },
   banner: {
-    key: '2.0-release',
+    key: '2.1-release',
     text: (
       <a href="/docs/introduction" target="_blank">
-        🎉 VERSE.DB 2.0 is released. Read more →
+        🎉 VERSE.DB 2.1 is released. Read more →
       </a>
     )
   },

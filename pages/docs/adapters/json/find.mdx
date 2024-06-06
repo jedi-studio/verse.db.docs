@@ -17,34 +17,35 @@ const results = await db.find(dataname, query);
 - `dataname`: The name of the data collection (e.g., `"users"`).
 - `query`: An object representing the search criteria. You can specify fields and their corresponding values to filter the data.
 
-### Example
+### Operation Keys (OPKs)
 
-Suppose you have a JSON collection of user data, and you want to find users with the name "Mark Maher." You can use the `find` method like this:
+Here's how you might use these Operation Keys together in a practical scenario:
 
-```javascript
-const results = await db.find("users", { name: "Mark Maher" });
-console.log(results);
+```typescript
+const queries = [
+  { age: 25 }, // Equality
+  { username: { $regex: "^john" } }, // Regex
+  { "profile.bio": { $exists: true } }, // Exists
+  { age: { $gt: 25 } }, // Greater Than
+  { age: { $lt: 30 } }, // Less Than
+  { tags: { $in: ["developer"] } }, // In
+  { username: { $ne: "john_doe" } }, // Not Equal
+  { "profile.interests": { $elemMatch: { $eq: "coding" } } }, // Element Match
+  { "profile.verified": { $typeOf: "boolean" } }, // Type Of
+  { $and: [{ age: { $gt: 20 } }, { age: { $lt: 30 } }] }, // And
+  { age: { $validate: (value: number) => value > 18 && value < 40 } }, // Validate
+  { $or: [{ age: { $lt: 25 } }, { age: { $gt: 30 } }] }, // Or
+  { tags: { $size: 2 } }, // Size
+  { username: { $nin: ["john_doe", "jane_doe"] } }, // Not In
+  { "profile.interests": { $slice: 1 } }, // Slice
+  { "profile.interests": { $sort: 1 } }, // Sort
+  { "profile.bio": { $text: "developer" } } // Text
+];
+
+for (const query of queries) {
+  const result = await db.find('users', query);
+  console.log(result);
+}
 ```
 
-This will return an array of user objects that match the specified query. Adjust the `dataname` and `query` parameters according to your data structure and search requirements.
-
-Remember to replace `"users"` with the actual name of your data collection and adjust the query criteria as needed. Happy querying! 😊🔍
-
-## Understanding the Results
-
-The find method typically returns an array of objects. Each object in the array corresponds to a single record within the loaded JSON file. Here's what the output looks like:
-
-```json
-[
-  {
-    // Object data properties here
-  },
-  {
-    // Object data properties here
-  }
-  // ... more objects
-]
-```
-
-- Each object represents a record in your data set.
-- The properties within each object contain the data associated with that record.
+you can know more about the [**Operation Keys here**](/docs/cors/OPKs#QPK)
