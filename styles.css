@@ -120,3 +120,30 @@ html {
   height: 250px;
   width: 250px;
 } */
+
+.card-bg {
+  background: rgba(255, 255, 255, 0.44);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.dark .card-bg {
+  background: rgba(0, 0, 0, 0.44);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+.blog-card-content {
+  background: rgba(255, 255, 255, 0.44);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+.dark .blog-card-content {
+  background: rgba(11, 11, 11, 0.22);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border: 1px solid rgba(0, 0, 0, 1);
+}

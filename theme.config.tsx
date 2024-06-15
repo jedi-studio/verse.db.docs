@@ -1,7 +1,7 @@
 import React from "react";
 import { DocsThemeConfig, useConfig } from "nextra-theme-docs";
-import Logo from "./components/logo";
-import Npm from "./components/npm";
+import Logo from "./src/components/logo";
+import Npm from "./src/components/npm";
 import { useRouter } from "next/router";
 
 const config: DocsThemeConfig = {
