@@ -35,6 +35,7 @@ const BlogContainer = () => {
       {posts.map((post) => (
         <Card 
           username={post.user.username} 
+          userImage={post.user.profile_image}
           coverImage={post.cover_image}
           date={post.readable_publish_date} 
           title={post.title} 

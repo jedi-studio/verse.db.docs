@@ -3,6 +3,7 @@ import Markdown from "./markdown";
 
 interface CardProps {
   username: string;
+  userImage: string;
   coverImage?: string | null | undefined;
   date: string;
   title: string;
@@ -10,7 +11,7 @@ interface CardProps {
   key: number;
 }
 
-const Card: React.FC<CardProps> = ({ username, coverImage, date, title, body_markdown, key }) => {
+const Card: React.FC<CardProps> = ({ username, userImage, coverImage, date, title, body_markdown, key }) => {
   return (
     <div className="min-w-full rounded-xl shadow-xl card-bg w-full" key={key}>
       {coverImage ? 
@@ -22,7 +23,7 @@ const Card: React.FC<CardProps> = ({ username, coverImage, date, title, body_mar
         <div className="user flex flex-row text-start justify-start">
           <div className="avatar">
             <div className="w-14 mr-3 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src="https://marco5dev.site/assets/mark-img1-f8981f4a.jpg" alt="Avatar" />
+              <img src={userImage} alt={username} />
             </div>
           </div>
           <div className="flex flex-col text-start">
