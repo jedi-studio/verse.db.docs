@@ -18,6 +18,7 @@ Create an External Schema File:
   <Tabs.Tab>
     ```javascript ShowLineNumbers copy filename="/models/UserSchema.js" /schema/model/SchemaTypes/
     const { Schema, SchemaTypes } = require("verse.db");
+    const db = require("./Data/db.versedb");
 
     const userSchemaFields = {
       name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
@@ -51,6 +52,7 @@ Create an External Schema File:
   <Tabs.Tab>
     ```typescript ShowLineNumbers copy filename="/models/UserSchema.ts" /schema/model/SchemaTypes/
     import { Schema, SchemaTypes } from 'verse.db';
+    import db from "./Data/db.versedb";
 
     const userSchemaFields = {
       name: { type: SchemaTypes.String, required: true, minlength: 2, maxlength: 50 },
@@ -109,16 +111,16 @@ Available Field Types:
 
 ```typescript
 type FieldType =
-  | (SchemaType.String | "String")
-  | (SchemaType.Number | "Number")
-  | (SchemaType.Boolean | "Boolean")
-  | (SchemaType.Array | "Array")
-  | (SchemaType.Object | "Object")
-  | (SchemaType.Null | "Null")
-  | (SchemaType.Enum | "Enum")
-  | (SchemaType.Custom | "Custom")
-  | (SchemaType.Union | "Union")
-  | (SchemaType.Any | "Any");
+  | (SchemaTypes.String | "String")
+  | (SchemaTypes.Number | "Number")
+  | (SchemaTypes.Boolean | "Boolean")
+  | (SchemaTypes.Array | "Array")
+  | (SchemaTypes.Object | "Object")
+  | (SchemaTypes.Null | "Null")
+  | (SchemaTypes.Enum | "Enum")
+  | (SchemaTypes.Custom | "Custom")
+  | (SchemaTypes.Union | "Union")
+  | (SchemaTypes.Any | "Any");
 ```
 </Steps>
 Feel free to explore the schema system and tailor it to your specific data requirements! 🚀
