@@ -35,7 +35,7 @@ const BlogContainer = () => {
   }, []);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error} please refreash the page</div>;
   }
 
   if (!loading) {
