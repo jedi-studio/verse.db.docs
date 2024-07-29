@@ -1,0 +1,32 @@
+{
+  "load": {
+    "title": "Load Method"
+  },
+  "drop": {
+    "title": "Drop Method"
+  },
+  "add": {
+    "title": "Add Method"
+  },
+  "clear": {
+    "title": "Clear Method"
+  },
+  "stats": {
+    "title": "Statitics Method"
+  },
+  "invalidate": {
+    "title": "Invalidate Method"
+  },
+  "regenerateSessionId": {
+    "title": "Regenerate Session ID Method"
+  },
+  "expressMiddleware": {
+    "title": "Express Middleware Method"
+  },
+  "nextMiddleware": {
+    "title": "NEXT.JS Middleware Method"
+  },
+  "triggerEvent": {
+    "title": "Trigger Event Method"
+  }
+}

@@ -1,0 +1,151 @@
+---
+title: Express Middleware Method
+description: The expressMiddleware method integrates the session adapter with an Express.js application, providing session management capabilities for handling HTTP requests. It ensures that sessions are loaded, created, and managed seamlessly within the Express framework.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Express Middleware Method
+
+The `expressMiddleware` method integrates the session adapter with an Express.js application, providing session management capabilities for handling HTTP requests. It ensures that sessions are loaded, created, and managed seamlessly within the Express framework.
+
+## Features
+
+- **Express Integration**: Seamlessly integrates with Express.js applications.
+- **Session Management**: Automatically handles session creation, loading, and management.
+- **Security**: Supports secure session handling with options for encryption and expiry.
+- **Logging**: Provides detailed logging for middleware operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import express from 'express';
+    import versedb from 'verse.db';
+
+    const app = express();
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    app.use(adapter.expressMiddleware());
+
+    app.get('/', (req, res) => {
+      if (req.session) {
+        res.send('Session ID: ' + req.session.id);
+      } else {
+        res.send('No session found');
+      }
+    });
+
+    app.listen(3000, () => {
+      console.log('Server running on http://localhost:3000');
+    });
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import express from 'express';
+    import versedb from 'verse.db';
+
+    const app = express();
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    app.use(adapter.expressMiddleware());
+
+    app.get('/', (req, res) => {
+      if (req.session) {
+        res.send('Session ID: ' + req.session.id);
+      } else {
+        res.send('No session found');
+      }
+    });
+
+    app.listen(3000, () => {
+      console.log('Server running on http://localhost:3000');
+    });
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- No parameters are required when using `expressMiddleware`.
+
+### Returns
+
+- Returns an Express middleware function that handles session management for incoming HTTP requests.
+
+### Example
+
+```typescript
+import express from 'express';
+import versedb from 'verse.db';
+
+const app = express();
+
+const adapter = new versedb.connect({
+  adapter: "session",
+  dataPath: './sessions',
+  maxSize: 1000,
+  ttl: 3600000,
+  useMemory: true,
+  secure: {
+    enable: true,
+    secret: 'your-secret-key'
+  }
+});
+
+app.use(adapter.expressMiddleware());
+
+app.get('/', (req, res) => {
+  if (req.session) {
+    res.send('Session ID: ' + req.session.id);
+  } else {
+    res.send('No session found');
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
+```
+
+### Detailed Explanation
+
+1. **Express Integration**: The middleware integrates with the Express.js application, adding session management capabilities.
+   - It adds a `session` object to the `req` object, allowing for easy access to session data within request handlers.
+
+2. **Session Management**: Automatically handles creating new sessions, loading existing sessions, and managing session expiry.
+   - If a session ID is found in the request cookies, it loads the session data.
+   - If no session ID is found, it creates a new session and sets a cookie in the response.
+
+3. **Security**: Supports secure session handling with encryption and session expiry.
+   - The `secure` option enables encryption for session data and ensures that session cookies are set with the `HttpOnly` and `Secure` flags if using HTTPS.
+
+4. **Logging**: Provides detailed logging for debugging and tracking session operations.
+   - Logs include information about session creation, loading, and expiry checks, along with any errors encountered during the process.

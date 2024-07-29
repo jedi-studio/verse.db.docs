@@ -1,0 +1,94 @@
+---
+title: Drop Method
+description: The drop method removes a cache entry by its key, logging the operation and updating cache statistics.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Drop Method
+
+The `drop` method removes a cache entry identified by its key. If the entry exists in the cache, it will be deleted, and the operation will be logged. If the entry does not exist, an appropriate message will be returned.
+
+## Features
+
+- **Cache Removal**: Removes a specific cache entry by key.
+- **Logging**: Provides logging for successful removal and errors.
+- **Statistics Update**: Updates cache statistics to reflect the removal.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function dropCacheEntry(key: string) {
+      const result = await adapter.drop(key);
+      console.log(result.message);
+    }
+
+    dropCacheEntry('your-cache-key');
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.cache({
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function dropCacheEntry(key: string) {
+      const result = await adapter.drop(key);
+      console.log(result.message);
+    }
+
+    dropCacheEntry('your-cache-key');
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `key` (string): The key of the cache entry to remove.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the result of the drop operation.
+
+### Example
+
+```typescript
+const key = "cacheKey123";
+
+adapter
+  .drop(key)
+  .then((result) => {
+    console.log(result.message);
+  })
+  .catch((error) => {
+    console.error("Error dropping cache entry:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Cache Removal**: The method removes the cache entry associated with the provided key.
+   - Logs the successful removal or if the entry does not exist.
+
+2. **Logging**: Provides detailed logs for the drop operation, including any errors
+
+ encountered.
+   - Useful for debugging and tracking cache operations.

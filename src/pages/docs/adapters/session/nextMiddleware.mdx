@@ -1,0 +1,139 @@
+---
+title: Next.js Middleware Method
+description: The nextMiddleware method integrates the session adapter with a Next.js application, providing session management capabilities for handling HTTP requests. It ensures that sessions are managed and accessed seamlessly within the Next.js framework.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Next.js Middleware Method
+
+The `nextMiddleware` method integrates the session adapter with a Next.js application, providing session management capabilities for handling HTTP requests. It ensures that sessions are managed and accessed seamlessly within the Next.js framework.
+
+## Features
+
+- **Next.js Integration**: Seamlessly integrates with Next.js applications.
+- **Session Management**: Automatically handles session creation, loading, and management.
+- **Security**: Supports secure session handling with options for encryption and expiry.
+- **Logging**: Provides detailed logging for middleware operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import { NextApiRequest, NextApiResponse } from 'next';
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+      await new Promise<void>((resolve) => {
+        adapter.nextMiddleware()(req, res, () => resolve());
+      });
+
+      if (req.session) {
+        res.status(200).json({ sessionId: req.session.id });
+      } else {
+        res.status(404).json({ message: 'No session found' });
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import { NextApiRequest, NextApiResponse } from 'next';
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+      await new Promise<void>((resolve) => {
+        adapter.nextMiddleware()(req, res, () => resolve());
+      });
+
+      if (req.session) {
+        res.status(200).json({ sessionId: req.session.id });
+      } else {
+        res.status(404).json({ message: 'No session found' });
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- No parameters are required when using `nextMiddleware`.
+
+### Returns
+
+- Returns a Next.js middleware function that handles session management for incoming HTTP requests.
+
+### Example
+
+```typescript
+import { NextApiRequest, NextApiResponse } from 'next';
+import versedb from 'verse.db';
+
+const adapter = new versedb.connect({
+  adapter: "session",
+  dataPath: './sessions',
+  maxSize: 1000,
+  ttl: 3600000,
+  useMemory: true,
+  secure: {
+    enable: true,
+    secret: 'your-secret-key'
+  }
+});
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await new Promise<void>((resolve) => {
+    adapter.nextMiddleware()(req, res, () => resolve());
+  });
+
+  if (req.session) {
+    res.status(200).json({ sessionId: req.session.id });
+  } else {
+    res.status(404).json({ message: 'No session found' });
+  }
+}
+```
+
+### Detailed Explanation
+
+1. **Next.js Integration**: The middleware integrates with the Next.js application, adding session management capabilities.
+   - It adds a `session` object to the `req` object, allowing for easy access to session data within API routes.
+
+2. **Session Management**: Automatically handles creating new sessions, loading existing sessions, and managing session expiry.
+   - If a session ID is found in the request cookies, it loads the session data.
+   - If no session ID is found, it creates a new session and sets a cookie in the response.
+
+3. **Security**: Supports secure session handling with encryption and session expiry.
+   - The `secure` option enables encryption for session data and ensures that session cookies are set with the `HttpOnly` and `Secure` flags if using HTTPS.
+
+4. **Logging**: Provides detailed logging for debugging and tracking session operations.
+   - Logs include information about session creation, loading, and expiry checks, along with any errors encountered during the process.

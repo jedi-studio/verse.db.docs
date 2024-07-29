@@ -1,0 +1,116 @@
+---
+title: Clear Method
+description: The clear method is responsible for removing all sessions. It deletes all session data from both memory and disk, ensuring complete removal of all sessions.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Clear Method
+
+The `clear` method is responsible for removing all sessions. It deletes all session data from both memory and disk, ensuring complete removal of all sessions.
+
+## Features
+
+- **In-Memory Deletion**: Removes all sessions from memory.
+- **File-Based Deletion**: Deletes all session files from the file system.
+- **Logging**: Provides detailed logging for session clearing operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function clearSessions() {
+      const result = await adapter.clear();
+      if (result.acknowledged) {
+        console.log('All sessions cleared:', result.message);
+      } else {
+        console.log('Failed to clear sessions:', result.errorMessage);
+      }
+    }
+
+    clearSessions();
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function clearSessions() {
+      const result = await adapter.clear();
+      if (result.acknowledged) {
+        console.log('All sessions cleared:', result.message);
+      } else {
+        console.log('Failed to clear sessions:', result.errorMessage);
+      }
+    }
+
+    clearSessions();
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- None
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the success or failure of the operation.
+
+### Example
+
+```typescript
+adapter
+  .clear()
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("All sessions cleared:", result.message);
+    } else {
+      console.log("Failed to clear sessions:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error("Error clearing sessions:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **In-Memory Deletion**: The method first clears all session data from memory.
+   - All sessions stored in memory are removed.
+
+2. **File System Deletion**: The method then deletes all session files from the file system.
+   - It reads the list of session files from the data path and deletes each file.
+
+3. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.
+   - Logs include information about session clearing and errors encountered during the operation.

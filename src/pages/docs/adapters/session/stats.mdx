@@ -1,0 +1,112 @@
+---
+title: Stats Method
+description: The stats method provides statistics about the session store, including the total number of sessions currently stored on disk. This method helps in monitoring and managing session data effectively.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Stats Method
+
+The `stats` method provides statistics about the session store, including the total number of sessions currently stored on disk. This method helps in monitoring and managing session data effectively.
+
+## Features
+
+- **Session Count**: Retrieves the total number of session files stored on disk.
+- **Logging**: Provides detailed logging for session statistics operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function getSessionStats() {
+      const result = await adapter.stats();
+      if (result.acknowledged) {
+        console.log('Session statistics:', result.results);
+      } else {
+        console.log('Failed to retrieve session statistics:', result.errorMessage);
+      }
+    }
+
+    getSessionStats();
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false,
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function getSessionStats() {
+      const result = await adapter.stats();
+      if (result.acknowledged) {
+        console.log('Session statistics:', result.results);
+      } else {
+        console.log('Failed to retrieve session statistics:', result.errorMessage);
+      }
+    }
+
+    getSessionStats();
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- None
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object containing the session statistics.
+
+### Example
+
+```typescript
+adapter
+  .stats()
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("Session statistics:", result.results);
+    } else {
+      console.log("Failed to retrieve session statistics:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error("Error retrieving session statistics:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Session Count**: The method reads the session files from the data path and counts the total number of sessions stored on disk.
+   - It returns the count of session files as part of the result.
+
+2. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.
+   - Logs include information about session statistics retrieval and any errors encountered during the operation.

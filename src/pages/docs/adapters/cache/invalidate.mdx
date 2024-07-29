@@ -1,0 +1,91 @@
+---
+title: Invalidate Method
+description: The invalidate method removes cache entries based on a predicate function, allowing selective invalidation.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Invalidate Method
+
+The `invalidate` method removes cache entries based on a predicate function. This allows for selective invalidation of entries that match certain criteria. The method iterates over all cache entries and deletes those that satisfy the predicate.
+
+## Features
+
+- **Selective Invalidation**: Removes cache entries based on a predicate function.
+- **Logging**: Provides logging for invalidation actions.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function invalidateCache(predicate: (key: string, data: any) => boolean) {
+      const result = await adapter.invalidate(predicate);
+      console.log(result.message);
+    }
+
+    invalidateCache((key, data) => data.someCondition === true);
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.cache({
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function invalidateCache(predicate: (key: string, data: any) => boolean) {
+      const result = await adapter.invalidate(predicate);
+      console.log(result.message);
+    }
+
+    invalidateCache((key, data) => data.someCondition === true);
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `predicate` (function): A function that determines which entries to invalidate. It takes `key` and `data` as arguments and returns a boolean.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the result of the invalidate operation.
+
+### Example
+
+```typescript
+const predicate = (key: string, data: any) => data.isStale;
+
+adapter
+  .invalidate(predicate)
+  .then((result) => {
+    console.log(result.message);
+  })
+  .catch((error) => {
+    console.error("Error invalidating cache entries:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Selective Removal**: Uses a predicate function to determine which cache entries to remove.
+   - Iterates over all entries and applies the predicate to decide whether to delete each entry.
+
+2. **Logging**: Logs invalidation actions for monitoring purposes.
+   - Helps in tracking which entries were invalidated and why.

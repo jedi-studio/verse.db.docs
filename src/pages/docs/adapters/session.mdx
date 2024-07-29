@@ -1,0 +1,50 @@
+---
+title: Session Adapter
+description: The Session Adapter is a robust and flexible tool designed to handle session management in your applications
+---
+
+import { Cards, Card } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
+
+# Session Adapter
+
+The Session Adapter is a robust and flexible tool designed to handle session management in your applications. It offers both in-memory and file-based storage options, with additional features like session expiry, session pruning, and session regeneration to prevent fixation attacks. This adapter is also equipped with middleware integration for Express and Next.js, making it a versatile choice for various web development needs.
+
+## Features
+
+- **Session Storage**: Supports both in-memory and file-based storage.
+- **Session Expiry**: Manages session expiry and automatic pruning of expired sessions.
+- **Session Regeneration**: Prevents session fixation attacks by regenerating session IDs.
+- **Middleware Integration**: Easily integrates with Express and Next.js.
+- **Custom Event Hooks**: Allows custom logic through event hooks.
+- **Development Logs**: Optional logging for development and debugging purposes.
+
+## Functions
+
+The Session Adapter includes the following functions:
+
+- **load**: Loads a session by ID.
+- **add**: Adds or updates a session.
+- **drop**: Drops a session by ID.
+- **clear**: Clears all sessions.
+- **stats**: Retrieves statistics about the session store.
+- **invalidate**: Invalidates sessions based on a predicate function.
+- **regenerateSessionId**: Regenerates a session ID to prevent fixation attacks.
+- **expressMiddleware**: Integrates with Express middleware.
+- **nextMiddleware**: Integrates with Next.js middleware.
+- **triggerEvent**: Provides hooks for custom logic.
+
+### Functions:
+
+<Cards>
+  <Card icon={<ArrowRightIcon />} title="Load()" href="/docs/adapters/session/load" />
+  <Card icon={<ArrowRightIcon />} title="drop()" href="/docs/adapters/session/drop" />
+  <Card icon={<ArrowRightIcon />} title="add()" href="/docs/adapters/session/add" />
+  <Card icon={<ArrowRightIcon />} title="clear()" href="/docs/adapters/session/clear" />
+  <Card icon={<ArrowRightIcon />} title="stats()" href="/docs/adapters/session/stats" />
+  <Card icon={<ArrowRightIcon />} title="invalidate()" href="/docs/adapters/session/invalidate" />
+  <Card icon={<ArrowRightIcon />} title="regenerateSessionId()" href="/docs/adapters/session/regenerateSessionId" />
+  <Card icon={<ArrowRightIcon />} title="expressMiddleware()" href="/docs/adapters/session/expressMiddleware" />
+  <Card icon={<ArrowRightIcon />} title="nextMiddleware()" href="/docs/adapters/session/nextMiddleware" />
+  <Card icon={<ArrowRightIcon />} title="triggerEvent()" href="/docs/adapters/session/triggerEvent" />
+</Cards>

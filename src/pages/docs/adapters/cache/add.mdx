@@ -1,0 +1,98 @@
+---
+title: Add Method
+description: The add method inserts or updates a cache entry with a specified key and data, handling cache pruning to ensure size limits.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Add Method
+
+The `add` method inserts or updates a cache entry with a specified key and data. It also handles cache pruning to ensure the cache size does not exceed the maximum limit. The entry will be assigned an expiry time if the TTL (Time-To-Live) is greater than zero.
+
+## Features
+
+- **Cache Insertion**: Adds or updates cache entries.
+- **Expiry Handling**: Assigns an expiry time based on the TTL setting.
+- **Cache Pruning**: Automatically prunes old entries to maintain the maximum cache size.
+- **Logging**: Provides logging for cache additions and pruning events.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+  
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+  
+    async function addCacheEntry(key: string, data: any) {
+      const result = await adapter.add(key, data);
+      console.log(result.message);
+    }
+  
+    addCacheEntry('your-cache-key', { value: 'some data' });
+    ```
+  
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.cache({
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function addCacheEntry(key: string, data: any) {
+      const result = await adapter.add(key, data);
+      console.log(result.message);
+    }
+
+    addCacheEntry('your-cache-key', { value: 'some data' });
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `key` (string): The key for the cache entry.
+- `data` (CacheData): The data to store in the cache.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the result of the add operation.
+
+### Example
+
+```typescript
+const key = "cacheKey123";
+const data = { value: "some data" };
+
+adapter
+  .add(key, data)
+  .then((result) => {
+    console.log(result.message);
+  })
+  .catch((error) => {
+    console.error("Error adding cache entry:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Insertion/Update**: The method inserts or updates the cache entry with the provided key and data.
+   - Sets an expiry time based on the TTL setting if it is greater than zero.
+
+2. **Cache Pruning**: Ensures the cache does not exceed the maximum size by removing the oldest entries if necessary.
+   - Logs are generated for each eviction.
+
+3. **Logging**: Logs are created to indicate successful additions and any cache pruning events.
+   - Useful for monitoring cache operations.

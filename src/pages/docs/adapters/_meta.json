@@ -7,5 +7,11 @@
     },
     "sql":{
         "title": "SQL Adapter"
+    },
+    "session":{
+        "title": "Session Adapter"
+    },
+    "cache":{
+        "title": "Cache Adapter"
     }
 }

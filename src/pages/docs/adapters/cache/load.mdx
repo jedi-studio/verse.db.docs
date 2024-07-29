@@ -1,0 +1,108 @@
+---
+title: Load Method
+description: The load method retrieves a cache entry by its key, checking for expiration and returning the data if valid.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Load Method
+
+The `load` method retrieves a cache entry by its key. It checks if the entry is present in the cache and whether it has expired. If the entry is valid and not expired, it returns the cached data; otherwise, it returns `null`.
+
+## Features
+
+- **Cache Retrieval**: Retrieves cache entries by key.
+- **Expiry Check**: Automatically checks and handles expired entries.
+- **Logging**: Provides logging for cache access and expiry events.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function loadCacheEntry(key: string) {
+      const result = await adapter.load(key);
+      if (result) {
+        console.log('Cache entry loaded:', result.results);
+      } else {
+        console.log('Cache entry not found or expired');
+      }
+    }
+
+    loadCacheEntry('your-cache-key');
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.cache({
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function loadCacheEntry(key: string) {
+      const result = await adapter.load(key);
+      if (result) {
+        console.log('Cache entry loaded:', result.results);
+      } else {
+        console.log('Cache entry not found or expired');
+      }
+    }
+
+    loadCacheEntry('your-cache-key');
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `key` (string): The key of the cache entry to retrieve.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object containing the cache data if found and valid, or `null` if not found or expired.
+
+### Example
+
+```typescript
+const key = "cacheKey123";
+adapter
+  .load(key)
+  .then((result) => {
+    if (result) {
+      console.log("Cache entry data:", result.results);
+    } else {
+      console.log("Cache entry not found or expired");
+    }
+  })
+  .catch((error) => {
+    console.error("Error loading cache entry:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Cache Check**: The method first checks if the key exists in the cache.
+   - If found, it checks if the entry has expired.
+   - If expired, the entry is removed, and `null` is returned.
+   - If not expired, the entry is returned.
+
+2. **Expiry Handling**: If an entry is expired, it is automatically removed from the cache.
+   - This ensures that stale entries do not remain in the cache.
+
+3. **Logging**: Logs are generated to indicate cache hits, misses, and expiry events.
+   - Useful for debugging and monitoring cache performance.

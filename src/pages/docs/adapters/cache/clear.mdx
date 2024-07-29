@@ -1,0 +1,86 @@
+---
+title: Clear Method
+description: The clear method removes all cache entries, effectively resetting the cache. It logs the clearing operation and updates cache statistics.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Clear Method
+
+The `clear` method removes all entries from the cache. This effectively resets the cache to an empty state. The operation is logged, and cache statistics are updated to reflect the clearing.
+
+## Features
+
+- **Full Cache Removal**: Clears all entries from the cache.
+- **Logging**: Provides logging for the clearing operation.
+- **Statistics Update**: Resets cache statistics to zero.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function clearCache() {
+      const result = await adapter.clear();
+      console.log(result.message);
+    }
+
+    clearCache();
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.cache({
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function clearCache() {
+      const result = await adapter.clear();
+      console.log(result.message);
+    }
+
+    clearCache();
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the result of the clear operation.
+
+### Example
+
+```typescript
+adapter
+  .clear()
+  .then((result) => {
+    console.log(result.message);
+  })
+  .catch((error) => {
+    console.error("Error clearing cache:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Cache Clearing**: The method removes all entries from the cache.
+   - Logs the clearing operation and updates the cache statistics.
+
+2. **Logging**: Logs the clearing action and any potential issues.
+   - Provides visibility into cache management activities.

@@ -1,0 +1,42 @@
+---
+title: Cache Adapter
+description: The Cache Adapter provides a comprehensive caching solution for managing cache entries with features like expiration, size limitation, and statistics tracking.
+---
+
+import { Cards, Card } from 'nextra/components'
+import { ArrowRightIcon } from 'nextra/icons'
+
+# Cache Adapter
+
+The Cache Adapter provides a comprehensive caching solution for managing cache entries with features like expiration, size limitation, and statistics tracking. It supports both in-memory cache storage and various operational methods for managing cache entries effectively. This adapter is designed to handle cache expiry, automatic pruning of expired entries, and provides detailed statistics and invalidation capabilities.
+
+## Features
+
+- **In-Memory Storage**: Uses in-memory storage for caching entries.
+- **Cache Expiry**: Manages cache expiry and automatic removal of expired entries.
+- **Cache Pruning**: Ensures the cache does not exceed the maximum size by evicting old entries.
+- **Statistics Tracking**: Provides detailed statistics about cache hits, misses, and evictions.
+- **Cache Invalidation**: Allows invalidation of cache entries based on custom predicates.
+- **Development Logs**: Optional logging for development and debugging purposes.
+
+## Functions
+
+The Cache Adapter includes the following functions:
+
+- **load**: Loads a cache entry by key.
+- **add**: Adds or updates a cache entry.
+- **drop**: Drops a cache entry by key.
+- **clear**: Clears all cache entries.
+- **stats**: Retrieves statistics about the cache.
+- **invalidate**: Invalidates cache entries based on a predicate function.
+
+### Functions:
+
+<Cards>
+  <Card icon={<ArrowRightIcon />} title="Load()" href="/docs/adapters/cache/load" />
+  <Card icon={<ArrowRightIcon />} title="Add()" href="/docs/adapters/cache/add" />
+  <Card icon={<ArrowRightIcon />} title="Drop()" href="/docs/adapters/cache/drop" />
+  <Card icon={<ArrowRightIcon />} title="Clear()" href="/docs/adapters/cache/clear" />
+  <Card icon={<ArrowRightIcon />} title="Stats()" href="/docs/adapters/cache/stats" />
+  <Card icon={<ArrowRightIcon />} title="Invalidate()" href="/docs/adapters/cache/invalidate" />
+</Cards>

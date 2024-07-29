@@ -1,0 +1,134 @@
+---
+title: Invalidate Method
+description: The invalidate method invalidates sessions based on a predicate function. This method is useful for removing specific sessions that meet certain criteria, ensuring efficient session management and cleanup.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Invalidate Method
+
+The `invalidate` method invalidates sessions based on a predicate function. This method is useful for removing specific sessions that meet certain criteria, ensuring efficient session management and cleanup.
+
+## Features
+
+- **Predicate-Based Invalidation**: Invalidates sessions based on a user-defined predicate function.
+- **In-Memory and Disk Invalidation**: Applies invalidation to both in-memory and disk-stored sessions.
+- **Logging**: Provides detailed logging for session invalidation operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function invalidateSessions() {
+      const predicate = (key, data) => {
+        // Define your invalidation criteria here
+        return data.user === 'targetUser';
+      };
+      
+      const result = await adapter.invalidate(predicate);
+      if (result.acknowledged) {
+        console.log('Sessions invalidated');
+      } else {
+        console.log('Failed to invalidate sessions:', result.errorMessage);
+      }
+    }
+
+    invalidateSessions();
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function invalidateSessions() {
+      const predicate = (key, data) => {
+        // Define your invalidation criteria here
+        return data.user === 'targetUser';
+      };
+
+      const result = await adapter.invalidate(predicate);
+      if (result.acknowledged) {
+        console.log('Sessions invalidated');
+      } else {
+        console.log('Failed to invalidate sessions:', result.errorMessage);
+      }
+    }
+
+    invalidateSessions();
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `predicate` (function): A function that takes a session key and session data as arguments and returns a boolean indicating whether the session should be invalidated.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the success or failure of the invalidation operation.
+
+### Example
+
+```typescript
+const predicate = (key, data) => {
+  // Define your invalidation criteria here
+  return data.user === 'targetUser';
+};
+
+adapter
+  .invalidate(predicate)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("Sessions invalidated");
+    } else {
+      console.log("Failed to invalidate sessions:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error("Error invalidating sessions:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Predicate-Based Invalidation**: The method takes a predicate function to determine which sessions should be invalidated.
+   - The predicate function is applied to each session in memory and on disk.
+
+2. **In-Memory Invalidation**: The method iterates through the in-memory sessions and invalidates those that match the predicate.
+   - Invalidated sessions are removed from memory.
+
+3. **Disk Invalidation**: The method reads session files from the data path, applies the predicate, and deletes matching sessions from disk.
+   - Invalidated sessions are removed from the file system.
+
+4. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.
+   - Logs include information about invalidated sessions and any errors encountered during the operation.

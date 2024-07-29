@@ -1,0 +1,122 @@
+---
+title: Trigger Event Method
+description: The triggerEvent method is designed to emit custom events related to session operations. It allows users to hook into session-related actions by emitting events with session-specific data, enabling advanced customization and integration with other parts of an application.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Trigger Event Method
+
+The `triggerEvent` method is designed to emit custom events related to session operations. It allows users to hook into session-related actions by emitting events with session-specific data, enabling advanced customization and integration with other parts of an application.
+
+## Features
+
+- **Custom Event Emission**: Emits custom events with session-related data.
+- **Flexible Integration**: Allows for integration with other parts of an application through event listeners.
+- **Session-Specific Data**: Includes session ID and data in the emitted event.
+- **Event Handling**: Supports listening for and handling custom events to trigger additional logic.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    // Listen for session-related events
+    adapter.on('sessionCreated', ({ sessionId, sessionData }) => {
+      console.log(`Session created: ${sessionId}`, sessionData);
+    });
+
+    // Trigger a custom event
+    adapter.triggerEvent('sessionCreated', 'your-session-id', { user: 'John Doe' });
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for default it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for default it will be 10000
+      useMemory: true, // for default it will be false,
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    // Listen for session-related events
+    adapter.on('sessionCreated', ({ sessionId, sessionData }) => {
+      console.log(`Session created: ${sessionId}`, sessionData);
+    });
+
+    // Trigger a custom event
+    adapter.triggerEvent('sessionCreated', 'your-session-id', { user: 'John Doe' });
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `eventName` (string): The name of the event to emit.
+- `sessionId` (string): The unique identifier for the session related to the event.
+- `sessionData` (SessionData, optional): The session data associated with the event. This is optional and may be `undefined`.
+
+### Returns
+
+- The method does not return any value but emits an event with the specified `eventName` and session-related data.
+
+### Example
+
+```typescript
+import { EventEmitter } from 'events';
+
+class MySessionAdapter extends EventEmitter {
+  triggerEvent(eventName: string, sessionId: string, sessionData?: any) {
+    this.emit(eventName, { sessionId, sessionData });
+  }
+}
+
+const adapter = new MySessionAdapter();
+
+// Listen for session-related events
+adapter.on('sessionCreated', ({ sessionId, sessionData }) => {
+  console.log(`Session created: ${sessionId}`, sessionData);
+});
+
+// Trigger a custom event
+adapter.triggerEvent('sessionCreated', 'your-session-id', { user: 'John Doe' });
+```
+
+### Detailed Explanation
+
+1. **Custom Event Emission**: The `triggerEvent` method allows for emitting custom events with specific names.
+   - This enables the implementation of custom logic or integration with other systems when specific session actions occur.
+
+2. **Session-Specific Data**: Includes session ID and optional session data in the event payload.
+   - This allows for detailed handling and processing of session-related events.
+
+3. **Event Handling**: The method leverages Node.js's `EventEmitter` for managing events.
+   - Users can listen for specific events using the `on` method and respond accordingly.
+   - Provides flexibility for adding custom logic and hooks into session management.
+
+4. **Integration**: Useful for advanced use cases where session management needs to trigger external processes or integrate with other parts of the application.
+   - Can be used to log actions, trigger updates, or interface with other components or services.

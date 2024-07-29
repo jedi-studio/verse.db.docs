@@ -1,0 +1,69 @@
+---
+title: Stats Method
+description: The stats method retrieves detailed statistics about the cache, including size, hits, misses, and evictions.
+adapter: CACHE
+---
+
+import { Tabs } from "nextra/components";
+
+# Stats Method
+
+The `stats` method retrieves detailed statistics about the cache, including the number of cache entries, cache hits, cache misses, and evictions. This information helps in monitoring and analyzing the performance of the cache.
+
+## Features
+
+- **Statistics Retrieval**: Provides information on cache size, hits, misses, and evictions.
+- **Logging**: Includes logging for retrieving cache statistics.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "cache",
+      maxSize: 1000,
+      ttl: 3600000, // 1 hour in milliseconds
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function getCacheStats() {
+      const result = await adapter.stats();
+      console.log('Cache statistics:', result.results);
+    }
+
+    getCacheStats();
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object containing cache statistics.
+
+### Example
+
+```typescript
+adapter
+  .stats()
+  .then((result) => {
+    console.log("Cache statistics:", result.results);
+  })
+  .catch((error) => {
+    console.error("Error retrieving cache statistics:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Statistics Data**: Provides the following metrics:
+   - `size`: Current number of entries in the cache.
+   - `hits`: Number of cache hits.
+   - `misses`: Number of cache misses.
+   - `evictions`: Number of cache entries evicted due to size constraints.
+
+2. **Logging**: Logs the retrieval of cache statistics.
+   - Useful for monitoring and performance tuning.

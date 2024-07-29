@@ -1,0 +1,124 @@
+---
+title: Load Method
+description: The load method is responsible for loading a session by its ID. It first checks for the session in memory and, if not found or expired, it attempts to load the session from disk. This method ensures that sessions are retrieved efficiently while managing expiry and cleanup of stale sessions.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Load Method
+
+The `load` method is responsible for loading a session by its ID. It first checks for the session in memory and, if not found or expired, it attempts to load the session from disk. This method ensures that sessions are retrieved efficiently while managing expiry and cleanup of stale sessions.
+
+## Features
+
+- **In-Memory Loading**: Quickly retrieves sessions stored in memory.
+- **File-Based Loading**: Loads sessions from the file system if not found in memory.
+- **Expiry Check**: Automatically checks and removes expired sessions.
+- **Logging**: Provides detailed logging for session loading operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+      });
+
+    async function loadSession(sessionId: string) {
+    const result = await adapter.load(sessionId);
+    if (result) {
+    console.log('Session loaded:', result.session);
+    } else {
+    console.log('Session not found or expired');
+    }
+    }
+
+    loadSession('your-session-id');
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      devLogs: { enable: false, path: "" },
+      }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function loadSession(sessionId: string) {
+    const result = await adapter.load(sessionId);
+    if (result) {
+    console.log('Session loaded:', result.session);
+    } else {
+    console.log('Session not found or expired');
+    }
+    }
+
+    loadSession('your-session-id');
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `sessionId` (string): The unique identifier for the session you want to load.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object containing the session data if found, or `null` if not found or expired.
+
+### Example
+
+```typescript
+const sessionId = "abc123";
+adapter
+  .load(sessionId)
+  .then((result) => {
+    if (result) {
+      console.log("Session data:", result.session);
+    } else {
+      console.log("Session not found or expired");
+    }
+  })
+  .catch((error) => {
+    console.error("Error loading session:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **In-Memory Check**: The method first checks if the session ID exists in the in-memory store.
+
+   - If found, it checks if the session has expired.
+   - If expired, it removes the session from memory and returns `null`.
+   - If not expired, it returns the session data from memory.
+
+2. **File System Check**: If the session ID is not found in memory, it constructs the file path for the session and checks if the file exists.
+
+   - If the file exists, it reads and decompresses the session data.
+   - It checks the expiry of the session data.
+   - If expired, it deletes the file and returns `null`.
+   - If not expired, it stores the session data in memory and returns it.
+
+3. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.

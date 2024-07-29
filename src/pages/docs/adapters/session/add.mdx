@@ -1,0 +1,129 @@
+---
+title: Add Method
+description: The add method is responsible for adding or updating a session by its ID. It stores the session data in memory and on disk, ensuring efficient retrieval and persistence. This method also manages session expiry and cleanup of stale sessions.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Add Method
+
+The `add` method is responsible for adding or updating a session by its ID. It stores the session data in memory and on disk, ensuring efficient retrieval and persistence. This method also manages session expiry and cleanup of stale sessions.
+
+## Features
+
+- **In-Memory Storage**: Quickly stores sessions in memory.
+- **File-Based Storage**: Persists sessions to the file system for durability.
+- **Expiry Management**: Automatically handles session expiry.
+- **Logging**: Provides detailed logging for session save operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function addSession(sessionId: string, sessionData: SessionData) {
+      const result = await adapter.add(sessionId, sessionData);
+      if (result.acknowledged) {
+        console.log('Session added:', result.message);
+      } else {
+        console.log('Failed to add session:', result.errorMessage);
+      }
+    }
+
+    addSession('your-session-id', { key: 'value' });
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function addSession(sessionId: string, sessionData: SessionData) {
+      const result = await adapter.add(sessionId, sessionData);
+      if (result.acknowledged) {
+        console.log('Session added:', result.message);
+      } else {
+        console.log('Failed to add session:', result.errorMessage);
+      }
+    }
+
+    addSession('your-session-id', { key: 'value' });
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `sessionId` (string): The unique identifier for the session you want to add or update.
+- `sessionData` (SessionData): The data to be stored in the session.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the success or failure of the operation.
+
+### Example
+
+```typescript
+const sessionId = "abc123";
+const sessionData = { key: "value" };
+adapter
+  .add(sessionId, sessionData)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("Session added:", result.message);
+    } else {
+      console.log("Failed to add session:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error("Error adding session:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **In-Memory Storage**: The method first stores the session data in memory, associating it with the provided session ID.
+
+   - If the session already exists, it updates the existing data.
+   - If the session is new, it adds the data to the memory store.
+
+2. **File System Storage**: The method then writes the session data to a file on disk.
+
+   - The session data is compressed before being written to ensure efficient storage.
+   - If the file write operation fails, an error is logged and returned.
+
+3. **Expiry Management**: The method manages session expiry by setting an expiry timestamp.
+
+   - If the session TTL (time-to-live) is specified, it calculates the expiry time.
+   - Expired sessions are automatically pruned from memory.
+
+4. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.
+   - Logs include information about session addition, updates, and errors.

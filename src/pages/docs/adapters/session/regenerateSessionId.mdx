@@ -1,0 +1,124 @@
+---
+title: Regenerate Session ID Method
+description: The regenerateSessionId method regenerates a session ID to prevent fixation attacks. It transfers session data from an old session ID to a new session ID, ensuring the session's integrity and security.
+adapter: SESSION
+---
+
+import { Tabs } from "nextra/components";
+
+# Regenerate Session ID Method
+
+The `regenerateSessionId` method regenerates a session ID to prevent fixation attacks. It transfers session data from an old session ID to a new session ID, ensuring the session's integrity and security.
+
+## Features
+
+- **Security Enhancement**: Prevents session fixation attacks by changing session IDs.
+- **Data Transfer**: Safely transfers session data from the old session ID to the new one.
+- **In-Memory and Disk Operations**: Updates session data in both memory and the file system.
+- **Logging**: Provides detailed logging for session ID regeneration operations.
+
+## Usage
+
+<Tabs items={['With Connect Class', 'Without Connect Class']}>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.connect({
+      adapter: "session",
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      secure: {
+        enable: true,
+        secret: 'your-secret-key'
+      },
+      devLogs: { enable: false, path: "" },
+    });
+
+    async function regenerateSessionId(oldSessionId, newSessionId) {
+      const result = await adapter.regenerateSessionId(oldSessionId, newSessionId);
+      if (result.acknowledged) {
+        console.log('Session ID regenerated:', result.message);
+      } else {
+        console.log('Failed to regenerate session ID:', result.errorMessage);
+      }
+    }
+
+    regenerateSessionId('old-session-id', 'new-session-id');
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```typescript
+    import versedb from 'verse.db';
+
+    const adapter = new versedb.session({
+      dataPath: './sessions',
+      maxSize: 1000, // for deafualt it will be 10
+      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+      useMemory: true, // for defualt it will be false
+      devLogs: { enable: false, path: "" },
+    }, {
+      enable: true,
+      secret: 'your-secret-key'
+    });
+
+    async function regenerateSessionId(oldSessionId, newSessionId) {
+      const result = await adapter.regenerateSessionId(oldSessionId, newSessionId);
+      if (result.acknowledged) {
+        console.log('Session ID regenerated:', result.message);
+      } else {
+        console.log('Failed to regenerate session ID:', result.errorMessage);
+      }
+    }
+
+    regenerateSessionId('old-session-id', 'new-session-id');
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+### Parameters
+
+- `oldSessionId` (string): The current session ID that needs to be changed.
+- `newSessionId` (string): The new session ID to be assigned.
+
+### Returns
+
+- A `Promise` that resolves with an `AdapterResults` object indicating the success or failure of the session ID regeneration operation.
+
+### Example
+
+```typescript
+const oldSessionId = "old-session-id";
+const newSessionId = "new-session-id";
+
+adapter
+  .regenerateSessionId(oldSessionId, newSessionId)
+  .then((result) => {
+    if (result.acknowledged) {
+      console.log("Session ID regenerated:", result.message);
+    } else {
+      console.log("Failed to regenerate session ID:", result.errorMessage);
+    }
+  })
+  .catch((error) => {
+    console.error("Error regenerating session ID:", error);
+  });
+```
+
+### Detailed Explanation
+
+1. **Security Enhancement**: The method helps prevent session fixation attacks by allowing the application to change session IDs.
+   - This is particularly useful after a user logs in or performs a sensitive operation.
+
+2. **Data Transfer**: The method transfers session data from the old session ID to the new session ID.
+   - It updates both the in-memory store and the session file on disk.
+
+3. **In-Memory and Disk Operations**: The method checks if the session data exists in memory and transfers it to the new session ID.
+   - If the session data is not found in memory, it checks the session file on disk and renames the file.
+
+4. **Logging**: Throughout the process, detailed logs are generated for debugging and tracking purposes.
+   - Logs include information about the old and new session IDs and any errors encountered during the operation.
