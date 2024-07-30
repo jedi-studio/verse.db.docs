@@ -13,9 +13,9 @@ const config: DocsThemeConfig = {
   logo: () => {
     return (
       <>
-        <Logo height={24} />
+        <Logo height={24} className="mr-3" />
         <span
-          className="mx-2 font-extrabold hidden md:inline select-none"
+          className="mx-2 font-extrabold select-none"
           title={`verse.db Logo`}
         >
           VERSE.DB
@@ -35,10 +35,10 @@ const config: DocsThemeConfig = {
     link: "https://discord.gg/EurnFWMweW",
   },
   banner: {
-    key: '2.1-release',
+    key: 'session-adapter',
     text: (
-      <a href="https://versedb.jedi-studio.com/blog" target="_blank">
-        🎉 Blog is released. Read more →
+      <a href="https://versedb.jedi-studio.com/docs/adapters" target="_blank">
+       🪄 New Adapters are released. Check them out →
       </a>
     )
   },

@@ -22,59 +22,63 @@ The `load` method is responsible for loading a session by its ID. It first check
 <Tabs items={['With Connect Class', 'Without Connect Class']}>
   <Tabs.Tab>
     ```typescript
-    import versedb from 'verse.db';
+    import versedb from "verse.db";
 
     const adapter = new versedb.connect({
       adapter: "session",
-      dataPath: './sessions',
+      dataPath: "./sessions",
       maxSize: 1000, // for deafualt it will be 10
       ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
       useMemory: true, // for defualt it will be false
       secure: {
         enable: true,
-        secret: 'your-secret-key'
+        secret: "your-secret-key",
       },
       devLogs: { enable: false, path: "" },
-      });
+    });
 
     async function loadSession(sessionId: string) {
-    const result = await adapter.load(sessionId);
-    if (result) {
-    console.log('Session loaded:', result.session);
-    } else {
-    console.log('Session not found or expired');
-    }
+      const result = await adapter.load(sessionId);
+      if (result) {
+        console.log("Session loaded:", result.session);
+      } else {
+        console.log("Session not found or expired");
+      }
     }
 
-    loadSession('your-session-id');
+    loadSession("your-session-id");
+
     ```
 
   </Tabs.Tab>
   <Tabs.Tab>
     ```typescript
-    import versedb from 'verse.db';
+    import versedb from "verse.db";
 
-    const adapter = new versedb.session({
-      dataPath: './sessions',
-      maxSize: 1000, // for deafualt it will be 10
-      ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
-      useMemory: true, // for defualt it will be false
-      devLogs: { enable: false, path: "" },
-      }, {
-      enable: true,
-      secret: 'your-secret-key'
-    });
+    const adapter = new versedb.session(
+      {
+        dataPath: "./sessions",
+        maxSize: 1000, // for deafualt it will be 10
+        ttl: 3600000, // 1 hour in milliseconds, for deafualt it will be 10000
+        useMemory: true, // for defualt it will be false
+        devLogs: { enable: false, path: "" },
+      },
+      {
+        enable: true,
+        secret: "your-secret-key",
+      }
+    );
 
     async function loadSession(sessionId: string) {
-    const result = await adapter.load(sessionId);
-    if (result) {
-    console.log('Session loaded:', result.session);
-    } else {
-    console.log('Session not found or expired');
-    }
+      const result = await adapter.load(sessionId);
+      if (result) {
+        console.log("Session loaded:", result.session);
+      } else {
+        console.log("Session not found or expired");
+      }
     }
 
-    loadSession('your-session-id');
+    loadSession("your-session-id");
     ```
 
   </Tabs.Tab>

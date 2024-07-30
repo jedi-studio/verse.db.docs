@@ -3,12 +3,22 @@ title: Session Adapter
 description: The Session Adapter is a robust and flexible tool designed to handle session management in your applications
 ---
 
-import { Cards, Card } from 'nextra/components'
-import { ArrowRightIcon } from 'nextra/icons'
+import { Cards, Card } from "nextra/components";
+import { ArrowRightIcon } from "nextra/icons";
 
-# Session Adapter
+<div className="flex flex-row justify-between content-center items-center">
+  # Session Adapter
+  <span className="badge badge-success font-bold h-8 dark:text-white text-xl">
+  NEW!
+  </span>
+</div>
 
-The Session Adapter is a robust and flexible tool designed to handle session management in your applications. It offers both in-memory and file-based storage options, with additional features like session expiry, session pruning, and session regeneration to prevent fixation attacks. This adapter is also equipped with middleware integration for Express and Next.js, making it a versatile choice for various web development needs.
+The Session Adapter is a robust and flexible tool designed to handle session management
+in your applications. It offers both in-memory and file-based storage options, with
+additional features like session expiry, session pruning, and session regeneration
+to prevent fixation attacks. This adapter is also equipped with middleware integration
+for Express and Next.js, making it a versatile choice for various web development
+needs.
 
 ## Features
 
@@ -37,14 +47,54 @@ The Session Adapter includes the following functions:
 ### Functions:
 
 <Cards>
-  <Card icon={<ArrowRightIcon />} title="Load()" href="/docs/adapters/session/load" />
-  <Card icon={<ArrowRightIcon />} title="drop()" href="/docs/adapters/session/drop" />
-  <Card icon={<ArrowRightIcon />} title="add()" href="/docs/adapters/session/add" />
-  <Card icon={<ArrowRightIcon />} title="clear()" href="/docs/adapters/session/clear" />
-  <Card icon={<ArrowRightIcon />} title="stats()" href="/docs/adapters/session/stats" />
-  <Card icon={<ArrowRightIcon />} title="invalidate()" href="/docs/adapters/session/invalidate" />
-  <Card icon={<ArrowRightIcon />} title="regenerateSessionId()" href="/docs/adapters/session/regenerateSessionId" />
-  <Card icon={<ArrowRightIcon />} title="expressMiddleware()" href="/docs/adapters/session/expressMiddleware" />
-  <Card icon={<ArrowRightIcon />} title="nextMiddleware()" href="/docs/adapters/session/nextMiddleware" />
-  <Card icon={<ArrowRightIcon />} title="triggerEvent()" href="/docs/adapters/session/triggerEvent" />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="Load()"
+    href="/docs/adapters/session/load"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="drop()"
+    href="/docs/adapters/session/drop"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="add()"
+    href="/docs/adapters/session/add"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="clear()"
+    href="/docs/adapters/session/clear"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="stats()"
+    href="/docs/adapters/session/stats"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="invalidate()"
+    href="/docs/adapters/session/invalidate"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="regenerateSessionId()"
+    href="/docs/adapters/session/regenerateSessionId"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="expressMiddleware()"
+    href="/docs/adapters/session/expressMiddleware"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="nextMiddleware()"
+    href="/docs/adapters/session/nextMiddleware"
+  />
+  <Card
+    icon={<ArrowRightIcon />}
+    title="triggerEvent()"
+    href="/docs/adapters/session/triggerEvent"
+  />
 </Cards>
